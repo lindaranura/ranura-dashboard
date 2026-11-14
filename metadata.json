@@ -1,0 +1,6 @@
+{
+  "name": "Ranura Dashboard",
+  "description": "Dashboard master data, analitik real-time, dan manajemen operasional terintegrasi dengan Shopee, TikTok, Google Sheets, Gmail, dan Google Drive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

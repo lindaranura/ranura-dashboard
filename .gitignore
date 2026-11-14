@@ -1,0 +1,26 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+service-account.json
+service_account.json
+credentials.json
+data/*.json
+!data/.gitkeep
+
+# Temporary test & patch scripts
+patch*.cjs
+test*.cjs
+test*.js
+test*.ts
+test*.txt
+txt*.txt
+putra_test*.js
+check*.ts
+debug*.cjs
+remove*.cjs
+restore*.cjs

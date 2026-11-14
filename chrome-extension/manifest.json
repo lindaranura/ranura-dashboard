@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Ranura Scraper Auto-Sync",
+  "version": "1.0",
+  "description": "Menarik data pesanan Shopee/TikTok dan mengirimkannya ke Dasbor Ranura lokal.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:3001/*",
+    "*://seller.shopee.co.id/*",
+    "*://seller.tiktok.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Ranura Auto-Sync"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://seller.shopee.co.id/*"],
+      "js": ["content_shopee.js"]
+    },
+    {
+      "matches": ["*://seller.tiktok.com/*"],
+      "js": ["content_tiktok.js"]
+    }
+  ]
+}

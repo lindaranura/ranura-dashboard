@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Beautiful custom background layout patterns */
+.glow-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+}
+
+/* Modern Card Glow and Transition Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.card-hover-effect {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.06);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+/* Modern styling for interactive components */
+.primary-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  transition: all 0.2s ease;
+}
+.primary-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+/* Scrollbar customizations */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom Micro Entrance Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* =========================================================
+   NEW: Stock Health Bar
+   ========================================================= */
+.stock-health-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: #e2e8f0;
+  overflow: hidden;
+  position: relative;
+}
+
+.stock-health-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stock-health-bar-fill.optimal {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.stock-health-bar-fill.warning {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.stock-health-bar-fill.critical {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  animation: healthPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes healthPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* =========================================================
+   NEW: Financial Card Glow
+   ========================================================= */
+.financial-card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.financial-card-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.financial-card-glow:hover::before {
+  opacity: 1.5;
+}
+
+/* =========================================================
+   NEW: Progress Bar Gradient (Storage / Usage)
+   ========================================================= */
+.progress-bar-gradient {
+  height: 8px;
+  border-radius: 99px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.progress-bar-gradient-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================
+   NEW: Upload Zone Enhancement
+   ========================================================= */
+.upload-zone-enhanced {
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.upload-zone-enhanced:hover,
+.upload-zone-enhanced.drag-active {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+  transform: scale(1.005);
+}
+
+@keyframes borderDash {
+  to { background-position: 100% 0; }
+}
+
+/* =========================================================
+   NEW: Fulfillment Funnel
+   ========================================================= */
+.funnel-step {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.funnel-step::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid #e2e8f0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+.funnel-step:last-child::after {
+  display: none;
+}
+
+/* =========================================================
+   NEW: Low Stock Alert Shimmer
+   ========================================================= */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.low-stock-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* =========================================================
+   NEW: Platform Revenue Mini Bars
+   ========================================================= */
+.platform-bar {
+  height: 6px;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.platform-bar.shopee { background: linear-gradient(90deg, #f97316, #fb923c); }
+.platform-bar.tiktok { background: linear-gradient(90deg, #d946ef, #e879f9); }
+.platform-bar.manual { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+.platform-bar.telegram { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+
+/* Firefox & standard scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* =========================================================
+   Print Stylesheets (Faktur & Laporan Keuangan)
+   ========================================================= */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+
+  /* Hide dashboard navigation, sidebar, and control buttons during print */
+  #ranura-sidebar,
+  header,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  #main-subview-frame,
+  #beranda-viewport {
+    overflow: visible !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .printable-invoice,
+  .printable-report {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 24px !important;
+    margin: 0 !important;
+  }
+}
+
