@@ -216,7 +216,7 @@ async function startServer() {
   });
 
   // Helper function to fetch catalog items from a specific sheet
-  async function fetchItemsFromSheet(sheetId: string) {
+  async function fetchItemsFromSheet(sheetId: string, monthParam?: string) {
     const keyPath = path.resolve(process.cwd(), 'service-account.json');
     if (!fs.existsSync(keyPath)) {
       throw new Error("No service-account.json found");
@@ -233,15 +233,25 @@ async function startServer() {
     const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
     const availableTabs = meta.data.sheets?.map(s => s.properties?.title || '') || [];
 
-    const monthsDesc = ['desember', 'november', 'oktober', 'september', 'agustus', 'juli', 'juni', 'mei', 'april', 'maret', 'februari', 'januari'];
-    let matchedTab: string | undefined;
+    let isHijab = sheetId === DEFAULT_HIJAB_SHEET_ID;
+    const targetMonth = monthParam && monthParam !== 'default' && monthParam !== 'all' 
+      ? monthParam.toLowerCase() 
+      : (isHijab ? 'september' : 'agustus');
 
-    for (const m of monthsDesc) {
-      matchedTab = availableTabs.find(t => {
-        const lower = t.toLowerCase();
-        return (lower.includes('katalog') || lower.includes('barang')) && lower.includes(m);
-      });
-      if (matchedTab) break;
+    let matchedTab: string | undefined = availableTabs.find(t => {
+      const lower = t.toLowerCase();
+      return (lower.includes('katalog') || lower.includes('barang')) && lower.includes(targetMonth);
+    });
+
+    if (!matchedTab) {
+      const monthsDesc = ['desember', 'november', 'oktober', 'september', 'agustus', 'juli', 'juni', 'mei', 'april', 'maret', 'februari', 'januari'];
+      for (const m of monthsDesc) {
+        matchedTab = availableTabs.find(t => {
+          const lower = t.toLowerCase();
+          return (lower.includes('katalog') || lower.includes('barang')) && lower.includes(m);
+        });
+        if (matchedTab) break;
+      }
     }
 
     if (!matchedTab) {
@@ -256,7 +266,6 @@ async function startServer() {
 
     const rows = resp.data.values || [];
     let headerRowIdx = -1;
-    let isHijab = sheetId === DEFAULT_HIJAB_SHEET_ID;
 
     for (let i = 0; i < Math.min(rows.length, 10); i++) {
       const rowStr = (rows[i] || []).join(' ').toLowerCase();
@@ -327,18 +336,19 @@ async function startServer() {
   app.get("/api/inventory/sheet", async (req, res) => {
     try {
       const requestedId = req.query.id as string;
-      console.log("[INVENTORY] Fetching sheet: " + (requestedId || 'all'));
+      const month = (req.query.month as string) || 'default';
+      console.log(`[INVENTORY] Fetching sheet: ${requestedId || 'all'}, month: ${month}`);
 
       if (!requestedId || requestedId === 'all') {
         const [swimwearItems, hijabItems] = await Promise.all([
-          fetchItemsFromSheet(DEFAULT_SWIMWEAR_SHEET_ID).catch(e => { console.warn("Failed swimwear fetch:", e.message); return []; }),
-          fetchItemsFromSheet(DEFAULT_HIJAB_SHEET_ID).catch(e => { console.warn("Failed hijab fetch:", e.message); return []; })
+          fetchItemsFromSheet(DEFAULT_SWIMWEAR_SHEET_ID, month).catch(e => { console.warn("Failed swimwear fetch:", e.message); return []; }),
+          fetchItemsFromSheet(DEFAULT_HIJAB_SHEET_ID, month).catch(e => { console.warn("Failed hijab fetch:", e.message); return []; })
         ]);
         const allItems = [...swimwearItems, ...hijabItems];
         console.log(`[INVENTORY] Fetched total ${allItems.length} items (${swimwearItems.length} Swimwear + ${hijabItems.length} Hijab)`);
         return res.json(allItems);
       } else {
-        const items = await fetchItemsFromSheet(requestedId);
+        const items = await fetchItemsFromSheet(requestedId, month);
         console.log(`[INVENTORY] Fetched ${items.length} items from ${requestedId}`);
         return res.json(items);
       }

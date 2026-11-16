@@ -82,7 +82,8 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1')) {
+        const hasMovements = Array.isArray(parsed) && parsed.some((i: any) => (i.stockIn || 0) > 0 || (i.stockOut || 0) > 0);
+        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1') && hasMovements) {
           return parsed;
         }
       } catch (e) {}

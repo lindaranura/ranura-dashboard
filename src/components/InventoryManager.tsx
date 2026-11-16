@@ -68,20 +68,36 @@ export default function InventoryManager({
   const [toast, setToast] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<{ title?: string, message: string, type: 'success' | 'error' | 'info' | 'warning' } | null>(null);
   const [isSyncingFromSheet, setIsSyncingFromSheet] = useState(false);
+  const [activeCatalogMonth, setActiveCatalogMonth] = useState<string>('default');
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'swimwear' | 'hijab'>('all');
 
-  const fetchPublicSheets = async () => {
-    const sheetIds = [
-      { id: '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8', name: 'Ranura Swimwear' },
-      { id: '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8', name: 'Ranura Hijab & Rosal' }
+  const fetchPublicSheets = async (month: string = 'default') => {
+    const isDefault = month === 'default' || !month;
+    const swimMonth = isDefault ? 'Agustus' : month;
+    const hijabMonth = isDefault ? 'September' : month;
+
+    const sheetConfigs = [
+      { 
+        id: '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8', 
+        name: 'Ranura Swimwear',
+        tabName: `Katalog Barang ${swimMonth} 2026`,
+        isHijab: false
+      },
+      { 
+        id: '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8', 
+        name: 'Ranura Hijab & Rosal',
+        tabName: `Katalog Barang Hijab ${hijabMonth} 2026`,
+        isHijab: true
+      }
     ];
+
     let merged: any[] = [];
     let counter = 1;
 
-    for (const s of sheetIds) {
+    for (const s of sheetConfigs) {
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${s.id}/gviz/tq?tqx=out:json`;
+        const url = `https://docs.google.com/spreadsheets/d/${s.id}/gviz/tq?sheet=${encodeURIComponent(s.tabName)}&tqx=out:json`;
         const res = await fetch(url);
         if (!res.ok) continue;
         const text = await res.text();
@@ -95,6 +111,10 @@ export default function InventoryManager({
           if (!name || name.toLowerCase().includes('kosongkan') || name.toLowerCase().includes('nama barang')) continue;
 
           let sku = cells[0]?.v ? String(cells[0].v).trim() : name;
+          if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
+            sku = name;
+          }
+
           const initialStock = Number(cells[2]?.v) || 0;
           const stockIn = Number(cells[3]?.v) || 0;
           const stockOut = Number(cells[4]?.v) || 0;
@@ -102,9 +122,8 @@ export default function InventoryManager({
           const buyPrice = Math.round(Number(cells[6]?.v) || 0);
           const sellPrice = Math.round(Number(cells[8]?.v) || 0);
 
-          const isHijab = s.id === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
           let category = "Pakaian Apung";
-          if (isHijab) {
+          if (s.isHijab) {
             if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
             else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
             else category = "Ranura Hijab";
@@ -131,7 +150,8 @@ export default function InventoryManager({
             status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
             unit: 'pcs',
             sourceSheetId: s.id,
-            sourceSheetName: s.name
+            sourceSheetName: s.name,
+            activeMonth: s.tabName
           });
         }
       } catch (err) {
@@ -141,14 +161,19 @@ export default function InventoryManager({
     return merged;
   };
 
-  const handleSyncFromGoogleSheet = async () => {
+  const handleSyncFromGoogleSheet = async (monthToSync: string = activeCatalogMonth) => {
     setIsSyncingFromSheet(true);
-    setToastMessage({ type: 'info', title: 'Menarik Data...', message: 'Sedang mensinkronkan data inventaris dari Ranura Swimwear & Ranura Hijab...' });
+    const monthLabel = monthToSync === 'default' ? 'Terkini' : monthToSync;
+    setToastMessage({ 
+      type: 'info', 
+      title: 'Menarik Data...', 
+      message: `Sedang mensinkronkan data inventaris ${monthLabel} dari Ranura Swimwear & Ranura Hijab...` 
+    });
     try {
       let allData: any[] = [];
       // 1. Try local/server backend endpoint first
       try {
-        const res = await fetch('/api/inventory/sheet?id=all&t=' + Date.now());
+        const res = await fetch(`/api/inventory/sheet?id=all&month=${encodeURIComponent(monthToSync)}&t=${Date.now()}`);
         if (res.ok) {
           const contentType = res.headers.get('content-type') || '';
           if (contentType.includes('application/json')) {
@@ -161,19 +186,21 @@ export default function InventoryManager({
 
       // 2. Direct fallback to Google Sheets GViz API (works on Vercel static deployment)
       if (!allData || allData.length === 0) {
-        console.log('Fetching live data directly from Google Sheets...');
-        allData = await fetchPublicSheets();
+        console.log('Fetching live data directly from Google Sheets GViz...');
+        allData = await fetchPublicSheets(monthToSync);
       }
       
       if (allData && allData.length > 0 && onReplaceInventory) {
         onReplaceInventory(allData);
         localStorage.setItem('apex_inventory', JSON.stringify(allData));
+        const totalIn = allData.reduce((s, i) => s + (i.stockIn || 0), 0);
+        const totalOut = allData.reduce((s, i) => s + (i.stockOut || 0), 0);
         setToastMessage({ 
           type: 'success', 
           title: 'Sinkronisasi Sukses', 
-          message: `Berhasil menarik ${allData.length} produk dari 2 Google Sheets (Ranura Swimwear & Ranura Hijab).` 
+          message: `Berhasil menarik ${allData.length} produk (${totalIn} masuk, ${totalOut} keluar) dari 2 Google Sheets.` 
         });
-        onAddLog('system', 'success', `Inventaris diperbarui secara live dari Google Sheets (${allData.length} barang fisik).`);
+        onAddLog('system', 'success', `Inventaris diperbarui secara live dari Google Sheets: ${allData.length} barang fisik (Total Masuk: ${totalIn} pcs, Total Keluar: ${totalOut} pcs).`);
       } else {
         throw new Error('Data inventaris sheet kosong.');
       }
@@ -185,10 +212,12 @@ export default function InventoryManager({
     }
   };
 
-  // Auto-sync from Google Sheets on initial load if inventory has mock items or is empty
+  // Auto-sync from Google Sheets on initial load if inventory has mock items or is empty or has zero movements
   React.useEffect(() => {
-    if (!inventory || inventory.length <= 10 || inventory.some(i => i.id === 'prod-1' || i.id === 'prod-2')) {
-      handleSyncFromGoogleSheet();
+    const totalIn = inventory.reduce((s, i) => s + (i.stockIn || 0), 0);
+    const totalOut = inventory.reduce((s, i) => s + (i.stockOut || 0), 0);
+    if (!inventory || inventory.length <= 10 || inventory.some(i => i.id === 'prod-1' || i.id === 'prod-2') || (totalIn === 0 && totalOut === 0)) {
+      handleSyncFromGoogleSheet('default');
     }
   }, []);
 
@@ -705,7 +734,7 @@ export default function InventoryManager({
 
         <div className="flex flex-col md:flex-row items-end md:items-center gap-3 shrink-0">
           <button
-            onClick={handleSyncFromGoogleSheet}
+            onClick={() => handleSyncFromGoogleSheet(activeCatalogMonth)}
             disabled={isSyncingFromSheet}
             className="flex items-center gap-2 px-4 py-3 md:py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-2xl md:rounded-xl shadow-sm transition-all cursor-pointer disabled:opacity-70"
           >
@@ -738,39 +767,54 @@ export default function InventoryManager({
         </div>
       </div>
 
-      {/* Assembly line quick info panels */}
-      <div id="production-gauge-panels" className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* Assembly line quick info panels & live stock stats */}
+      <div id="production-gauge-panels" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* Gauge 1 */}
-        <div className="p-5 bg-white border border-slate-200 rounded-2xl flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl">
+        <div className="p-4 bg-white border border-slate-200 rounded-2xl flex items-center gap-3.5 shadow-sm">
+          <div className="p-2.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl shrink-0">
             <Gauge className="h-5 w-5 animate-spin" style={{ animationDuration: '6s' }} />
           </div>
-          <div>
-            <span className="text-slate-400 text-[10px] font-mono uppercase">Kapasitas Produksi Jahit</span>
-            <p className="text-lg font-bold text-slate-800 font-mono mt-0.5">88.4% <span className="text-xs text-slate-500 font-sans font-normal">beban kerja</span></p>
+          <div className="min-w-0">
+            <span className="text-slate-400 text-[10px] font-mono uppercase block truncate">Kapasitas Produksi</span>
+            <p className="text-base font-bold text-slate-800 font-mono mt-0.5">88.4% <span className="text-xs text-slate-500 font-sans font-normal">beban kerja</span></p>
           </div>
         </div>
 
         {/* Gauge 2 */}
-        <div className="p-5 bg-white border border-slate-200 rounded-2xl flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-100 rounded-xl">
+        <div className="p-4 bg-white border border-slate-200 rounded-2xl flex items-center gap-3.5 shadow-sm">
+          <div className="p-2.5 bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-100 rounded-xl shrink-0">
             <Layers className="h-5 w-5" />
           </div>
-          <div>
-            <span className="text-slate-400 text-[10px] font-mono uppercase">Ready-To-Ship SKU</span>
-            <p className="text-lg font-bold text-slate-800 font-mono mt-0.5">6 Aktif <span className="text-xs text-slate-500 font-sans font-normal">tipe barang</span></p>
+          <div className="min-w-0">
+            <span className="text-slate-400 text-[10px] font-mono uppercase block truncate">Ready-To-Ship SKU</span>
+            <p className="text-base font-bold text-slate-800 font-mono mt-0.5">{inventory.length} SKU <span className="text-xs text-slate-500 font-sans font-normal">aktif</span></p>
           </div>
         </div>
 
-        {/* Gauge 3 */}
-        <div className="p-5 bg-white border border-slate-200 rounded-2xl flex items-center gap-4 shadow-sm">
-          <div className="p-3 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl">
-            <Activity className="h-5 w-5" />
+        {/* Gauge 3: Total Masuk Live */}
+        <div className="p-4 bg-white border border-slate-200 rounded-2xl flex items-center gap-3.5 shadow-sm">
+          <div className="p-2.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-xl shrink-0">
+            <ArrowUpRight className="h-5 w-5" />
           </div>
-          <div>
-            <span className="text-slate-400 text-[10px] font-mono uppercase">QC Pass Rate</span>
-            <p className="text-lg font-bold text-slate-800 font-mono mt-0.5">99.2% <span className="text-xs text-slate-500 font-sans font-normal">standar mutu</span></p>
+          <div className="min-w-0">
+            <span className="text-slate-400 text-[10px] font-mono uppercase block truncate">Total Masuk (Sheet)</span>
+            <p className="text-base font-bold text-emerald-600 font-mono mt-0.5">
+              +{inventory.reduce((s, i) => s + (i.stockIn || 0), 0)} pcs
+            </p>
+          </div>
+        </div>
+
+        {/* Gauge 4: Total Keluar Live */}
+        <div className="p-4 bg-white border border-slate-200 rounded-2xl flex items-center gap-3.5 shadow-sm">
+          <div className="p-2.5 bg-rose-50 text-rose-600 border border-rose-100 rounded-xl shrink-0">
+            <ArrowDownLeft className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <span className="text-slate-400 text-[10px] font-mono uppercase block truncate">Total Keluar (Sheet)</span>
+            <p className="text-base font-bold text-rose-600 font-mono mt-0.5">
+              -{inventory.reduce((s, i) => s + (i.stockOut || 0), 0)} pcs
+            </p>
           </div>
         </div>
       </div>
@@ -926,11 +970,36 @@ export default function InventoryManager({
                 Master unit fisik terintegrasi otomatis dengan Google Sheets Ranura Swimwear & Ranura Hijab
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs shadow-xs">
+                <Calendar className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+                <span className="text-[11px] font-medium text-slate-500">Bulan:</span>
+                <select
+                  value={activeCatalogMonth}
+                  onChange={(e) => {
+                    const nextM = e.target.value;
+                    setActiveCatalogMonth(nextM);
+                    handleSyncFromGoogleSheet(nextM);
+                  }}
+                  className="bg-transparent font-bold text-slate-800 outline-none cursor-pointer pr-1 text-xs"
+                >
+                  <option value="default">Terkini (Ags Swimwear + Sept Hijab)</option>
+                  <option value="Agustus">Agustus 2026</option>
+                  <option value="September">September 2026</option>
+                  <option value="Juli">Juli 2026</option>
+                  <option value="Juni">Juni 2026</option>
+                  <option value="Mei">Mei 2026</option>
+                  <option value="April">April 2026</option>
+                  <option value="Maret">Maret 2026</option>
+                  <option value="Februari">Februari 2026</option>
+                  <option value="Januari">Januari 2026</option>
+                </select>
+              </div>
+
               <button
                 type="button"
                 id="btn-sync-sheets-live"
-                onClick={handleSyncFromGoogleSheet}
+                onClick={() => handleSyncFromGoogleSheet(activeCatalogMonth)}
                 disabled={isSyncingFromSheet}
                 className="flex items-center gap-1.5 px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer disabled:opacity-60"
                 title="Tarik data live dari kedua Google Sheets"
