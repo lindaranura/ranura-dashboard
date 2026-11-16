@@ -22,7 +22,8 @@ import {
   ArrowUpRight,
   ArrowDownLeft,
   Check,
-  Download
+  Download,
+  Search
 } from 'lucide-react';
 import Barcode from 'react-barcode';
 import { motion, AnimatePresence } from 'motion/react';
@@ -67,41 +68,29 @@ export default function InventoryManager({
   const [toast, setToast] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<{ title?: string, message: string, type: 'success' | 'error' | 'info' | 'warning' } | null>(null);
   const [isSyncingFromSheet, setIsSyncingFromSheet] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'swimwear' | 'hijab'>('all');
 
   const handleSyncFromGoogleSheet = async () => {
     setIsSyncingFromSheet(true);
-    setToastMessage({ type: 'info', title: 'Menarik Data...', message: 'Sedang mensinkronkan data inventaris dari seluruh Google Sheet terhubung...' });
+    setToastMessage({ type: 'info', title: 'Menarik Data...', message: 'Sedang mensinkronkan data inventaris dari Ranura Swimwear & Ranura Hijab...' });
     try {
-      const sheetsToSync = googleSheets && googleSheets.length > 0 
-        ? googleSheets 
-        : [{ spreadsheetId: spreadsheetId || '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' }];
+      // Endpoint /api/inventory/sheet?id=all loads both Google Sheets automatically
+      const res = await fetch('/api/inventory/sheet?id=all&t=' + Date.now());
+      if (!res.ok) throw new Error('Gagal menghubungi server dasbor untuk sinkronisasi inventaris.');
+      const allData = await res.json();
       
-      let allData: any[] = [];
-      let successCount = 0;
-
-      for (const sheet of sheetsToSync) {
-        if (!sheet.spreadsheetId) continue;
-        try {
-          const res = await fetch('/api/inventory/sheet?id=' + sheet.spreadsheetId + '&t=' + Date.now());
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.length > 0) {
-              allData = [...allData, ...data];
-              successCount++;
-            }
-          }
-        } catch (e) {
-          console.warn('Gagal menarik dari sheet:', sheet.spreadsheetId, e);
-        }
-      }
-      
-      if (allData.length > 0 && onReplaceInventory) {
+      if (allData && allData.length > 0 && onReplaceInventory) {
         onReplaceInventory(allData);
         localStorage.setItem('apex_inventory', JSON.stringify(allData));
-        setToastMessage({ type: 'success', title: 'Sinkronisasi Sukses', message: `Berhasil menarik ${allData.length} SKU dari ${successCount} Google Sheet.` });
-        onAddLog('system', 'success', `Inventaris diperbarui secara live dari ${successCount} Google Sheet (${allData.length} barang).`);
+        setToastMessage({ 
+          type: 'success', 
+          title: 'Sinkronisasi Sukses', 
+          message: `Berhasil menarik ${allData.length} produk dari 2 Google Sheets (Ranura Swimwear & Ranura Hijab).` 
+        });
+        onAddLog('system', 'success', `Inventaris diperbarui secara live dari Google Sheets (${allData.length} barang fisik).`);
       } else {
-        throw new Error('Data sheet kosong dari seluruh sumber.');
+        throw new Error('Data inventaris sheet kosong.');
       }
     } catch (err: any) {
       setToastMessage({ type: 'error', title: 'Gagal Sinkronisasi', message: err.message });
@@ -110,6 +99,13 @@ export default function InventoryManager({
       setIsSyncingFromSheet(false);
     }
   };
+
+  // Auto-sync from Google Sheets on initial load if inventory has mock items or is empty
+  React.useEffect(() => {
+    if (!inventory || inventory.length <= 10 || inventory.some(i => i.id === 'prod-1' || i.id === 'prod-2')) {
+      handleSyncFromGoogleSheet();
+    }
+  }, []);
 
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3500); };
 
@@ -300,10 +296,58 @@ export default function InventoryManager({
     }
   };
 
+  const swimwearCount = useMemo(() => {
+    return inventory.filter(i => 
+      i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' ||
+      i.category?.toLowerCase().includes('renang') ||
+      i.category?.toLowerCase().includes('apung') ||
+      i.category?.toLowerCase().includes('proswim')
+    ).length;
+  }, [inventory]);
+
+  const hijabCount = useMemo(() => {
+    return inventory.filter(i => 
+      i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+      i.category?.toLowerCase().includes('rosal') ||
+      i.category?.toLowerCase().includes('hijab') ||
+      i.category?.toLowerCase().includes('outer')
+    ).length;
+  }, [inventory]);
+
+  const filteredInventory = useMemo(() => {
+    return inventory.filter(item => {
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch = !q || 
+        item.name.toLowerCase().includes(q) || 
+        (item.sku && item.sku.toLowerCase().includes(q)) ||
+        (item.category && item.category.toLowerCase().includes(q));
+      
+      if (!matchesSearch) return false;
+
+      if (categoryFilter === 'swimwear') {
+        return item.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' ||
+               item.category?.toLowerCase().includes('renang') ||
+               item.category?.toLowerCase().includes('apung') ||
+               item.category?.toLowerCase().includes('proswim');
+      }
+      if (categoryFilter === 'hijab') {
+        return item.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+               item.category?.toLowerCase().includes('rosal') ||
+               item.category?.toLowerCase().includes('hijab') ||
+               item.category?.toLowerCase().includes('outer');
+      }
+      return true;
+    });
+  }, [inventory, searchQuery, categoryFilter]);
+
   // Local state for production batch add
   const [selectedItemForProd, setSelectedItemForProd] = useState<string>(inventory[0]?.id || '');
   const [productionQty, setProductionQty] = useState<number>(0);
   const [isAssembling, setIsAssembling] = useState(false);
+
+  const selectedProductItem = useMemo(() => {
+    return inventory.find(i => i.id === selectedItem) || inventory[0];
+  }, [inventory, selectedItem]);
 
   // Sync selected items when inventory loads
   React.useEffect(() => {
@@ -337,9 +381,12 @@ export default function InventoryManager({
         const nextStockIn = (item.stockIn || 0) + productionQty;
         onUpdateStock(selectedItemForProd, nextStock, nextStockIn, item.stockOut, item.initialStock);
 
-        const finalSheetId = item.sourceSheetId || spreadsheetId || '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
+        const isRosalOrHijab = item.category?.toLowerCase().includes('rosal') || 
+                               item.category?.toLowerCase().includes('hijab') || 
+                               item.category?.toLowerCase().includes('outer');
+        const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' : '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8');
         if (finalSheetId) {
-          fetch('http://localhost:3000/api/inventory/update-stock', {
+          fetch('/api/inventory/update-stock', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -350,7 +397,7 @@ export default function InventoryManager({
               qty: productionQty,
               keterangan: 'PRODUKSI',
               platform: '',
-              catatan: '',
+              catatan: 'Produksi Batch Jalur Utama',
               date: new Date().toISOString().split('T')[0]
             })
           }).catch(err => console.error('Gagal sync mutasi ke Google Sheets:', err));
@@ -452,9 +499,13 @@ export default function InventoryManager({
 
       onUpdateStock(selectedItem, nextStock, nextStockIn, nextStockOut, item.initialStock);
 
-      const finalSheetId = item.sourceSheetId || spreadsheetId || '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
+      const isRosalOrHijab = item.category?.toLowerCase().includes('rosal') || 
+                             item.category?.toLowerCase().includes('hijab') || 
+                             item.category?.toLowerCase().includes('outer');
+      const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' : '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8');
+      
       if (finalSheetId) {
-        fetch('http://localhost:3000/api/inventory/update-stock', {
+        fetch('/api/inventory/update-stock', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -463,12 +514,18 @@ export default function InventoryManager({
             sku: item.sku,
             name: item.name,
             qty: transactionQty,
-            keterangan: transactionType === 'in' ? keterangan : catatan,
+            keterangan: transactionType === 'in' ? keterangan : (catatan || 'MUTASI KELUAR'),
             platform: (transactionType === 'out' || keterangan === 'RETUR') ? platform : '',
             catatan: transactionType === 'in' ? catatan : '',
             date: new Date().toISOString().split('T')[0]
           })
-        }).catch(err => console.error('Gagal sync mutasi ke Google Sheets:', err));
+        }).then(res => res.json())
+          .then(data => {
+            if (data?.success) {
+              onAddLog('system', 'success', `Tersinkron otomatis ke Google Sheet tab "${data.targetSheetName}" (${data.updateRange})`);
+            }
+          })
+          .catch(err => console.error('Gagal sync mutasi ke Google Sheets:', err));
       }
 
       const newMovement: StockMovement = {
@@ -772,20 +829,90 @@ export default function InventoryManager({
         
         {/* Table of stocks (2 columns) */}
         <div className="lg:col-span-2 p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
             <div>
-              <h3 className="text-base font-semibold text-slate-900">Inventaris Barang Jadi</h3>
-              <p className="text-xs text-slate-500">Master data unit fisik yang terintegrasi dengan marketplace</p>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-semibold text-slate-900">Inventaris Barang Jadi</h3>
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                  {inventory.length} Produk Live
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Master unit fisik terintegrasi otomatis dengan Google Sheets Ranura Swimwear & Ranura Hijab
+              </p>
             </div>
-            <button
-              type="button"
-              id="btn-export-inventory-csv"
-              onClick={handleExportInventoryCSV}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold border border-slate-200 transition-all cursor-pointer shadow-xs hover:border-slate-300"
-            >
-              <Download className="h-3.5 w-3.5 text-blue-600" />
-              <span>Ekspor CSV</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                id="btn-sync-sheets-live"
+                onClick={handleSyncFromGoogleSheet}
+                disabled={isSyncingFromSheet}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer disabled:opacity-60"
+                title="Tarik data live dari kedua Google Sheets"
+              >
+                <RefreshCw className={`h-3.5 w-3.5 ${isSyncingFromSheet ? 'animate-spin' : ''}`} />
+                <span>{isSyncingFromSheet ? 'Menyinkronkan...' : 'Sinkronkan Google Sheets'}</span>
+              </button>
+              <button
+                type="button"
+                id="btn-export-inventory-csv"
+                onClick={handleExportInventoryCSV}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold border border-slate-200 transition-all cursor-pointer shadow-xs hover:border-slate-300"
+              >
+                <Download className="h-3.5 w-3.5 text-blue-600" />
+                <span>Ekspor CSV</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Filter Bar & Search */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs overflow-x-auto">
+              <button
+                type="button"
+                onClick={() => setCategoryFilter('all')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  categoryFilter === 'all'
+                    ? 'bg-white text-slate-900 shadow-xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Semua ({inventory.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setCategoryFilter('swimwear')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  categoryFilter === 'swimwear'
+                    ? 'bg-blue-600 text-white shadow-xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                🏊 Swimwear ({swimwearCount})
+              </button>
+              <button
+                type="button"
+                onClick={() => setCategoryFilter('hijab')}
+                className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  categoryFilter === 'hijab'
+                    ? 'bg-purple-600 text-white shadow-xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                🧕 Hijab & Rosal ({hijabCount})
+              </button>
+            </div>
+
+            <div className="relative flex-1 sm:max-w-xs">
+              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari nama atau SKU produk..."
+                className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl text-xs text-slate-900 outline-none transition-all placeholder:text-slate-400"
+              />
+            </div>
           </div>
 
           <div className="overflow-x-auto">
@@ -793,7 +920,7 @@ export default function InventoryManager({
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-150 text-slate-500 font-mono text-[10px] tracking-wider uppercase">
                   <th className="py-3 px-4">Nama Produk / SKU</th>
-                  <th className="py-3 px-4">Kategori</th>
+                  <th className="py-3 px-4">Kategori & Sumber</th>
                   <th className="py-3 px-4 text-center">Stok Awal</th>
                   <th className="py-3 px-4 text-center">Stok Masuk</th>
                   <th className="py-3 px-4 text-center">Stok Keluar</th>
@@ -806,7 +933,7 @@ export default function InventoryManager({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs">
-                {inventory.map((item) => {
+                {filteredInventory.map((item) => {
                   const stockIn = item.stockIn ?? (item.stock + item.reserved);
                   const stockOut = item.stockOut ?? item.reserved;
                   const initialStock = item.initialStock ?? (item.stock - stockIn + stockOut);
@@ -824,6 +951,11 @@ export default function InventoryManager({
                     statusBadge = 'bg-rose-50 text-rose-600 border border-rose-100';
                   }
 
+                  const isHijabOrRosal = item.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+                                         item.category?.toLowerCase().includes('rosal') ||
+                                         item.category?.toLowerCase().includes('hijab') ||
+                                         item.category?.toLowerCase().includes('outer');
+
                   return (
                     <tr key={item.id} className="hover:bg-slate-50/60 transition-colors">
                       <td className="py-4.5 px-4">
@@ -838,8 +970,17 @@ export default function InventoryManager({
                           <span className="font-mono text-[10px] text-slate-500 break-all">{item.sku}</span>
                         </div>
                       </td>
-                      <td className="py-4.5 px-4 text-slate-500">
-                        {item.category}
+                      <td className="py-4.5 px-4">
+                        <div className="flex flex-col gap-1">
+                          <span className="font-medium text-slate-800">{item.category}</span>
+                          <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold w-fit border ${
+                            isHijabOrRosal 
+                              ? 'bg-purple-50 text-purple-700 border-purple-200' 
+                              : 'bg-blue-50 text-blue-700 border-blue-200'
+                          }`}>
+                            {isHijabOrRosal ? 'Ranura Hijab & Rosal' : 'Ranura Swimwear'}
+                          </span>
+                        </div>
                       </td>
                       <td className="py-4.5 px-4 text-center font-mono font-medium text-slate-500 bg-slate-50/50">
                         {initialStock} {item.unit}
@@ -871,28 +1012,55 @@ export default function InventoryManager({
                         Rp {(stockOut * (item.sellPrice || 0)).toLocaleString('id-ID')}
                       </td>
                       <td className="py-4.5 px-4 text-center">
-                        <button 
-                          type="button"
-                          onClick={() => setPrintBarcodeSku(item.sku || item.id)}
-                          className="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors inline-flex items-center justify-center"
-                          title="Cetak Barcode"
-                        >
-                          <Printer className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center justify-center gap-1">
+                          <button 
+                            type="button"
+                            onClick={() => {
+                              setSelectedItem(item.id);
+                              const qtyInput = document.getElementById('tx-qty-input');
+                              if (qtyInput) qtyInput.focus();
+                              showToast(`Produk dipilih: ${item.name}`);
+                            }}
+                            className="px-2 py-1 bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 rounded-lg text-[10px] font-semibold transition-colors cursor-pointer border border-slate-200"
+                            title="Input Mutasi untuk produk ini"
+                          >
+                            + Mutasi
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => setPrintBarcodeSku(item.sku || item.id)}
+                            className="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors inline-flex items-center justify-center cursor-pointer"
+                            title="Cetak Barcode"
+                          >
+                            <Printer className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
                 })}
-                {inventory.length === 0 && (
+                {filteredInventory.length === 0 && (
                   <tr>
                     <td colSpan={11} className="py-12 px-6 text-center text-slate-400 font-medium bg-slate-50/20">
                       <div className="flex flex-col items-center justify-center py-6">
                         <div className="h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3 border border-slate-200">
                           <Package className="h-6 w-6" />
                         </div>
-                        <p className="text-slate-700 font-bold text-sm">Belum ada data stok & produksi terhubung</p>
+                        <p className="text-slate-700 font-bold text-sm">
+                          {searchQuery ? `Tidak ada produk dengan kata kunci "${searchQuery}"` : 'Belum ada data produk'}
+                        </p>
                         <p className="text-xs text-slate-500 max-w-sm mt-1 leading-normal">
-                          Silakan hubungkan saluran integrasi (Shopee / TikTok) pada menu <strong className="text-blue-600">Integrasi Saluran</strong> untuk memuat data master produk dan stok pabrik secara otomatis.
+                          {searchQuery ? (
+                            <button 
+                              type="button" 
+                              onClick={() => setSearchQuery('')} 
+                              className="text-blue-600 font-semibold hover:underline"
+                            >
+                              Reset pencarian
+                            </button>
+                          ) : (
+                            'Klik tombol "Sinkronkan Google Sheets" di atas untuk menarik katalog produk dari kedua spreadsheet.'
+                          )}
                         </p>
                       </div>
                     </td>
@@ -933,9 +1101,9 @@ export default function InventoryManager({
                 />
               </div>
 
-              {/* Product Selection */}
+              {/* Product Selection Grouped by Brand */}
               <div>
-                <label className="block text-xs text-slate-500 font-semibold mb-1.5">Atau Pilih Manual</label>
+                <label className="block text-xs text-slate-500 font-semibold mb-1.5">Pilih Produk</label>
                 <select
                   id="tx-item-select"
                   value={selectedItem}
@@ -943,15 +1111,54 @@ export default function InventoryManager({
                   className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none cursor-pointer transition-all"
                 >
                   {inventory.length > 0 ? (
-                    inventory.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name} ({item.sku})
-                      </option>
-                    ))
+                    <>
+                      <optgroup label={`🏊 Ranura Swimwear (${swimwearCount} Produk)`}>
+                        {inventory.filter(i => i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' || (!i.category?.toLowerCase().includes('rosal') && !i.category?.toLowerCase().includes('hijab') && !i.category?.toLowerCase().includes('outer'))).map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {item.name} (Stok: {item.stock} pcs)
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label={`🧕 Ranura Hijab & Rosal Madani (${hijabCount} Produk)`}>
+                        {inventory.filter(i => i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' || i.category?.toLowerCase().includes('rosal') || i.category?.toLowerCase().includes('hijab') || i.category?.toLowerCase().includes('outer')).map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {item.name} (Stok: {item.stock} pcs)
+                          </option>
+                        ))}
+                      </optgroup>
+                    </>
                   ) : (
                     <option value="">Belum ada produk aktif</option>
                   )}
                 </select>
+
+                {/* Selected Product Info Preview */}
+                {selectedProductItem && (
+                  <div className="mt-2.5 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-[11px]">
+                    <div className="min-w-0 pr-2">
+                      <span className="font-semibold text-slate-900 block truncate">{selectedProductItem.name}</span>
+                      <span className="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
+                        <span className="font-mono text-slate-600">{selectedProductItem.sku}</span>
+                        <span>•</span>
+                        <span className={`font-semibold ${
+                          selectedProductItem.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' || selectedProductItem.category?.toLowerCase().includes('rosal') || selectedProductItem.category?.toLowerCase().includes('hijab')
+                            ? 'text-purple-600'
+                            : 'text-blue-600'
+                        }`}>
+                          {selectedProductItem.sourceSheetName || (selectedProductItem.category?.toLowerCase().includes('rosal') || selectedProductItem.category?.toLowerCase().includes('hijab') ? 'Ranura Hijab & Rosal' : 'Ranura Swimwear')}
+                        </span>
+                      </span>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <span className="font-bold text-slate-800 block text-xs">
+                        {selectedProductItem.stock} <span className="text-[10px] font-normal text-slate-500">{selectedProductItem.unit}</span>
+                      </span>
+                      <span className="text-[10px] text-emerald-600 font-semibold">
+                        Rp {(selectedProductItem.sellPrice || 0).toLocaleString('id-ID')}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Transaction Type */}
@@ -982,16 +1189,31 @@ export default function InventoryManager({
 
               {/* Qty */}
               <div>
-                <label className="block text-xs text-slate-500 font-semibold mb-1.5">
-                  Jumlah Mutasi (Qty)
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs text-slate-500 font-semibold">
+                    Jumlah Mutasi (Qty)
+                  </label>
+                  <div className="flex items-center gap-1">
+                    {[1, 5, 10, 50].map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        onClick={() => setTransactionQty(prev => prev + preset)}
+                        className="px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-bold rounded transition-colors"
+                      >
+                        +{preset}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <input
                   type="number"
                   required
-                  min="0"
+                  min="1"
                   id="tx-qty-input"
-                  value={transactionQty}
+                  value={transactionQty || ''}
                   onChange={(e) => setTransactionQty(Math.max(0, parseInt(e.target.value) || 0))}
+                  placeholder="Masukkan jumlah..."
                   className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none font-mono transition-all"
                 />
               </div>
@@ -999,23 +1221,23 @@ export default function InventoryManager({
               {/* Keterangan */}
               {transactionType === 'in' ? (
                 <div>
-                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Keterangan / Referensi</label>
+                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Keterangan Masuk</label>
                   <select
                     value={keterangan}
                     onChange={(e) => setKeterangan(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all cursor-pointer"
                   >
-                    <option value="PRODUKSI">Produksi</option>
-                    <option value="RETUR">Retur</option>
-                    <option value="LAINNYA">Lainnya</option>
+                    <option value="PRODUKSI">PRODUKSI</option>
+                    <option value="RETUR">RETUR</option>
+                    <option value="LAINNYA">LAINNYA</option>
                   </select>
                 </div>
               ) : (
                 <div>
-                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Keterangan / Referensi</label>
+                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Catatan / Keterangan Keluar</label>
                   <input
                     type="text"
-                    placeholder="Kosongkan jika tidak ada, atau isi manual"
+                    placeholder="Kosongkan jika tidak ada, atau isi catatan"
                     value={catatan}
                     onChange={(e) => setCatatan(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all"
@@ -1026,45 +1248,33 @@ export default function InventoryManager({
               {/* Platform */}
               {(transactionType === 'out' || (transactionType === 'in' && keterangan === 'RETUR')) && (
                 <div>
-                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Platform / Orderan</label>
+                  <label className="block text-xs text-slate-500 font-semibold mb-1.5">Saluran Penjualan / Platform</label>
                   <select
                     value={platform}
                     onChange={(e) => setPlatform(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all cursor-pointer font-medium"
                   >
-                    <option value="BERIRRA">BERIRRA</option>
-                    <option value="KOMUNITAS">KOMUNITAS</option>
-                    <option value="DROPSHIP">DROPSHIP</option>
-                    <option value="OFFLINE STORE">OFFLINE STORE</option>
-                    <option value="SHOPEE RANURA">SHOPEE RANURA</option>
+                    <option value="SHOPEE MAYUDEE">SHOPEE MAYUDEE</option>
                     <option value="SHOPEE SAFESWIM">SHOPEE SAFESWIM</option>
-                    <option value="TOKOPEDIA">TOKOPEDIA</option>
-                    <option value="BU SHINTA">BU SHINTA</option>
-                    <option value="WHATSAPP">WHATSAPP</option>
-                    <option value="BU MAYA">BU MAYA</option>
-                    <option value="LAZADA">LAZADA</option>
-                    <option value="WA IKLAN">WA IKLAN</option>
+                    <option value="SHOPEE RANURA">SHOPEE RANURA</option>
                     <option value="TIKTOK SHOP">TIKTOK SHOP</option>
+                    <option value="WA MAYUDEE">WA MAYUDEE</option>
+                    <option value="WA IKLAN">WA IKLAN</option>
+                    <option value="GOOGLE ADS">GOOGLE ADS</option>
+                    <option value="TOKOPEDIA">TOKOPEDIA</option>
+                    <option value="BERDU">BERDU</option>
+                    <option value="OFFLINE STORE">OFFLINE STORE</option>
+                    <option value="PEMBELIAN OFFLINE">PEMBELIAN OFFLINE</option>
+                    <option value="WHATSAPP">WHATSAPP</option>
+                    <option value="DROPSHIP">DROPSHIP</option>
+                    <option value="KOMUNITAS">KOMUNITAS</option>
+                    <option value="AMBIL SENDIRI">AMBIL SENDIRI</option>
+                    <option value="LAZADA">LAZADA</option>
+                    <option value="ENDORSEMENT">ENDORSEMENT</option>
+                    <option value="TUKER SIZE">TUKER SIZE</option>
                     <option value="REPEAT ORDER">REPEAT ORDER</option>
                     <option value="4EL">4EL</option>
-                    <option value="GOOGLE ADS">GOOGLE ADS</option>
-                    <option value="TUKER SIZE">TUKER SIZE</option>
-                    <option value="FACEBOOK">FACEBOOK</option>
-                    <option value="ENDORSEMENT">ENDORSEMENT</option>
-                    <option value="WHATSAPP IKLAN">WHATSAPP IKLAN</option>
-                    <option value="BUTIK SANIA">BUTIK SANIA</option>
                     <option value="AFFILIATE">AFFILIATE</option>
-                    <option value="Ruang Konten">Ruang Konten</option>
-                    <option value="AMBIL SENDIRI">AMBIL SENDIRI</option>
-                    <option value="WHATSAPP 4EL">WHATSAPP 4EL</option>
-                    <option value="KIRIM ULANG">KIRIM ULANG</option>
-                    <option value="PEMBELIAN OFFLINE">PEMBELIAN OFFLINE</option>
-                    <option value="TUKER BARANG">TUKER BARANG</option>
-                    <option value="WEBSITE">WEBSITE</option>
-                    <option value="BERDU">BERDU</option>
-                    <option value="INSTAGRAM">INSTAGRAM</option>
-                    <option value="DIPINJEM PRODUKSI">DIPINJEM PRODUKSI</option>
-                    <option value="KOMPLAIN">KOMPLAIN</option>
                   </select>
                 </div>
               )}
@@ -1075,7 +1285,7 @@ export default function InventoryManager({
                   <label className="block text-xs text-slate-500 font-semibold mb-1.5">Catatan Khusus</label>
                   <input
                     type="text"
-                    placeholder="Contoh: Tanggal Kembar"
+                    placeholder="Contoh: Batch Jahit 01, Paket ditolak pelanggan, dll"
                     value={catatan}
                     onChange={(e) => setCatatan(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-3 py-2 text-slate-900 outline-none transition-all"

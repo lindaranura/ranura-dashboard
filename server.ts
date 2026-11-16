@@ -61,44 +61,33 @@ async function startServer() {
     }
   });
 
-  // Fallback proxy to internal bot (port 3001) for unhandled /api/*
-  app.all("/api/*", async (req, res, next) => {
-    try {
-      const targetUrl = `http://localhost:3001${req.originalUrl}`;
-      const headers = { 'Content-Type': 'application/json' };
-      if (req.headers['authorization']) headers['Authorization'] = req.headers['authorization'];
-      
-      const fetchOpts = {
-        method: req.method,
-        headers
-      };
-      if (['POST', 'PUT', 'PATCH'].includes(req.method) && req.body && Object.keys(req.body).length > 0) {
-        fetchOpts.body = JSON.stringify(req.body);
-      }
-      
-      const resp = await fetch(targetUrl, fetchOpts).catch(() => null);
-      if (!resp) return next();
-      
-      const cType = resp.headers.get('content-type') || '';
-      if (cType.includes('application/json')) {
-        const json = await resp.json();
-        return res.status(resp.status).json(json);
-      } else {
-        const text = await resp.text();
-        return res.status(resp.status).send(text);
-      }
-    } catch (err) {
-      return next();
-    }
-  });
-
   // ==========================================
   // API: Update Inventory Google Sheet directly
   // ==========================================
+  const DEFAULT_SWIMWEAR_SHEET_ID = '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
+  const DEFAULT_HIJAB_SHEET_ID = '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
+
+  function parseNumber(val: any): number {
+    if (!val) return 0;
+    if (typeof val === 'number') return val;
+    const cleaned = String(val).replace(/\./g, '').replace(/,/g, '.').replace(/[^0-9.-]/g, '');
+    return parseInt(cleaned) || 0;
+  }
+
+  function parseCurrency(val: any): number {
+    if (!val) return 0;
+    if (typeof val === 'number') return Math.round(val);
+    let str = String(val).trim();
+    if (str.includes(',')) str = str.split(',')[0];
+    const cleaned = str.replace(/[^0-9]/g, '');
+    return parseInt(cleaned) || 0;
+  }
+
   app.post("/api/inventory/update-stock", async (req, res) => {
     try {
       const { type, sheetId, sku, name, qty, keterangan, platform, catatan, date } = req.body;
-      if (!sheetId || !name || !qty || !type) return res.status(400).json({ error: "Missing required fields" });
+      const targetSheetId = sheetId || DEFAULT_SWIMWEAR_SHEET_ID;
+      if (!name || !qty || !type) return res.status(400).json({ error: "Missing required fields" });
 
       const keyPath = path.resolve(process.cwd(), 'service-account.json');
       if (!fs.existsSync(keyPath)) {
@@ -124,47 +113,61 @@ async function startServer() {
       const month = String(dateObj.getMonth() + 1).padStart(2, '0');
       const formattedDate = `${day}/${month}/${yearStr}`;
 
-      // Find correct tab name by fuzzy matching
-      const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
+      // Get available tabs
+      const meta = await sheets.spreadsheets.get({ spreadsheetId: targetSheetId });
       const availableTabs = meta.data.sheets?.map(s => s.properties?.title || '') || [];
       
       const searchKeyword = type === 'in' ? 'masuk' : 'keluar';
-      const monthSearch = monthStr.toLowerCase();
       
-      let targetSheetName = availableTabs.find(t => {
-        const lowerT = t.toLowerCase();
-        // Match keyword (Barang Masuk / Keluar) AND either full month ("september") or short month ("sep")
-        return lowerT.includes(searchKeyword.toLowerCase()) && 
-               (lowerT.includes(monthSearch) || lowerT.includes(monthSearch.substring(0, 3)));
+      // Look from current month down to januari to find the latest valid month tab
+      const monthsDesc = ['desember', 'november', 'oktober', 'september', 'agustus', 'juli', 'juni', 'mei', 'april', 'maret', 'februari', 'januari'];
+      let targetSheetName: string | undefined;
+
+      // 1. Try exact month match first
+      const currentMonthLower = monthStr.toLowerCase();
+      targetSheetName = availableTabs.find(t => {
+        const lower = t.toLowerCase();
+        return lower.includes(searchKeyword) && (lower.includes(currentMonthLower) || lower.includes(currentMonthLower.substring(0, 3)));
       });
-      
+
+      // 2. Fallback: find latest available month tab
       if (!targetSheetName) {
-        targetSheetName = `Barang ${type === 'in' ? 'Masuk' : 'Keluar'} ${monthStr} ${yearStr}`;
+        for (const m of monthsDesc) {
+          targetSheetName = availableTabs.find(t => {
+            const lower = t.toLowerCase();
+            return lower.includes(searchKeyword) && lower.includes(m);
+          });
+          if (targetSheetName) break;
+        }
       }
 
-      let rowValues = [];
+      // 3. Fallback: any tab matching searchKeyword
+      if (!targetSheetName) {
+        targetSheetName = availableTabs.find(t => t.toLowerCase().includes(searchKeyword)) || availableTabs[0];
+      }
+
+      let rowValues: any[] = [];
       let startCol = '';
       let endCol = '';
-      let startRowNumber = 0;
+      let startRowNumber = 5;
       
       if (type === 'in') {
         // Masuk: [Tanggal, Nama Barang, Qty, Keterangan, Platform, Catatan] -> 6 columns (A to F)
-        rowValues = [formattedDate, name, qty, keterangan || catatan || '', platform || '', catatan || ''];
+        rowValues = [formattedDate, name, qty, keterangan || 'PRODUKSI', platform || '', catatan || ''];
         startCol = 'A';
         endCol = 'F';
-        startRowNumber = 5; // Starts at A5
+        startRowNumber = 5;
       } else {
-        // Keluar: NO SKU based on user request. [Tanggal, Nama Barang, Qty, Platform, Catatan] -> 5 columns (B to F)
-        rowValues = [formattedDate, name, qty, platform || '', catatan || keterangan || ''];
+        // Keluar: [Tanggal, Nama Barang, Qty, Orderan/Platform, Keterangan/Catatan] -> 5 columns (B to F, Col A blank)
+        rowValues = [formattedDate, name, qty, platform || 'SHOPEE', catatan || keterangan || ''];
         startCol = 'B';
         endCol = 'F';
-        startRowNumber = 6; // Starts at B6
+        startRowNumber = 5;
       }
 
       // Check last row's date to determine if a spacer row is needed
-      // Fetch ONLY startCol:endCol so we ignore column I completely!
       const dataResp = await sheets.spreadsheets.values.get({
-        spreadsheetId: sheetId,
+        spreadsheetId: targetSheetId,
         range: `'${targetSheetName}'!${startCol}${startRowNumber}:${endCol}`
       });
       
@@ -176,10 +179,7 @@ async function startServer() {
         const r = rows[i];
         if (r && r.length > 0 && r.some(c => c && String(c).trim() !== '')) {
           maxPopulatedRow = startRowNumber + i;
-          
-          // Date is always at index 0 because both startCol='A' (in) and startCol='B' (out) have date as the first element!
           let d = r[0] ? String(r[0]).trim() : '';
-          
           if (d.match(/^\d{2}\/\d{2}\/\d{4}$/) || d.match(/^\d{5}$/)) {
             lastDate = d;
           }
@@ -188,7 +188,7 @@ async function startServer() {
 
       let targetRow = maxPopulatedRow + 1;
 
-      const valuesToUpdate = [];
+      const valuesToUpdate: any[][] = [];
       if (maxPopulatedRow >= startRowNumber && lastDate && lastDate !== formattedDate) {
         // Insert spacer row
         valuesToUpdate.push(Array(rowValues.length).fill('')); 
@@ -199,7 +199,7 @@ async function startServer() {
       const updateRange = `'${targetSheetName}'!${startCol}${targetRow}:${endCol}${endRow}`;
 
       await sheets.spreadsheets.values.update({
-        spreadsheetId: sheetId,
+        spreadsheetId: targetSheetId,
         range: updateRange,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
@@ -207,6 +207,7 @@ async function startServer() {
         }
       });
 
+      console.log(`[INVENTORY] Updated stock (${type}) for ${name} into '${targetSheetName}'!${updateRange}`);
       res.json({ success: true, targetSheetName, rowValues, updateRange });
     } catch (err: any) {
       console.error("Failed to append stock:", err);
@@ -214,221 +215,134 @@ async function startServer() {
     }
   });
 
+  // Helper function to fetch catalog items from a specific sheet
+  async function fetchItemsFromSheet(sheetId: string) {
+    const keyPath = path.resolve(process.cwd(), 'service-account.json');
+    if (!fs.existsSync(keyPath)) {
+      throw new Error("No service-account.json found");
+    }
+
+    const keyData = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+    const auth = new google.auth.JWT({
+      email: keyData.client_email,
+      key: keyData.private_key,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
+    const availableTabs = meta.data.sheets?.map(s => s.properties?.title || '') || [];
+
+    const monthsDesc = ['desember', 'november', 'oktober', 'september', 'agustus', 'juli', 'juni', 'mei', 'april', 'maret', 'februari', 'januari'];
+    let matchedTab: string | undefined;
+
+    for (const m of monthsDesc) {
+      matchedTab = availableTabs.find(t => {
+        const lower = t.toLowerCase();
+        return (lower.includes('katalog') || lower.includes('barang')) && lower.includes(m);
+      });
+      if (matchedTab) break;
+    }
+
+    if (!matchedTab) {
+      matchedTab = availableTabs.find(t => t.toLowerCase().includes('katalog')) || availableTabs[0];
+    }
+
+    console.log(`[INVENTORY] Fetching items for sheet ${sheetId} using tab "${matchedTab}"`);
+    const resp = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: `'${matchedTab}'!A1:N600`
+    });
+
+    const rows = resp.data.values || [];
+    let headerRowIdx = -1;
+    let isHijab = sheetId === DEFAULT_HIJAB_SHEET_ID;
+
+    for (let i = 0; i < Math.min(rows.length, 10); i++) {
+      const rowStr = (rows[i] || []).join(' ').toLowerCase();
+      if (rowStr.includes('nama barang') && (rowStr.includes('kode barang') || rowStr.includes('stok awal') || rowStr.includes('bulan'))) {
+        headerRowIdx = i;
+        if (rowStr.includes('bulan')) isHijab = true;
+        break;
+      }
+    }
+
+    const startIdx = headerRowIdx >= 0 ? headerRowIdx + 2 : (isHijab ? 4 : 5);
+    const items: any[] = [];
+    let skuCounter = 1;
+
+    for (let i = startIdx; i < rows.length; i++) {
+      const r = rows[i];
+      if (!r || !r[1]) continue;
+      const name = String(r[1]).trim();
+      if (!name || name.toLowerCase().includes('kosongkan') || name.toLowerCase().includes('nama barang')) continue;
+
+      let sku = r[0] ? String(r[0]).trim() : '';
+      if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
+        sku = name;
+      }
+
+      const initialStock = parseNumber(r[2]);
+      const stockIn = parseNumber(r[3]);
+      const stockOut = parseNumber(r[4]);
+      const stock = parseNumber(r[5]);
+      const buyPrice = parseCurrency(r[6]);
+      const sellPrice = parseCurrency(r[8]);
+
+      let category = "Pakaian Apung";
+      if (isHijab) {
+        if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
+        else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
+        else category = "Ranura Hijab";
+      } else {
+        if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
+        else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
+        else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
+        else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
+        else category = "Baju Renang Ranura";
+      }
+
+      items.push({
+        id: `item-${sheetId.substring(0, 6)}-${skuCounter++}`,
+        name,
+        sku,
+        category,
+        stock,
+        reserved: 0,
+        initialStock,
+        stockIn,
+        stockOut,
+        buyPrice,
+        sellPrice,
+        status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
+        unit: 'pcs',
+        sourceSheetId: sheetId,
+        sourceSheetName: isHijab ? 'Ranura Hijab & Rosal' : 'Ranura Swimwear'
+      });
+    }
+
+    return items;
+  }
+
   app.get("/api/inventory/sheet", async (req, res) => {
-    console.log("[INVENTORY] Fetching sheet: " + req.query.id);
     try {
-      const sheetId = req.query.id as string;
-      if (!sheetId) return res.status(400).json({ error: "Missing sheet id" });
-      
-      let sheetUrl = "https://docs.google.com/spreadsheets/d/" + sheetId + "/export?format=csv";
-      
-      const keyPath = path.resolve(process.cwd(), 'service-account.json');
-      let accessToken = null;
-      let matchedSheet = null;
-      
-      let availableTabs = [];
+      const requestedId = req.query.id as string;
+      console.log("[INVENTORY] Fetching sheet: " + (requestedId || 'all'));
 
-      // 1. Try to get tabs via Service Account API
-      if (fs.existsSync(keyPath)) {
-        try {
-          const keyData = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
-          const auth = new google.auth.JWT({
-            email: keyData.client_email,
-            key: keyData.private_key,
-            scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-          });
-          const tokenRes = await auth.getAccessToken();
-          accessToken = tokenRes.token;
-
-          const sheets = google.sheets({version: 'v4', auth});
-          const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
-          
-          if (meta.data.sheets) {
-            availableTabs = meta.data.sheets.map(s => ({
-              title: s.properties.title,
-              sheetId: s.properties.sheetId
-            }));
-          }
-        } catch (err) {
-          console.warn("[INVENTORY] API Metadata error (falling back to HTML scrape):", err.message);
-        }
+      if (!requestedId || requestedId === 'all') {
+        const [swimwearItems, hijabItems] = await Promise.all([
+          fetchItemsFromSheet(DEFAULT_SWIMWEAR_SHEET_ID).catch(e => { console.warn("Failed swimwear fetch:", e.message); return []; }),
+          fetchItemsFromSheet(DEFAULT_HIJAB_SHEET_ID).catch(e => { console.warn("Failed hijab fetch:", e.message); return []; })
+        ]);
+        const allItems = [...swimwearItems, ...hijabItems];
+        console.log(`[INVENTORY] Fetched total ${allItems.length} items (${swimwearItems.length} Swimwear + ${hijabItems.length} Hijab)`);
+        return res.json(allItems);
+      } else {
+        const items = await fetchItemsFromSheet(requestedId);
+        console.log(`[INVENTORY] Fetched ${items.length} items from ${requestedId}`);
+        return res.json(items);
       }
-
-      // 2. Fallback: Scrape tabs from public HTML view if API failed
-      if (availableTabs.length === 0) {
-        try {
-          const htmlRes = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/htmlview`);
-          if (htmlRes.ok) {
-            const htmlText = await htmlRes.text();
-            const regex = /{name:\s*"([^"]+)",[^}]*?gid:\s*"(\d+)"/g;
-            const matches = [...htmlText.matchAll(regex)];
-            availableTabs = matches.map(m => ({ title: m[1], sheetId: m[2] }));
-            console.log(`[INVENTORY] Scraped ${availableTabs.length} tabs from HTML for ${sheetId}`);
-          }
-        } catch (e) {
-          console.warn("[INVENTORY] Failed to scrape HTML for tabs:", e.message);
-        }
-      }
-      
-      // 3. Find the best matching tab
-      if (availableTabs.length > 0) {
-          const dateNow = new Date();
-          const currentMonth = dateNow.toLocaleString('id-ID', { month: 'long', year: 'numeric' }).toLowerCase();
-          
-          const targetTitle = `katalog barang ${currentMonth}`;
-          console.log(`[INVENTORY] Searching for exact tab: "${targetTitle}"`);
-          
-          matchedSheet = availableTabs.find(s => s.title.toLowerCase() === targetTitle);
-          
-          // Fallback: look for current month somewhere in the title
-          if (!matchedSheet) {
-            const monthOnly = dateNow.toLocaleString('id-ID', { month: 'long' }).toLowerCase();
-            const yearOnly = dateNow.getFullYear().toString();
-            matchedSheet = availableTabs.find(s => {
-              const t = s.title.toLowerCase();
-              return (t.includes('katalog') || t.includes('stok') || t.includes('inventory') || t.includes('barang')) 
-                     && t.includes(monthOnly) && t.includes(yearOnly);
-            });
-          }
-          
-          // Fallback: look for ANY inventory-related tab
-          if (!matchedSheet) {
-            matchedSheet = availableTabs.find(s => {
-               const t = s.title.toLowerCase();
-               return t.includes('katalog') || t.includes('stok') || t.includes('inventory') || t.includes('barang');
-            });
-          }
-          
-          // Ultimate fallback: just use the first tab
-          if (!matchedSheet) {
-             matchedSheet = availableTabs[0];
-          }
-          
-          if (matchedSheet && matchedSheet.sheetId !== undefined) {
-            console.log(`[INVENTORY] Selected tab: "${matchedSheet.title}" (gid=${matchedSheet.sheetId})`);
-            sheetUrl += `&gid=${matchedSheet.sheetId}`;
-          }
-      }
-
-      const fetchOptions = accessToken ? { headers: { Authorization: `Bearer ${accessToken}` } } : {};
-      const resp = await fetch(sheetUrl, fetchOptions);
-      if (!resp.ok) { 
-        console.error(`[INVENTORY] Fetch failed with status ${resp.status}`); 
-        throw new Error("Failed to fetch sheet"); 
-      }
-      
-      const csvData = await resp.text();
-      const lines = csvData.split('\n');
-      const items = [];
-      let startParsing = false;
-      let skuCounter = 1000;
-      let formatType = 'legacy';
-      
-      for (const line of lines) {
-        const cleanLine = line.trim();
-        
-        if (!startParsing) {
-           const lower = cleanLine.toLowerCase();
-           if ((lower.includes('kode barang') && lower.includes('nama barang')) || 
-               (lower.includes('barang') && lower.includes('stok awal'))) {
-             startParsing = true;
-             formatType = 'legacy';
-             continue;
-           }
-           if (lower.includes('id produk') && lower.includes('nama produk') && lower.includes('sku')) {
-             startParsing = true;
-             formatType = 'new';
-             continue;
-           }
-        }
-        
-        if (!startParsing || !cleanLine) continue;
-        if (cleanLine.toLowerCase().includes('kosongkan saja')) continue;
-        if (cleanLine.toLowerCase().includes('id produk') || cleanLine.toLowerCase().includes('kode barang')) continue; // Skip header row if guessed
-        
-        const cols = cleanLine.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        
-        if (formatType === 'legacy') {
-          if (cols.length >= 6 && cols[1]) {
-            const name = cols[1].replace(/"/g, '').trim();
-            if (!name) continue;
-            
-            const initialStock = parseInt(cols[2].replace(/\./g, '')) || 0;
-            const stockIn = parseInt(cols[3].replace(/\./g, '')) || 0;
-            const stockOut = parseInt(cols[4].replace(/\./g, '')) || 0;
-            const stock = parseInt(cols[5].replace(/\./g, '')) || 0;
-            
-            let buyPriceStr = cols[6] || '0';
-            let sellPriceStr = cols[8] || '0';
-            if (buyPriceStr.includes(',')) buyPriceStr = buyPriceStr.split(',')[0];
-            if (sellPriceStr.includes(',')) sellPriceStr = sellPriceStr.split(',')[0];
-            
-            const buyPrice = parseInt(buyPriceStr.replace(/[^0-9]/g, '')) || 0;
-            const sellPrice = parseInt(sellPriceStr.replace(/[^0-9]/g, '')) || 0;
-            
-            let category = "Pakaian Apung";
-            if (name.toLowerCase().includes("rompi")) category = "Perlengkapan Ibadah";
-            if (name.toLowerCase().includes("kacamata") || name.toLowerCase().includes("ban")) category = "Aksesoris Renang";
-  
-            let sku = cols[0].replace(/"/g, '').trim();
-            if (!sku || ["januari","februari","maret","april","mei","juni","juli","agustus","september","oktober","november","desember","bulan"].includes(sku.toLowerCase())) {
-              sku = name;
-            }
-            
-            items.push({
-              id: 'item-' + sheetId.substring(0,8) + '-' + skuCounter,
-              name: name,
-              sku: sku,
-              category: category,
-              stock: stock,
-              reserved: 0,
-              initialStock: initialStock,
-              stockIn: stockIn,
-              stockOut: stockOut,
-              buyPrice: buyPrice,
-              sellPrice: sellPrice,
-              status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
-              unit: 'pcs',
-              sourceSheetId: sheetId
-            });
-            skuCounter++;
-          }
-        } else if (formatType === 'new') {
-          if (cols.length >= 7 && cols[1]) {
-            const name = cols[1].replace(/"/g, '').trim();
-            if (!name) continue;
-            
-            const sku = cols[2].replace(/"/g, '').trim() || name;
-            const category = cols[3].replace(/"/g, '').trim();
-            
-            const stockIn = parseInt(cols[4].replace(/\./g, '')) || 0;
-            const stockOut = parseInt(cols[5].replace(/\./g, '')) || 0;
-            const stock = parseInt(cols[6].replace(/\./g, '')) || 0;
-            
-            items.push({
-              id: 'item-' + sheetId.substring(0,8) + '-' + skuCounter,
-              name: name,
-              sku: sku,
-              category: category,
-              stock: stock,
-              reserved: 0,
-              initialStock: stock - stockIn + stockOut,
-              stockIn: stockIn,
-              stockOut: stockOut,
-              buyPrice: 0,
-              sellPrice: 0,
-              status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
-              unit: cols[7]?.replace(/"/g, '').trim() || 'pcs',
-              sourceSheetId: sheetId
-            });
-            skuCounter++;
-          }
-        }
-      }
-      
-      console.log(`[INVENTORY] Fetched ${items.length} items from ${sheetId}`);
-      res.json(items);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to fetch sheet", err);
       res.status(500).json({ error: err.message });
     }
@@ -512,6 +426,37 @@ async function startServer() {
     } catch (error: any) {
       console.error("Gemini Chat API Error:", error);
       res.status(500).json({ error: error.message || "Gagal mendapatkan respon dari asisten Gemini" });
+    }
+  });
+
+  // Fallback proxy to internal bot (port 3001) for unhandled /api/*
+  app.all("/api/*", async (req, res, next) => {
+    try {
+      const targetUrl = `http://localhost:3001${req.originalUrl}`;
+      const headers: any = { 'Content-Type': 'application/json' };
+      if (req.headers['authorization']) headers['Authorization'] = req.headers['authorization'];
+      
+      const fetchOpts: any = {
+        method: req.method,
+        headers
+      };
+      if (['POST', 'PUT', 'PATCH'].includes(req.method) && req.body && Object.keys(req.body).length > 0) {
+        fetchOpts.body = JSON.stringify(req.body);
+      }
+      
+      const resp = await fetch(targetUrl, fetchOpts).catch(() => null);
+      if (!resp || resp.status === 404) return next();
+      
+      const cType = resp.headers.get('content-type') || '';
+      if (cType.includes('application/json')) {
+        const json = await resp.json();
+        return res.status(resp.status).json(json);
+      } else {
+        const text = await resp.text();
+        return res.status(resp.status).send(text);
+      }
+    } catch (err) {
+      return next();
     }
   });
 
