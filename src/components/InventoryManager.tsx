@@ -71,14 +71,99 @@ export default function InventoryManager({
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'swimwear' | 'hijab'>('all');
 
+  const fetchPublicSheets = async () => {
+    const sheetIds = [
+      { id: '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8', name: 'Ranura Swimwear' },
+      { id: '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8', name: 'Ranura Hijab & Rosal' }
+    ];
+    let merged: any[] = [];
+    let counter = 1;
+
+    for (const s of sheetIds) {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${s.id}/gviz/tq?tqx=out:json`;
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const text = await res.text();
+        const jsonStr = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+        const data = JSON.parse(jsonStr);
+        const rows = data.table?.rows || [];
+
+        for (let i = 4; i < rows.length; i++) {
+          const cells = rows[i]?.c || [];
+          const name = cells[1]?.v ? String(cells[1].v).trim() : '';
+          if (!name || name.toLowerCase().includes('kosongkan') || name.toLowerCase().includes('nama barang')) continue;
+
+          let sku = cells[0]?.v ? String(cells[0].v).trim() : name;
+          const initialStock = Number(cells[2]?.v) || 0;
+          const stockIn = Number(cells[3]?.v) || 0;
+          const stockOut = Number(cells[4]?.v) || 0;
+          const stock = Number(cells[5]?.v) || 0;
+          const buyPrice = Math.round(Number(cells[6]?.v) || 0);
+          const sellPrice = Math.round(Number(cells[8]?.v) || 0);
+
+          const isHijab = s.id === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
+          let category = "Pakaian Apung";
+          if (isHijab) {
+            if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
+            else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
+            else category = "Ranura Hijab";
+          } else {
+            if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
+            else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
+            else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
+            else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
+            else category = "Baju Renang Ranura";
+          }
+
+          merged.push({
+            id: `item-${s.id.substring(0, 6)}-${counter++}`,
+            name,
+            sku,
+            category,
+            stock,
+            reserved: 0,
+            initialStock,
+            stockIn,
+            stockOut,
+            buyPrice,
+            sellPrice,
+            status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
+            unit: 'pcs',
+            sourceSheetId: s.id,
+            sourceSheetName: s.name
+          });
+        }
+      } catch (err) {
+        console.warn(`Direct fetch failed for ${s.name}:`, err);
+      }
+    }
+    return merged;
+  };
+
   const handleSyncFromGoogleSheet = async () => {
     setIsSyncingFromSheet(true);
     setToastMessage({ type: 'info', title: 'Menarik Data...', message: 'Sedang mensinkronkan data inventaris dari Ranura Swimwear & Ranura Hijab...' });
     try {
-      // Endpoint /api/inventory/sheet?id=all loads both Google Sheets automatically
-      const res = await fetch('/api/inventory/sheet?id=all&t=' + Date.now());
-      if (!res.ok) throw new Error('Gagal menghubungi server dasbor untuk sinkronisasi inventaris.');
-      const allData = await res.json();
+      let allData: any[] = [];
+      // 1. Try local/server backend endpoint first
+      try {
+        const res = await fetch('/api/inventory/sheet?id=all&t=' + Date.now());
+        if (res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            allData = await res.json();
+          }
+        }
+      } catch (e) {
+        console.warn('Backend unavailable, will use direct Google Sheets fetch:', e);
+      }
+
+      // 2. Direct fallback to Google Sheets GViz API (works on Vercel static deployment)
+      if (!allData || allData.length === 0) {
+        console.log('Fetching live data directly from Google Sheets...');
+        allData = await fetchPublicSheets();
+      }
       
       if (allData && allData.length > 0 && onReplaceInventory) {
         onReplaceInventory(allData);

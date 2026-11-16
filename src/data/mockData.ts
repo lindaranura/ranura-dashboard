@@ -11,6 +11,7 @@ import {
   Campaign, 
   ChatThread 
 } from '../types';
+import REAL_PRODUCTION_DATA from './realProductionItems.json';
 
 // Helper for dynamic ISO dates
 const daysAgo = (days: number, hours: number = 0): string => {
@@ -418,92 +419,7 @@ export const INITIAL_LOGS: SyncLog[] = [
   }
 ];
 
-export const INITIAL_PRODUCTION: ProductionItem[] = [
-  {
-    id: 'prod-1',
-    name: 'Baju Renang Apung Ranura (Dewasa)',
-    sku: 'RANURA-APUNG-V2',
-    category: 'Pakaian Apung',
-    stock: 142,
-    reserved: 17,
-    initialStock: 100,
-    stockIn: 80,
-    stockOut: 38,
-    status: 'optimal',
-    unit: 'pcs',
-    zoneId: 'zone-a'
-  },
-  {
-    id: 'prod-2',
-    name: 'Rompi Sholat Madani Mayudee',
-    sku: 'MAYUDEE-MADANI-M1',
-    category: 'Perlengkapan Ibadah',
-    stock: 45,
-    reserved: 5,
-    initialStock: 30,
-    stockIn: 35,
-    stockOut: 20,
-    status: 'warning',
-    unit: 'pcs',
-    zoneId: 'zone-a'
-  },
-  {
-    id: 'prod-3',
-    name: 'Rompi Sholat Islah Mayudee',
-    sku: 'MAYUDEE-ISLAH-I1',
-    category: 'Perlengkapan Ibadah',
-    stock: 12,
-    reserved: 3,
-    initialStock: 10,
-    stockIn: 15,
-    stockOut: 13,
-    status: 'critical',
-    unit: 'pcs',
-    zoneId: 'zone-a'
-  },
-  {
-    id: 'prod-4',
-    name: 'Baju Renang Apung Anak Ranura',
-    sku: 'RANURA-APUNG-KIDS',
-    category: 'Pakaian Apung',
-    stock: 28,
-    reserved: 8,
-    initialStock: 20,
-    stockIn: 30,
-    stockOut: 22,
-    status: 'optimal',
-    unit: 'pcs',
-    zoneId: 'zone-a'
-  },
-  {
-    id: 'prod-5',
-    name: 'Rompi Sholat Premium Mayudee',
-    sku: 'MAYUDEE-PREMIUM',
-    category: 'Perlengkapan Ibadah',
-    stock: 80,
-    reserved: 2,
-    initialStock: 50,
-    stockIn: 50,
-    stockOut: 20,
-    status: 'optimal',
-    unit: 'pcs',
-    zoneId: 'zone-a'
-  },
-  {
-    id: 'prod-6',
-    name: 'Kacamata Renang Antifog Ranura',
-    sku: 'RANURA-ACC-01',
-    category: 'Aksesoris Renang',
-    stock: 310,
-    reserved: 30,
-    initialStock: 200,
-    stockIn: 180,
-    stockOut: 70,
-    status: 'optimal',
-    unit: 'pcs',
-    zoneId: 'zone-c'
-  }
-];
+export const INITIAL_PRODUCTION: ProductionItem[] = REAL_PRODUCTION_DATA as unknown as ProductionItem[];
 
 // ==========================================
 // ZONA GUDANG (WAREHOUSE ZONES)

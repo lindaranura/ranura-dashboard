@@ -77,7 +77,18 @@ export default function App() {
   const [configs, setConfigs] = useState<IntegrationConfig[]>(() => { const saved = localStorage.getItem('apex_configs'); return saved ? JSON.parse(saved) : INITIAL_INTEGRATIONS; });
   const [orders, setOrders] = useState<Order[]>(() => { const saved = localStorage.getItem('apex_orders'); return saved ? JSON.parse(saved) : INITIAL_ORDERS; });
   const [logs, setLogs] = useState<SyncLog[]>(() => { const saved = localStorage.getItem('apex_logs'); return saved ? JSON.parse(saved) : INITIAL_LOGS; });
-  const [inventory, setInventory] = useState<ProductionItem[]>(() => { const saved = localStorage.getItem('apex_inventory'); return saved ? JSON.parse(saved) : INITIAL_PRODUCTION; });
+  const [inventory, setInventory] = useState<ProductionItem[]>(() => { 
+    const saved = localStorage.getItem('apex_inventory'); 
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1')) {
+          return parsed;
+        }
+      } catch (e) {}
+    }
+    return INITIAL_PRODUCTION; 
+  });
   const [chatThreads, setChatThreads] = useState<any[]>(() => { const saved = localStorage.getItem('apex_chat_threads'); return saved ? JSON.parse(saved) : INITIAL_CHAT_THREADS; });
   const [transactions, setTransactions] = useState<FinanceTransaction[]>(() => { const saved = localStorage.getItem('apex_transactions'); return saved ? JSON.parse(saved) : INITIAL_TRANSACTIONS; });
   const [invoices, setInvoices] = useState<Invoice[]>(() => { const saved = localStorage.getItem('apex_invoices'); return saved ? JSON.parse(saved) : INITIAL_INVOICES; });
