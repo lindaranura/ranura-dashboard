@@ -30,6 +30,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ProductionItem, WarehouseZone } from '../types';
 import { INITIAL_WAREHOUSE_ZONES } from '../data/mockData';
+import REAL_PRODUCTION_DATA from '../data/realProductionItems.json';
 import { generateHistoricalMovements, StockMovement } from '../data/stockMovementGenerator';
 import { exportMovementsToSheets, getCachedToken } from '../lib/sheetsService';
 
@@ -91,8 +92,12 @@ export default function InventoryManager({
       }
     ];
 
-    let merged: any[] = [];
-    let counter = 1;
+    // Start with all 313 base items so no products are lost when switching or syncing months
+    const baseItems: any[] = JSON.parse(JSON.stringify(REAL_PRODUCTION_DATA));
+    const itemsMap = new Map<string, any>();
+    baseItems.forEach(it => {
+      itemsMap.set(it.name.trim().toUpperCase(), it);
+    });
 
     for (const s of sheetConfigs) {
       try {
@@ -104,16 +109,13 @@ export default function InventoryManager({
         const data = JSON.parse(jsonStr);
         const rows = data.table?.rows || [];
 
-        for (let i = 4; i < rows.length; i++) {
+        // Read all rows starting from 0 to capture every product
+        for (let i = 0; i < rows.length; i++) {
           const cells = rows[i]?.c || [];
           const name = cells[1]?.v ? String(cells[1].v).trim() : '';
           if (!name || name.toLowerCase().includes('kosongkan') || name.toLowerCase().includes('nama barang')) continue;
 
-          let sku = cells[0]?.v ? String(cells[0].v).trim() : name;
-          if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
-            sku = name;
-          }
-
+          const key = name.toUpperCase();
           const initialStock = Number(cells[2]?.v) || 0;
           const stockIn = Number(cells[3]?.v) || 0;
           const stockOut = Number(cells[4]?.v) || 0;
@@ -121,43 +123,61 @@ export default function InventoryManager({
           const buyPrice = Math.round(Number(cells[6]?.v) || 0);
           const sellPrice = Math.round(Number(cells[8]?.v) || 0);
 
-          let category = "Pakaian Apung";
-          if (s.isHijab) {
-            if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
-            else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
-            else category = "Ranura Hijab";
+          if (itemsMap.has(key)) {
+            const existing = itemsMap.get(key);
+            existing.stock = stock;
+            existing.initialStock = initialStock;
+            existing.stockIn = stockIn;
+            existing.stockOut = stockOut;
+            if (buyPrice > 0) existing.buyPrice = buyPrice;
+            if (sellPrice > 0) existing.sellPrice = sellPrice;
+            existing.status = stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical';
+            existing.activeMonth = s.tabName;
           } else {
-            if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
-            else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
-            else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
-            else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
-            else category = "Baju Renang Ranura";
-          }
+            let sku = cells[0]?.v ? String(cells[0].v).trim() : name;
+            if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
+              sku = name;
+            }
 
-          merged.push({
-            id: `item-${s.id.substring(0, 6)}-${counter++}`,
-            name,
-            sku,
-            category,
-            stock,
-            reserved: 0,
-            initialStock,
-            stockIn,
-            stockOut,
-            buyPrice,
-            sellPrice,
-            status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
-            unit: 'pcs',
-            sourceSheetId: s.id,
-            sourceSheetName: s.name,
-            activeMonth: s.tabName
-          });
+            let category = "Pakaian Apung";
+            if (s.isHijab) {
+              if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
+              else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
+              else category = "Ranura Hijab";
+            } else {
+              if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
+              else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
+              else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
+              else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
+              else category = "Baju Renang Ranura";
+            }
+
+            const newItem = {
+              id: `item-${s.id.substring(0, 6)}-${itemsMap.size + 1}`,
+              name,
+              sku,
+              category,
+              stock,
+              reserved: 0,
+              initialStock,
+              stockIn,
+              stockOut,
+              buyPrice,
+              sellPrice,
+              status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
+              unit: 'pcs',
+              sourceSheetId: s.id,
+              sourceSheetName: s.name,
+              activeMonth: s.tabName
+            };
+            itemsMap.set(key, newItem);
+          }
         }
       } catch (err) {
         console.warn(`Direct fetch failed for ${s.name}:`, err);
       }
     }
-    return merged;
+    return Array.from(itemsMap.values());
   };
 
   const handleSyncFromGoogleSheet = async (monthToSync: string = activeCatalogMonth) => {

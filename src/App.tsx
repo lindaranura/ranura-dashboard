@@ -109,7 +109,7 @@ export default function App() {
         const parsed = JSON.parse(saved);
         const isOldSheets = parsed.some((i: any) => i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' || i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8');
         const hasMovements = Array.isArray(parsed) && parsed.some((i: any) => (i.stockIn || 0) > 0 || (i.stockOut || 0) > 0);
-        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1') && hasMovements && !isOldSheets) {
+        if (Array.isArray(parsed) && parsed.length >= INITIAL_PRODUCTION.length && !parsed.some((i: any) => i.id === 'prod-1') && hasMovements && !isOldSheets) {
           return parsed;
         }
       } catch (e) {}

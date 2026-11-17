@@ -1,6 +1,60 @@
 [
   {
     "id": "item-19oOIW-1",
+    "name": "RANURA KIDS BLACK GREY XS",
+    "sku": "RANURA KIDS BLACK GREY XS",
+    "category": "Baju Renang Anak",
+    "stock": 1,
+    "reserved": 0,
+    "initialStock": 1,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang November 2026"
+  },
+  {
+    "id": "item-19oOIW-2",
+    "name": "RANURA KIDS BLACK GREY S",
+    "sku": "RANURA KIDS BLACK GREY S",
+    "category": "Baju Renang Anak",
+    "stock": 1,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 6,
+    "stockOut": 5,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang November 2026"
+  },
+  {
+    "id": "item-19oOIW-3",
+    "name": "RANURA KIDS BLACK GREY M",
+    "sku": "RANURA KIDS BLACK GREY M",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 3,
+    "stockOut": 3,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang November 2026"
+  },
+  {
+    "id": "item-19oOIW-4",
     "name": "RANURA KIDS BLACK GREY L",
     "sku": "RANURA KIDS BLACK GREY L",
     "category": "Baju Renang Anak",
@@ -18,7 +72,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-2",
+    "id": "item-19oOIW-5",
     "name": "RANURA KIDS BLACK GREY XL",
     "sku": "RANURA KIDS BLACK GREY XL",
     "category": "Baju Renang Anak",
@@ -36,7 +90,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-3",
+    "id": "item-19oOIW-6",
     "name": "RANURA KIDS BLACK GREY XXL",
     "sku": "RANURA KIDS BLACK GREY XXL",
     "category": "Baju Renang Anak",
@@ -54,7 +108,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-4",
+    "id": "item-19oOIW-7",
     "name": "RANURA KIDS BLACK GREY XXXL",
     "sku": "RANURA KIDS BLACK GREY XXXL",
     "category": "Baju Renang Anak",
@@ -72,7 +126,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-5",
+    "id": "item-19oOIW-8",
     "name": "RANURA KIDS BLACK MARUN XS",
     "sku": "RANURA KIDS BLACK MARUN XS",
     "category": "Baju Renang Anak",
@@ -90,7 +144,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-6",
+    "id": "item-19oOIW-9",
     "name": "RANURA KIDS BLACK MARUN S",
     "sku": "RANURA KIDS BLACK MARUN S",
     "category": "Baju Renang Anak",
@@ -108,7 +162,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-7",
+    "id": "item-19oOIW-10",
     "name": "RANURA KIDS BLACK MARUN M",
     "sku": "RANURA KIDS BLACK MARUN M",
     "category": "Baju Renang Anak",
@@ -126,7 +180,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-8",
+    "id": "item-19oOIW-11",
     "name": "RANURA KIDS BLACK MARUN L",
     "sku": "RANURA KIDS BLACK MARUN L",
     "category": "Baju Renang Anak",
@@ -144,7 +198,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-9",
+    "id": "item-19oOIW-12",
     "name": "RANURA KIDS BLACK MARUN XL",
     "sku": "RANURA KIDS BLACK MARUN XL",
     "category": "Baju Renang Anak",
@@ -162,7 +216,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-10",
+    "id": "item-19oOIW-13",
     "name": "RANURA KIDS BLACK MARUN XXL",
     "sku": "RANURA KIDS BLACK MARUN XXL",
     "category": "Baju Renang Anak",
@@ -180,7 +234,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-11",
+    "id": "item-19oOIW-14",
     "name": "RANURA KIDS BLACK MARUN XXXL",
     "sku": "RANURA KIDS BLACK MARUN XXXL",
     "category": "Baju Renang Anak",
@@ -198,7 +252,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-12",
+    "id": "item-19oOIW-15",
     "name": "RANURA KIDS BABY PINK XS",
     "sku": "RANURA KIDS BABY PINK XS",
     "category": "Baju Renang Anak",
@@ -216,7 +270,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-13",
+    "id": "item-19oOIW-16",
     "name": "RANURA KIDS BABY PINK S",
     "sku": "RANURA KIDS BABY PINK S",
     "category": "Baju Renang Anak",
@@ -234,7 +288,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-14",
+    "id": "item-19oOIW-17",
     "name": "RANURA KIDS BABY PINK M",
     "sku": "RANURA KIDS BABY PINK M",
     "category": "Baju Renang Anak",
@@ -252,7 +306,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-15",
+    "id": "item-19oOIW-18",
     "name": "RANURA KIDS BABY PINK L",
     "sku": "RANURA KIDS BABY PINK L",
     "category": "Baju Renang Anak",
@@ -270,7 +324,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-16",
+    "id": "item-19oOIW-19",
     "name": "RANURA KIDS BABY PINK XL",
     "sku": "RANURA KIDS BABY PINK XL",
     "category": "Baju Renang Anak",
@@ -288,7 +342,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-17",
+    "id": "item-19oOIW-20",
     "name": "RANURA KIDS BABY PINK XXL",
     "sku": "RANURA KIDS BABY PINK XXL",
     "category": "Baju Renang Anak",
@@ -306,7 +360,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-18",
+    "id": "item-19oOIW-21",
     "name": "RANURA KIDS BABY PINK XXXL",
     "sku": "RANURA KIDS BABY PINK XXXL",
     "category": "Baju Renang Anak",
@@ -324,7 +378,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-19",
+    "id": "item-19oOIW-22",
     "name": "RANURA KIDS BLACK PINK XS",
     "sku": "RANURA KIDS BLACK PINK XS",
     "category": "Baju Renang Anak",
@@ -342,7 +396,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-20",
+    "id": "item-19oOIW-23",
     "name": "RANURA KIDS BLACK PINK S",
     "sku": "RANURA KIDS BLACK PINK S",
     "category": "Baju Renang Anak",
@@ -360,7 +414,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-21",
+    "id": "item-19oOIW-24",
     "name": "RANURA KIDS BLACK PINK M",
     "sku": "RANURA KIDS BLACK PINK M",
     "category": "Baju Renang Anak",
@@ -378,7 +432,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-22",
+    "id": "item-19oOIW-25",
     "name": "RANURA KIDS BLACK PINK L",
     "sku": "RANURA KIDS BLACK PINK L",
     "category": "Baju Renang Anak",
@@ -396,7 +450,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-23",
+    "id": "item-19oOIW-26",
     "name": "RANURA KIDS BLACK PINK XL",
     "sku": "RANURA KIDS BLACK PINK XL",
     "category": "Baju Renang Anak",
@@ -414,7 +468,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-24",
+    "id": "item-19oOIW-27",
     "name": "RANURA KIDS BLACK PINK XXL",
     "sku": "RANURA KIDS BLACK PINK XXL",
     "category": "Baju Renang Anak",
@@ -432,7 +486,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-25",
+    "id": "item-19oOIW-28",
     "name": "RANURA KIDS BLACK PINK XXXL",
     "sku": "RANURA KIDS BLACK PINK XXXL",
     "category": "Baju Renang Anak",
@@ -450,7 +504,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-26",
+    "id": "item-19oOIW-29",
     "name": "RANURA KIDS GREY PURPLE XS",
     "sku": "RANURA KIDS GREY PURPLE XS",
     "category": "Baju Renang Anak",
@@ -468,7 +522,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-27",
+    "id": "item-19oOIW-30",
     "name": "RANURA KIDS GREY PURPLE S",
     "sku": "RANURA KIDS GREY PURPLE S",
     "category": "Baju Renang Anak",
@@ -486,7 +540,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-28",
+    "id": "item-19oOIW-31",
     "name": "RANURA KIDS GREY PURPLE M",
     "sku": "RANURA KIDS GREY PURPLE M",
     "category": "Baju Renang Anak",
@@ -504,7 +558,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-29",
+    "id": "item-19oOIW-32",
     "name": "RANURA KIDS GREY PURPLE L",
     "sku": "RANURA KIDS GREY PURPLE L",
     "category": "Baju Renang Anak",
@@ -522,7 +576,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-30",
+    "id": "item-19oOIW-33",
     "name": "RANURA KIDS GREY PURPLE XL",
     "sku": "RANURA KIDS GREY PURPLE XL",
     "category": "Baju Renang Anak",
@@ -540,7 +594,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-31",
+    "id": "item-19oOIW-34",
     "name": "RANURA KIDS GREY PURPLE XXL",
     "sku": "RANURA KIDS GREY PURPLE XXL",
     "category": "Baju Renang Anak",
@@ -558,7 +612,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-32",
+    "id": "item-19oOIW-35",
     "name": "RANURA KIDS GREY PURPLE XXXL",
     "sku": "RANURA KIDS GREY PURPLE XXXL",
     "category": "Baju Renang Anak",
@@ -576,7 +630,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-33",
+    "id": "item-19oOIW-36",
     "name": "RANURA PROSWIM BLACK MARUN S",
     "sku": "RANURA PROSWIM BLACK MARUN S",
     "category": "Ranura Proswim",
@@ -594,7 +648,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-34",
+    "id": "item-19oOIW-37",
     "name": "RANURA PROSWIM BLACK MARUN M",
     "sku": "RANURA PROSWIM BLACK MARUN M",
     "category": "Ranura Proswim",
@@ -612,7 +666,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-35",
+    "id": "item-19oOIW-38",
     "name": "RANURA PROSWIM BLACK MARUN L",
     "sku": "RANURA PROSWIM BLACK MARUN L",
     "category": "Ranura Proswim",
@@ -630,7 +684,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-36",
+    "id": "item-19oOIW-39",
     "name": "RANURA PROSWIM BLACK MARUN XL",
     "sku": "RANURA PROSWIM BLACK MARUN XL",
     "category": "Ranura Proswim",
@@ -648,7 +702,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-37",
+    "id": "item-19oOIW-40",
     "name": "RANURA PROSWIM BLACK MARUN XXL",
     "sku": "RANURA PROSWIM BLACK MARUN XXL",
     "category": "Ranura Proswim",
@@ -666,7 +720,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-38",
+    "id": "item-19oOIW-41",
     "name": "RANURA PROSWIM GREY PURPLE S",
     "sku": "RANURA PROSWIM GREY PURPLE S",
     "category": "Ranura Proswim",
@@ -684,7 +738,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-39",
+    "id": "item-19oOIW-42",
     "name": "RANURA PROSWIM GREY PURPLE M",
     "sku": "RANURA PROSWIM GREY PURPLE M",
     "category": "Ranura Proswim",
@@ -702,7 +756,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-40",
+    "id": "item-19oOIW-43",
     "name": "RANURA PROSWIM GREY PURPLE L",
     "sku": "RANURA PROSWIM GREY PURPLE L",
     "category": "Ranura Proswim",
@@ -720,7 +774,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-41",
+    "id": "item-19oOIW-44",
     "name": "RANURA PROSWIM GREY PURPLE XL",
     "sku": "RANURA PROSWIM GREY PURPLE XL",
     "category": "Ranura Proswim",
@@ -738,7 +792,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-42",
+    "id": "item-19oOIW-45",
     "name": "RANURA PROSWIM GREY PURPLE XXL",
     "sku": "RANURA PROSWIM GREY PURPLE XXL",
     "category": "Ranura Proswim",
@@ -756,7 +810,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-43",
+    "id": "item-19oOIW-46",
     "name": "RANURA PROSWIM BLACK MILO S",
     "sku": "RANURA PROSWIM BLACK MILO S",
     "category": "Ranura Proswim",
@@ -774,7 +828,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-44",
+    "id": "item-19oOIW-47",
     "name": "RANURA PROSWIM BLACK MILO M",
     "sku": "RANURA PROSWIM BLACK MILO M",
     "category": "Ranura Proswim",
@@ -792,7 +846,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-45",
+    "id": "item-19oOIW-48",
     "name": "RANURA PROSWIM BLACK MILO L",
     "sku": "RANURA PROSWIM BLACK MILO L",
     "category": "Ranura Proswim",
@@ -810,7 +864,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-46",
+    "id": "item-19oOIW-49",
     "name": "RANURA PROSWIM BLACK MILO XL",
     "sku": "RANURA PROSWIM BLACK MILO XL",
     "category": "Ranura Proswim",
@@ -828,7 +882,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-47",
+    "id": "item-19oOIW-50",
     "name": "RANURA PROSWIM BLACK MILO XXL",
     "sku": "RANURA PROSWIM BLACK MILO XXL",
     "category": "Ranura Proswim",
@@ -846,7 +900,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-48",
+    "id": "item-19oOIW-51",
     "name": "RANURA PROSWIM BLACK PINK S",
     "sku": "RANURA PROSWIM BLACK PINK S",
     "category": "Ranura Proswim",
@@ -864,7 +918,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-49",
+    "id": "item-19oOIW-52",
     "name": "RANURA PROSWIM BLACK PINK M",
     "sku": "RANURA PROSWIM BLACK PINK M",
     "category": "Ranura Proswim",
@@ -882,7 +936,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-50",
+    "id": "item-19oOIW-53",
     "name": "RANURA PROSWIM BLACK PINK L",
     "sku": "RANURA PROSWIM BLACK PINK L",
     "category": "Ranura Proswim",
@@ -900,7 +954,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-51",
+    "id": "item-19oOIW-54",
     "name": "RANURA PROSWIM BLACK PINK XL",
     "sku": "RANURA PROSWIM BLACK PINK XL",
     "category": "Ranura Proswim",
@@ -918,7 +972,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-52",
+    "id": "item-19oOIW-55",
     "name": "RANURA PROSWIM BLACK PINK XXL",
     "sku": "RANURA PROSWIM BLACK PINK XXL",
     "category": "Ranura Proswim",
@@ -936,7 +990,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-53",
+    "id": "item-19oOIW-56",
     "name": "RANURA FEMALE BLACK MARUN S",
     "sku": "RANURA FEMALE BLACK MARUN S",
     "category": "Baju Renang Muslimah",
@@ -954,7 +1008,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-54",
+    "id": "item-19oOIW-57",
     "name": "RANURA FEMALE BLACK MARUN M",
     "sku": "RANURA FEMALE BLACK MARUN M",
     "category": "Baju Renang Muslimah",
@@ -972,7 +1026,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-55",
+    "id": "item-19oOIW-58",
     "name": "RANURA FEMALE BLACK MARUN L",
     "sku": "RANURA FEMALE BLACK MARUN L",
     "category": "Baju Renang Muslimah",
@@ -990,7 +1044,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-56",
+    "id": "item-19oOIW-59",
     "name": "RANURA FEMALE BLACK MARUN XL",
     "sku": "RANURA FEMALE BLACK MARUN XL",
     "category": "Baju Renang Muslimah",
@@ -1008,7 +1062,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-57",
+    "id": "item-19oOIW-60",
     "name": "RANURA FEMALE BLACK MARUN XXL",
     "sku": "RANURA FEMALE BLACK MARUN XXL",
     "category": "Baju Renang Muslimah",
@@ -1026,7 +1080,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-58",
+    "id": "item-19oOIW-61",
     "name": "RANURA FEMALE BLACK PINK S",
     "sku": "RANURA FEMALE BLACK PINK S",
     "category": "Baju Renang Muslimah",
@@ -1044,7 +1098,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-59",
+    "id": "item-19oOIW-62",
     "name": "RANURA FEMALE BLACK PINK M",
     "sku": "RANURA FEMALE BLACK PINK M",
     "category": "Baju Renang Muslimah",
@@ -1062,7 +1116,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-60",
+    "id": "item-19oOIW-63",
     "name": "RANURA FEMALE BLACK PINK L",
     "sku": "RANURA FEMALE BLACK PINK L",
     "category": "Baju Renang Muslimah",
@@ -1080,7 +1134,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-61",
+    "id": "item-19oOIW-64",
     "name": "RANURA FEMALE BLACK PINK XL",
     "sku": "RANURA FEMALE BLACK PINK XL",
     "category": "Baju Renang Muslimah",
@@ -1098,7 +1152,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-62",
+    "id": "item-19oOIW-65",
     "name": "RANURA FEMALE BLACK PINK XXL",
     "sku": "RANURA FEMALE BLACK PINK XXL",
     "category": "Baju Renang Muslimah",
@@ -1116,7 +1170,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-63",
+    "id": "item-19oOIW-66",
     "name": "RANURA FEMALE GREY PURPLE S",
     "sku": "RANURA FEMALE GREY PURPLE S",
     "category": "Baju Renang Muslimah",
@@ -1134,7 +1188,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-64",
+    "id": "item-19oOIW-67",
     "name": "RANURA FEMALE GREY PURPLE M",
     "sku": "RANURA FEMALE GREY PURPLE M",
     "category": "Baju Renang Muslimah",
@@ -1152,7 +1206,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-65",
+    "id": "item-19oOIW-68",
     "name": "RANURA FEMALE GREY PURPLE L",
     "sku": "RANURA FEMALE GREY PURPLE L",
     "category": "Baju Renang Muslimah",
@@ -1170,7 +1224,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-66",
+    "id": "item-19oOIW-69",
     "name": "RANURA FEMALE GREY PURPLE XL",
     "sku": "RANURA FEMALE GREY PURPLE XL",
     "category": "Baju Renang Muslimah",
@@ -1188,7 +1242,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-67",
+    "id": "item-19oOIW-70",
     "name": "RANURA FEMALE GREY PURPLE XXL",
     "sku": "RANURA FEMALE GREY PURPLE XXL",
     "category": "Baju Renang Muslimah",
@@ -1206,7 +1260,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-68",
+    "id": "item-19oOIW-71",
     "name": "RANURA MALE BLACK MARUN S",
     "sku": "RANURA MALE BLACK MARUN S",
     "category": "Baju Renang Pria",
@@ -1224,7 +1278,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-69",
+    "id": "item-19oOIW-72",
     "name": "RANURA MALE BLACK MARUN M",
     "sku": "RANURA MALE BLACK MARUN M",
     "category": "Baju Renang Pria",
@@ -1242,7 +1296,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-70",
+    "id": "item-19oOIW-73",
     "name": "RANURA MALE BLACK MARUN L",
     "sku": "RANURA MALE BLACK MARUN L",
     "category": "Baju Renang Pria",
@@ -1260,7 +1314,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-71",
+    "id": "item-19oOIW-74",
     "name": "RANURA MALE BLACK MARUN XL",
     "sku": "RANURA MALE BLACK MARUN XL",
     "category": "Baju Renang Pria",
@@ -1278,7 +1332,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-72",
+    "id": "item-19oOIW-75",
     "name": "RANURA MALE BLACK MARUN XXL",
     "sku": "RANURA MALE BLACK MARUN XXL",
     "category": "Baju Renang Pria",
@@ -1296,7 +1350,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-73",
+    "id": "item-19oOIW-76",
     "name": "RANURA MALE BLACK GREEN S",
     "sku": "RANURA MALE BLACK GREEN S",
     "category": "Baju Renang Pria",
@@ -1314,7 +1368,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-74",
+    "id": "item-19oOIW-77",
     "name": "RANURA MALE BLACK GREEN M",
     "sku": "RANURA MALE BLACK GREEN M",
     "category": "Baju Renang Pria",
@@ -1332,7 +1386,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-75",
+    "id": "item-19oOIW-78",
     "name": "RANURA MALE BLACK GREEN L",
     "sku": "RANURA MALE BLACK GREEN L",
     "category": "Baju Renang Pria",
@@ -1350,7 +1404,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-76",
+    "id": "item-19oOIW-79",
     "name": "RANURA MALE BLACK GREEN XL",
     "sku": "RANURA MALE BLACK GREEN XL",
     "category": "Baju Renang Pria",
@@ -1368,7 +1422,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-77",
+    "id": "item-19oOIW-80",
     "name": "RANURA MALE BLACK GREEN XXL",
     "sku": "RANURA MALE BLACK GREEN XXL",
     "category": "Baju Renang Pria",
@@ -1386,7 +1440,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-78",
+    "id": "item-19oOIW-81",
     "name": "RANURA HIJAB BLACK MARUN S",
     "sku": "RANURA HIJAB BLACK MARUN S",
     "category": "Baju Renang Ranura",
@@ -1404,7 +1458,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-79",
+    "id": "item-19oOIW-82",
     "name": "RANURA HIJAB BLACK MARUN M",
     "sku": "RANURA HIJAB BLACK MARUN M",
     "category": "Baju Renang Ranura",
@@ -1422,7 +1476,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-80",
+    "id": "item-19oOIW-83",
     "name": "RANURA HIJAB BLACK MARUN L",
     "sku": "RANURA HIJAB BLACK MARUN L",
     "category": "Baju Renang Ranura",
@@ -1440,7 +1494,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-81",
+    "id": "item-19oOIW-84",
     "name": "RANURA HIJAB BLACK MARUN XL",
     "sku": "RANURA HIJAB BLACK MARUN XL",
     "category": "Baju Renang Ranura",
@@ -1458,7 +1512,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-82",
+    "id": "item-19oOIW-85",
     "name": "RANURA HIJAB BLACK MARUN XXL",
     "sku": "RANURA HIJAB BLACK MARUN XXL",
     "category": "Baju Renang Ranura",
@@ -1476,7 +1530,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-83",
+    "id": "item-19oOIW-86",
     "name": "RANURA HIJAB GREY PURPLE S",
     "sku": "RANURA HIJAB GREY PURPLE S",
     "category": "Baju Renang Ranura",
@@ -1494,7 +1548,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-84",
+    "id": "item-19oOIW-87",
     "name": "RANURA HIJAB GREY PURPLE M",
     "sku": "RANURA HIJAB GREY PURPLE M",
     "category": "Baju Renang Ranura",
@@ -1512,7 +1566,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-85",
+    "id": "item-19oOIW-88",
     "name": "RANURA HIJAB GREY PURPLE L",
     "sku": "RANURA HIJAB GREY PURPLE L",
     "category": "Baju Renang Ranura",
@@ -1530,7 +1584,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-86",
+    "id": "item-19oOIW-89",
     "name": "RANURA HIJAB GREY PURPLE XL",
     "sku": "RANURA HIJAB GREY PURPLE XL",
     "category": "Baju Renang Ranura",
@@ -1548,7 +1602,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-87",
+    "id": "item-19oOIW-90",
     "name": "RANURA HIJAB GREY PURPLE XXL",
     "sku": "RANURA HIJAB GREY PURPLE XXL",
     "category": "Baju Renang Ranura",
@@ -1566,7 +1620,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-88",
+    "id": "item-19oOIW-91",
     "name": "RANURA HIJAB BLACK PINK S",
     "sku": "RANURA HIJAB BLACK PINK S",
     "category": "Baju Renang Ranura",
@@ -1584,7 +1638,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-89",
+    "id": "item-19oOIW-92",
     "name": "RANURA HIJAB BLACK PINK M",
     "sku": "RANURA HIJAB BLACK PINK M",
     "category": "Baju Renang Ranura",
@@ -1602,7 +1656,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-90",
+    "id": "item-19oOIW-93",
     "name": "RANURA HIJAB BLACK PINK L",
     "sku": "RANURA HIJAB BLACK PINK L",
     "category": "Baju Renang Ranura",
@@ -1620,7 +1674,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-91",
+    "id": "item-19oOIW-94",
     "name": "RANURA HIJAB BLACK PINK XL",
     "sku": "RANURA HIJAB BLACK PINK XL",
     "category": "Baju Renang Ranura",
@@ -1638,7 +1692,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-92",
+    "id": "item-19oOIW-95",
     "name": "RANURA HIJAB BLACK PINK XXL",
     "sku": "RANURA HIJAB BLACK PINK XXL",
     "category": "Baju Renang Ranura",
@@ -1656,7 +1710,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-93",
+    "id": "item-19oOIW-96",
     "name": "RANURA KIDS HIJAB BLACK MARUN S",
     "sku": "RANURA KIDS HIJAB BLACK MARUN S",
     "category": "Baju Renang Anak",
@@ -1674,7 +1728,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-94",
+    "id": "item-19oOIW-97",
     "name": "RANURA KIDS HIJAB BLACK MARUN M",
     "sku": "RANURA KIDS HIJAB BLACK MARUN M",
     "category": "Baju Renang Anak",
@@ -1692,7 +1746,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-95",
+    "id": "item-19oOIW-98",
     "name": "RANURA KIDS HIJAB BLACK MARUN L",
     "sku": "RANURA KIDS HIJAB BLACK MARUN L",
     "category": "Baju Renang Anak",
@@ -1710,7 +1764,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-96",
+    "id": "item-19oOIW-99",
     "name": "RANURA KIDS HIJAB BLACK MARUN XL",
     "sku": "RANURA KIDS HIJAB BLACK MARUN XL",
     "category": "Baju Renang Anak",
@@ -1728,7 +1782,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-97",
+    "id": "item-19oOIW-100",
     "name": "RANURA KIDS HIJAB BLACK MARUN XXL",
     "sku": "RANURA KIDS HIJAB BLACK MARUN XXL",
     "category": "Baju Renang Anak",
@@ -1746,7 +1800,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-98",
+    "id": "item-19oOIW-101",
     "name": "RANURA KIDS HIJAB GREY PURPLE S",
     "sku": "RANURA KIDS HIJAB GREY PURPLE S",
     "category": "Baju Renang Anak",
@@ -1764,7 +1818,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-99",
+    "id": "item-19oOIW-102",
     "name": "RANURA KIDS HIJAB GREY PURPLE M",
     "sku": "RANURA KIDS HIJAB GREY PURPLE M",
     "category": "Baju Renang Anak",
@@ -1782,7 +1836,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-100",
+    "id": "item-19oOIW-103",
     "name": "RANURA KIDS HIJAB GREY PURPLE L",
     "sku": "RANURA KIDS HIJAB GREY PURPLE L",
     "category": "Baju Renang Anak",
@@ -1800,7 +1854,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-101",
+    "id": "item-19oOIW-104",
     "name": "RANURA KIDS HIJAB GREY PURPLE XL",
     "sku": "RANURA KIDS HIJAB GREY PURPLE XL",
     "category": "Baju Renang Anak",
@@ -1818,7 +1872,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-102",
+    "id": "item-19oOIW-105",
     "name": "RANURA KIDS HIJAB GREY PURPLE XXL",
     "sku": "RANURA KIDS HIJAB GREY PURPLE XXL",
     "category": "Baju Renang Anak",
@@ -1836,7 +1890,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-103",
+    "id": "item-19oOIW-106",
     "name": "RANURA KIDS HIJAB BLACK PINK S",
     "sku": "RANURA KIDS HIJAB BLACK PINK S",
     "category": "Baju Renang Anak",
@@ -1854,7 +1908,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-104",
+    "id": "item-19oOIW-107",
     "name": "RANURA KIDS HIJAB BLACK PINK M",
     "sku": "RANURA KIDS HIJAB BLACK PINK M",
     "category": "Baju Renang Anak",
@@ -1872,7 +1926,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-105",
+    "id": "item-19oOIW-108",
     "name": "RANURA KIDS HIJAB BLACK PINK L",
     "sku": "RANURA KIDS HIJAB BLACK PINK L",
     "category": "Baju Renang Anak",
@@ -1890,7 +1944,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-106",
+    "id": "item-19oOIW-109",
     "name": "RANURA KIDS HIJAB BLACK PINK XL",
     "sku": "RANURA KIDS HIJAB BLACK PINK XL",
     "category": "Baju Renang Anak",
@@ -1908,7 +1962,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-107",
+    "id": "item-19oOIW-110",
     "name": "RANURA KIDS HIJAB BLACK PINK XXL",
     "sku": "RANURA KIDS HIJAB BLACK PINK XXL",
     "category": "Baju Renang Anak",
@@ -1926,7 +1980,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-108",
+    "id": "item-19oOIW-111",
     "name": "KACAMATA RENANG",
     "sku": "KACAMATA RENANG",
     "category": "Baju Renang Ranura",
@@ -1944,7 +1998,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-109",
+    "id": "item-19oOIW-112",
     "name": "RANURA KIDS BLACK GREEN S CUSTOM",
     "sku": "RANURA KIDS BLACK GREEN S CUSTOM",
     "category": "Baju Renang Anak",
@@ -1962,7 +2016,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-110",
+    "id": "item-19oOIW-113",
     "name": "RANURA MALE BLACK GREEN L CUSTOM",
     "sku": "RANURA MALE BLACK GREEN L CUSTOM",
     "category": "Baju Renang Pria",
@@ -1980,7 +2034,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-111",
+    "id": "item-19oOIW-114",
     "name": "RANURA MALE BLACK MARUN 6XL",
     "sku": "RANURA MALE BLACK MARUN 6XL",
     "category": "Baju Renang Pria",
@@ -1998,7 +2052,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-112",
+    "id": "item-19oOIW-115",
     "name": "RANURA MALE BLACK MARUN CUSTOM",
     "sku": "RANURA MALE BLACK MARUN CUSTOM",
     "category": "Baju Renang Pria",
@@ -2016,7 +2070,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-113",
+    "id": "item-19oOIW-116",
     "name": "RANURA MALE BLACK MARUN CUSTOM LP 115",
     "sku": "RANURA MALE BLACK MARUN CUSTOM LP 115",
     "category": "Baju Renang Pria",
@@ -2034,7 +2088,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-114",
+    "id": "item-19oOIW-117",
     "name": "RANURA HIJAB BLACK PINK CUSTOM",
     "sku": "RANURA HIJAB BLACK PINK CUSTOM",
     "category": "Baju Renang Ranura",
@@ -2052,7 +2106,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-115",
+    "id": "item-19oOIW-118",
     "name": "RANURA PROSWIM BLACK MARUN CUSTOM",
     "sku": "RANURA PROSWIM BLACK MARUN CUSTOM",
     "category": "Ranura Proswim",
@@ -2070,7 +2124,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-116",
+    "id": "item-19oOIW-119",
     "name": "RANURA MALE BLACK MARUN XXXL",
     "sku": "RANURA MALE BLACK MARUN XXXL",
     "category": "Baju Renang Pria",
@@ -2088,7 +2142,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-117",
+    "id": "item-19oOIW-120",
     "name": "RANURA HIJAB FULL BLACK XL",
     "sku": "RANURA HIJAB FULL BLACK XL",
     "category": "Baju Renang Ranura",
@@ -2106,7 +2160,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-118",
+    "id": "item-19oOIW-121",
     "name": "RANURA PROSWIM GREY PURPLE CUSTOM",
     "sku": "RANURA PROSWIM GREY PURPLE CUSTOM",
     "category": "Ranura Proswim",
@@ -2124,7 +2178,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-119",
+    "id": "item-19oOIW-122",
     "name": "RANURA PROSWIM GREY PINK CUSTOM",
     "sku": "RANURA PROSWIM GREY PINK CUSTOM",
     "category": "Ranura Proswim",
@@ -2142,7 +2196,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-120",
+    "id": "item-19oOIW-123",
     "name": "RANURA MALE GREY PURPLE XXL",
     "sku": "RANURA MALE GREY PURPLE XXL",
     "category": "Baju Renang Pria",
@@ -2160,7 +2214,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-121",
+    "id": "item-19oOIW-124",
     "name": "RANURA HIJAB BLACK MARUN CUSTOM",
     "sku": "RANURA HIJAB BLACK MARUN CUSTOM",
     "category": "Baju Renang Ranura",
@@ -2178,7 +2232,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-122",
+    "id": "item-19oOIW-125",
     "name": "RANURA FEMALE BLACK PINK CUSTOM",
     "sku": "RANURA FEMALE BLACK PINK CUSTOM",
     "category": "Baju Renang Muslimah",
@@ -2196,7 +2250,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-123",
+    "id": "item-19oOIW-126",
     "name": "RANURA MALE BLACK GREEN CUSTOM",
     "sku": "RANURA MALE BLACK GREEN CUSTOM",
     "category": "Baju Renang Pria",
@@ -2214,7 +2268,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-124",
+    "id": "item-19oOIW-127",
     "name": "RANURA MALE BLACK GREEN M NON BUSA",
     "sku": "RANURA MALE BLACK GREEN M NON BUSA",
     "category": "Baju Renang Pria",
@@ -2232,7 +2286,7 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
-    "id": "item-19oOIW-125",
+    "id": "item-19oOIW-128",
     "name": "RANURA FEMALE BLACK MARUN CUSTOM",
     "sku": "RANURA FEMALE BLACK MARUN CUSTOM",
     "category": "Baju Renang Muslimah",
@@ -2250,7 +2304,871 @@
     "activeMonth": "Katalog Barang November 2026"
   },
   {
+    "id": "item-19oOIW-129",
+    "name": "RANURA PROSWIM BLACK MILO CUSTOM",
+    "sku": "RANURA PROSWIM BLACK MILO CUSTOM",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 400000,
+    "sellPrice": 550000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Oktober 2026"
+  },
+  {
+    "id": "item-19oOIW-130",
+    "name": "RANURA FEMALE GREY PURPLE CUSTOM",
+    "sku": "RANURA FEMALE GREY PURPLE CUSTOM",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 0,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Oktober 2026"
+  },
+  {
+    "id": "item-19oOIW-131",
+    "name": "RANURA MALE BLACK MARUN L NON BUSA",
+    "sku": "RANURA MALE BLACK MARUN L NON BUSA",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 135000,
+    "sellPrice": 300000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang September 2026"
+  },
+  {
+    "id": "item-19oOIW-132",
+    "name": "RANURA HIJAB BLACK GREEN L CUSTOM",
+    "sku": "RANURA HIJAB BLACK GREEN L CUSTOM",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 295000,
+    "sellPrice": 400000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Agustus 2026"
+  },
+  {
+    "id": "item-19oOIW-133",
+    "name": "RANURA HIJAB PURPLE PINK XXL",
+    "sku": "RANURA HIJAB PURPLE PINK XXL",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 295000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Agustus 2026"
+  },
+  {
+    "id": "item-19oOIW-134",
+    "name": "Ranura PROSWIM PINK BLACK XXL",
+    "sku": "Ranura PROSWIM PINK BLACK XXL",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 0,
+    "sellPrice": 400000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Agustus 2026"
+  },
+  {
+    "id": "item-19oOIW-135",
+    "name": "RANURA HIJAB SAJA BLACK MARUN L",
+    "sku": "RANURA HIJAB SAJA BLACK MARUN L",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 0,
+    "sellPrice": 100000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Agustus 2026"
+  },
+  {
+    "id": "item-19oOIW-136",
+    "name": "RANURA KIDS BLACK GREY S CUSTOM",
+    "sku": "RANURA KIDS BLACK GREY S CUSTOM",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 160000,
+    "sellPrice": 280000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juli 2026"
+  },
+  {
+    "id": "item-19oOIW-137",
+    "name": "RANURA FEMALE BABY PINK S CUSTOM",
+    "sku": "RANURA FEMALE BABY PINK S CUSTOM",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 135000,
+    "sellPrice": 300000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juli 2026"
+  },
+  {
+    "id": "item-19oOIW-138",
+    "name": "RANURA PROSWIM GREY PURPLE L CUSTOM",
+    "sku": "RANURA PROSWIM GREY PURPLE L CUSTOM",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 225000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juli 2026"
+  },
+  {
+    "id": "item-19oOIW-139",
+    "name": "RANURA PROSWIM BLACK PINK S NON BUSA",
+    "sku": "RANURA PROSWIM BLACK PINK S NON BUSA",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 275000,
+    "sellPrice": 475000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juli 2026"
+  },
+  {
+    "id": "item-19oOIW-140",
+    "name": "RANURA HIJAB GREY PURPLE XL NON HIJAB",
+    "sku": "RANURA HIJAB GREY PURPLE XL NON HIJAB",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 220000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juli 2026"
+  },
+  {
+    "id": "item-19oOIW-141",
+    "name": "RANURA KIDS BLACK ORANGE S",
+    "sku": "RANURA KIDS BLACK ORANGE S",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-142",
+    "name": "RANURA KIDS BLACK ORANGE M",
+    "sku": "RANURA KIDS BLACK ORANGE M",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-143",
+    "name": "RANURA KIDS BLACK ORANGE L",
+    "sku": "RANURA KIDS BLACK ORANGE L",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-144",
+    "name": "RANURA KIDS BLACK ORANGE XL",
+    "sku": "RANURA KIDS BLACK ORANGE XL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 250000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-145",
+    "name": "RANURA KIDS BLACK ORANGE XXL",
+    "sku": "RANURA KIDS BLACK ORANGE XXL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 250000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-146",
+    "name": "RANURA KIDS BLACK ORANGE XXXL",
+    "sku": "RANURA KIDS BLACK ORANGE XXXL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 250000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-147",
+    "name": "RANURA KIDS PINK FANTA S",
+    "sku": "RANURA KIDS PINK FANTA S",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-148",
+    "name": "RANURA KIDS PINK FANTA M",
+    "sku": "RANURA KIDS PINK FANTA M",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-149",
+    "name": "RANURA KIDS PINK FANTA L",
+    "sku": "RANURA KIDS PINK FANTA L",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 230000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-150",
+    "name": "RANURA KIDS PINK FANTA XL",
+    "sku": "RANURA KIDS PINK FANTA XL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 250000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-151",
+    "name": "RANURA KIDS PINK FANTA XXL",
+    "sku": "RANURA KIDS PINK FANTA XXL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 250000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-152",
+    "name": "RANURA KIDS PINK FANTA XXXL",
+    "sku": "RANURA KIDS PINK FANTA XXXL",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 137500,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-153",
+    "name": "RANURA MALE BLACK GREY L CUSTOM",
+    "sku": "RANURA MALE BLACK GREY L CUSTOM",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 235000,
+    "sellPrice": 400000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Juni 2026"
+  },
+  {
+    "id": "item-19oOIW-154",
+    "name": "RANURA KIDS BLACK GREY L CUSTOM",
+    "sku": "RANURA KIDS BLACK GREY L CUSTOM",
+    "category": "Baju Renang Anak",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 160000,
+    "sellPrice": 280000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Mei 2026"
+  },
+  {
+    "id": "item-19oOIW-155",
+    "name": "RANURA MALE BLACK MARUN XL CUSTOM",
+    "sku": "RANURA MALE BLACK MARUN XL CUSTOM",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 235000,
+    "sellPrice": 400000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Mei 2026"
+  },
+  {
+    "id": "item-19oOIW-156",
+    "name": "RANURA MALE BLACK MARUN M CUSTOM",
+    "sku": "RANURA MALE BLACK MARUN M CUSTOM",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 185000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Mei 2026"
+  },
+  {
+    "id": "item-19oOIW-157",
+    "name": "RANURA FEMALE BLACK MARUN CUSTOM LD 120CM",
+    "sku": "RANURA FEMALE BLACK MARUN CUSTOM LD 120CM",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 235000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Mei 2026"
+  },
+  {
+    "id": "item-19oOIW-158",
+    "name": "RANURA PROSWIM BLACK PINK XL NON FLOATING",
+    "sku": "RANURA PROSWIM BLACK PINK XL NON FLOATING",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 275000,
+    "sellPrice": 400000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-159",
+    "name": "RANURA PROSWIM BLACK GREY L CUSTOM",
+    "sku": "RANURA PROSWIM BLACK GREY L CUSTOM",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 325000,
+    "sellPrice": 450000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-160",
+    "name": "RANURA MALE BLACK GREEN XXXL",
+    "sku": "RANURA MALE BLACK GREEN XXXL",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 2,
+    "stockOut": 2,
+    "buyPrice": 235000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-161",
+    "name": "RANURA HIJAB GREY PURPLE CUSTOM",
+    "sku": "RANURA HIJAB GREY PURPLE CUSTOM",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 345000,
+    "sellPrice": 475000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-162",
+    "name": "RANURA HIJAB BLACK MARUN XL NON HIJAB",
+    "sku": "RANURA HIJAB BLACK MARUN XL NON HIJAB",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 245000,
+    "sellPrice": 375000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-163",
+    "name": "RANURA FEMALE BLACK PINK L CUSTOM",
+    "sku": "RANURA FEMALE BLACK PINK L CUSTOM",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 185000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-164",
+    "name": "RANURA FEMALE BLACK MARUN CUSTOM LD",
+    "sku": "RANURA FEMALE BLACK MARUN CUSTOM LD",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 235000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang April 2026"
+  },
+  {
+    "id": "item-19oOIW-165",
+    "name": "RANURA MALE BLACK GREY XL",
+    "sku": "RANURA MALE BLACK GREY XL",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 0,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Maret 2026"
+  },
+  {
+    "id": "item-19oOIW-166",
+    "name": "RANURA HIJAB GREY PURPLE L NON FLOATING",
+    "sku": "RANURA HIJAB GREY PURPLE L NON FLOATING",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 245000,
+    "sellPrice": 375000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Maret 2026"
+  },
+  {
+    "id": "item-19oOIW-167",
+    "name": "RANURA HIJAB BLACK MARUN XL NON FLOATING",
+    "sku": "RANURA HIJAB BLACK MARUN XL NON FLOATING",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 245000,
+    "sellPrice": 375000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Februari 2026"
+  },
+  {
+    "id": "item-19oOIW-168",
+    "name": "RANURA FEMALE GREY PURPLE XXXL",
+    "sku": "RANURA FEMALE GREY PURPLE XXXL",
+    "category": "Baju Renang Muslimah",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 185000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
+    "id": "item-19oOIW-169",
+    "name": "RANURA MALE BLACK GREEN XL NON FLOATING",
+    "sku": "RANURA MALE BLACK GREEN XL NON FLOATING",
+    "category": "Baju Renang Pria",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 185000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
+    "id": "item-19oOIW-170",
+    "name": "RANURA HIJAB BLACK MARUN M NON FLOATING",
+    "sku": "RANURA HIJAB BLACK MARUN M NON FLOATING",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 245000,
+    "sellPrice": 350000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
+    "id": "item-19oOIW-171",
+    "name": "RANURA HIJAB BLACK MILO XL",
+    "sku": "RANURA HIJAB BLACK MILO XL",
+    "category": "Baju Renang Ranura",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 295000,
+    "sellPrice": 425000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
+    "id": "item-19oOIW-172",
+    "name": "Ranura Proswim Full Black S ( bajunya saja )",
+    "sku": "Ranura Proswim Full Black S ( bajunya saja )",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 0,
+    "sellPrice": 200000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
+    "id": "item-19oOIW-173",
+    "name": "RANURA PROSWIM BLACK MILO custom LD ( 120CM)",
+    "sku": "RANURA PROSWIM BLACK MILO custom LD ( 120CM)",
+    "category": "Ranura Proswim",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 375000,
+    "sellPrice": 525000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA",
+    "sourceSheetName": "Ranura Swimwear",
+    "activeMonth": "Katalog Barang Januari 2026"
+  },
+  {
     "id": "item-1dJUmz-1",
+    "name": "RANURA MURIH OUTER BROKEN WHITE S-L",
+    "sku": "RANURA MURIH OUTER BROKEN WHITE S-L",
+    "category": "Ranura Outer & Hijab",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 85000,
+    "sellPrice": 155000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab November 2026"
+  },
+  {
+    "id": "item-1dJUmz-2",
+    "name": "RANURA MURIH OUTER BROKEN WHITE XL-XXL",
+    "sku": "RANURA MURIH OUTER BROKEN WHITE XL-XXL",
+    "category": "Ranura Outer & Hijab",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 85000,
+    "sellPrice": 165000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab November 2026"
+  },
+  {
+    "id": "item-1dJUmz-3",
+    "name": "RANURA MURIH OUTER GREY S-L",
+    "sku": "RANURA MURIH OUTER GREY S-L",
+    "category": "Ranura Outer & Hijab",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 85000,
+    "sellPrice": 155000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab November 2026"
+  },
+  {
+    "id": "item-1dJUmz-4",
     "name": "RANURA MURIH OUTER GREY XL-XXL",
     "sku": "RANURA MURIH OUTER GREY XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2268,7 +3186,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-2",
+    "id": "item-1dJUmz-5",
     "name": "RANURA MURIH OUTER BLACK S-L",
     "sku": "RANURA MURIH OUTER BLACK S-L",
     "category": "Ranura Outer & Hijab",
@@ -2286,7 +3204,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-3",
+    "id": "item-1dJUmz-6",
     "name": "RANURA MURIH OUTER BLACK XL-XXL",
     "sku": "RANURA MURIH OUTER BLACK XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2304,7 +3222,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-4",
+    "id": "item-1dJUmz-7",
     "name": "RANURA MURIH OUTER DUSTY PINK S-L",
     "sku": "RANURA MURIH OUTER DUSTY PINK S-L",
     "category": "Ranura Outer & Hijab",
@@ -2322,7 +3240,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-5",
+    "id": "item-1dJUmz-8",
     "name": "RANURA MURIH OUTER DUSTY PINK XL-XXL",
     "sku": "RANURA MURIH OUTER DUSTY PINK XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2340,7 +3258,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-6",
+    "id": "item-1dJUmz-9",
     "name": "RANURA MURIH OUTER BLUE DENIM S-L",
     "sku": "RANURA MURIH OUTER BLUE DENIM S-L",
     "category": "Ranura Outer & Hijab",
@@ -2358,7 +3276,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-7",
+    "id": "item-1dJUmz-10",
     "name": "RANURA MURIH OUTER BLUE DENIM XL-XXL",
     "sku": "RANURA MURIH OUTER BLUE DENIM XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2376,7 +3294,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-8",
+    "id": "item-1dJUmz-11",
     "name": "RANURA MURIH OUTER MUSTARD S-L",
     "sku": "RANURA MURIH OUTER MUSTARD S-L",
     "category": "Ranura Outer & Hijab",
@@ -2394,7 +3312,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-9",
+    "id": "item-1dJUmz-12",
     "name": "RANURA MURIH OUTER MUSTARD XL-XXL",
     "sku": "RANURA MURIH OUTER MUSTARD XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2412,7 +3330,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-10",
+    "id": "item-1dJUmz-13",
     "name": "RANURA MURIH OUTER SAGE S-L",
     "sku": "RANURA MURIH OUTER SAGE S-L",
     "category": "Ranura Outer & Hijab",
@@ -2430,7 +3348,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-11",
+    "id": "item-1dJUmz-14",
     "name": "RANURA MURIH OUTER SAGE XL-XXL",
     "sku": "RANURA MURIH OUTER SAGE XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2448,7 +3366,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-12",
+    "id": "item-1dJUmz-15",
     "name": "RANURA MURIH OUTER LILAC S-L",
     "sku": "RANURA MURIH OUTER LILAC S-L",
     "category": "Ranura Outer & Hijab",
@@ -2466,7 +3384,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-13",
+    "id": "item-1dJUmz-16",
     "name": "RANURA MURIH OUTER LILAC XL-XXL",
     "sku": "RANURA MURIH OUTER LILAC XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2484,7 +3402,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-14",
+    "id": "item-1dJUmz-17",
     "name": "RANURA MURIH OUTER BEIGE S-L",
     "sku": "RANURA MURIH OUTER BEIGE S-L",
     "category": "Ranura Outer & Hijab",
@@ -2502,7 +3420,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-15",
+    "id": "item-1dJUmz-18",
     "name": "RANURA MURIH OUTER BEIGE XL-XXL",
     "sku": "RANURA MURIH OUTER BEIGE XL-XXL",
     "category": "Ranura Outer & Hijab",
@@ -2520,7 +3438,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-16",
+    "id": "item-1dJUmz-19",
     "name": "Rosal Madani Hoodie Full Zipper Navy S",
     "sku": "Rosal Madani Hoodie Full Zipper Navy S",
     "category": "Rompi Sholat Rosal",
@@ -2538,7 +3456,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-17",
+    "id": "item-1dJUmz-20",
     "name": "Rosal Madani Hoodie Full Zipper Navy M",
     "sku": "Rosal Madani Hoodie Full Zipper Navy M",
     "category": "Rompi Sholat Rosal",
@@ -2556,7 +3474,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-18",
+    "id": "item-1dJUmz-21",
     "name": "Rosal Madani Hoodie Full Zipper Navy L",
     "sku": "Rosal Madani Hoodie Full Zipper Navy L",
     "category": "Rompi Sholat Rosal",
@@ -2574,7 +3492,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-19",
+    "id": "item-1dJUmz-22",
     "name": "Rosal Madani Hoodie Full Zipper Navy XL",
     "sku": "Rosal Madani Hoodie Full Zipper Navy XL",
     "category": "Rompi Sholat Rosal",
@@ -2592,7 +3510,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-20",
+    "id": "item-1dJUmz-23",
     "name": "Rosal Madani Hoodie Full Zipper Navy XXL",
     "sku": "Rosal Madani Hoodie Full Zipper Navy XXL",
     "category": "Rompi Sholat Rosal",
@@ -2610,7 +3528,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-21",
+    "id": "item-1dJUmz-24",
     "name": "Rosal Madani Hoodie Full Zipper Navy XXXL",
     "sku": "Rosal Madani Hoodie Full Zipper Navy XXXL",
     "category": "Rompi Sholat Rosal",
@@ -2628,7 +3546,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-22",
+    "id": "item-1dJUmz-25",
     "name": "Rosal Madani Hoodie Full Zipper Abu S",
     "sku": "Rosal Madani Hoodie Full Zipper Abu S",
     "category": "Rompi Sholat Rosal",
@@ -2646,7 +3564,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-23",
+    "id": "item-1dJUmz-26",
     "name": "Rosal Madani Hoodie Full Zipper Abu M",
     "sku": "Rosal Madani Hoodie Full Zipper Abu M",
     "category": "Rompi Sholat Rosal",
@@ -2664,7 +3582,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-24",
+    "id": "item-1dJUmz-27",
     "name": "Rosal Madani Hoodie Full Zipper Abu L",
     "sku": "Rosal Madani Hoodie Full Zipper Abu L",
     "category": "Rompi Sholat Rosal",
@@ -2682,7 +3600,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-25",
+    "id": "item-1dJUmz-28",
     "name": "Rosal Madani Hoodie Full Zipper Abu XL",
     "sku": "Rosal Madani Hoodie Full Zipper Abu XL",
     "category": "Rompi Sholat Rosal",
@@ -2700,7 +3618,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-26",
+    "id": "item-1dJUmz-29",
     "name": "Rosal Madani Hoodie Full Zipper Abu XXL",
     "sku": "Rosal Madani Hoodie Full Zipper Abu XXL",
     "category": "Rompi Sholat Rosal",
@@ -2718,7 +3636,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-27",
+    "id": "item-1dJUmz-30",
     "name": "Rosal Madani Hoodie Full Zipper Abu XXXL",
     "sku": "Rosal Madani Hoodie Full Zipper Abu XXXL",
     "category": "Rompi Sholat Rosal",
@@ -2736,7 +3654,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-28",
+    "id": "item-1dJUmz-31",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue S",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue S",
     "category": "Rompi Sholat Rosal",
@@ -2754,7 +3672,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-29",
+    "id": "item-1dJUmz-32",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue M",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue M",
     "category": "Rompi Sholat Rosal",
@@ -2772,7 +3690,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-30",
+    "id": "item-1dJUmz-33",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue L",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue L",
     "category": "Rompi Sholat Rosal",
@@ -2790,7 +3708,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-31",
+    "id": "item-1dJUmz-34",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue XL",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue XL",
     "category": "Rompi Sholat Rosal",
@@ -2808,7 +3726,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-32",
+    "id": "item-1dJUmz-35",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue XXL",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue XXL",
     "category": "Rompi Sholat Rosal",
@@ -2826,7 +3744,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-33",
+    "id": "item-1dJUmz-36",
     "name": "Rosal Madani Hoodie Full Zipper Steel Blue XXXL",
     "sku": "Rosal Madani Hoodie Full Zipper Steel Blue XXXL",
     "category": "Rompi Sholat Rosal",
@@ -2844,7 +3762,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-34",
+    "id": "item-1dJUmz-37",
     "name": "Rosal Madani Hoodie Full Zipper Hitam S",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam S",
     "category": "Rompi Sholat Rosal",
@@ -2862,7 +3780,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-35",
+    "id": "item-1dJUmz-38",
     "name": "Rosal Madani Hoodie Full Zipper Hitam M",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam M",
     "category": "Rompi Sholat Rosal",
@@ -2880,7 +3798,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-36",
+    "id": "item-1dJUmz-39",
     "name": "Rosal Madani Hoodie Full Zipper Hitam L",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam L",
     "category": "Rompi Sholat Rosal",
@@ -2898,7 +3816,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-37",
+    "id": "item-1dJUmz-40",
     "name": "Rosal Madani Hoodie Full Zipper Hitam XL",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam XL",
     "category": "Rompi Sholat Rosal",
@@ -2916,7 +3834,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-38",
+    "id": "item-1dJUmz-41",
     "name": "Rosal Madani Hoodie Full Zipper Hitam XXL",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam XXL",
     "category": "Rompi Sholat Rosal",
@@ -2934,7 +3852,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-39",
+    "id": "item-1dJUmz-42",
     "name": "Rosal Madani Hoodie Full Zipper Hitam XXXL",
     "sku": "Rosal Madani Hoodie Full Zipper Hitam XXXL",
     "category": "Rompi Sholat Rosal",
@@ -2952,7 +3870,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-40",
+    "id": "item-1dJUmz-43",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu S",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu S",
     "category": "Rompi Sholat Rosal",
@@ -2970,7 +3888,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-41",
+    "id": "item-1dJUmz-44",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu M",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu M",
     "category": "Rompi Sholat Rosal",
@@ -2988,7 +3906,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-42",
+    "id": "item-1dJUmz-45",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu L",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu L",
     "category": "Rompi Sholat Rosal",
@@ -3006,7 +3924,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-43",
+    "id": "item-1dJUmz-46",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu XL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu XL",
     "category": "Rompi Sholat Rosal",
@@ -3024,7 +3942,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-44",
+    "id": "item-1dJUmz-47",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu XXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu XXL",
     "category": "Rompi Sholat Rosal",
@@ -3042,7 +3960,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-45",
+    "id": "item-1dJUmz-48",
     "name": "Rosal Madani Hoodie Setengah Zipper Abu XXXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Abu XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3060,7 +3978,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-46",
+    "id": "item-1dJUmz-49",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue S",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue S",
     "category": "Rompi Sholat Rosal",
@@ -3078,7 +3996,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-47",
+    "id": "item-1dJUmz-50",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue M",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue M",
     "category": "Rompi Sholat Rosal",
@@ -3096,7 +4014,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-48",
+    "id": "item-1dJUmz-51",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue L",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue L",
     "category": "Rompi Sholat Rosal",
@@ -3114,7 +4032,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-49",
+    "id": "item-1dJUmz-52",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue XL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue XL",
     "category": "Rompi Sholat Rosal",
@@ -3132,7 +4050,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-50",
+    "id": "item-1dJUmz-53",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue XXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue XXL",
     "category": "Rompi Sholat Rosal",
@@ -3150,7 +4068,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-51",
+    "id": "item-1dJUmz-54",
     "name": "Rosal Madani Hoodie Setengah Zipper Steel Blue XXXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Steel Blue XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3168,7 +4086,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-52",
+    "id": "item-1dJUmz-55",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam S",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam S",
     "category": "Rompi Sholat Rosal",
@@ -3186,7 +4104,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-53",
+    "id": "item-1dJUmz-56",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam M",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam M",
     "category": "Rompi Sholat Rosal",
@@ -3204,7 +4122,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-54",
+    "id": "item-1dJUmz-57",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam L",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam L",
     "category": "Rompi Sholat Rosal",
@@ -3222,7 +4140,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-55",
+    "id": "item-1dJUmz-58",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam XL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam XL",
     "category": "Rompi Sholat Rosal",
@@ -3240,7 +4158,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-56",
+    "id": "item-1dJUmz-59",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam XXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam XXL",
     "category": "Rompi Sholat Rosal",
@@ -3258,7 +4176,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-57",
+    "id": "item-1dJUmz-60",
     "name": "Rosal Madani Hoodie Setengah Zipper Hitam XXXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Hitam XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3276,7 +4194,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-58",
+    "id": "item-1dJUmz-61",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy S",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy S",
     "category": "Rompi Sholat Rosal",
@@ -3294,7 +4212,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-59",
+    "id": "item-1dJUmz-62",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy M",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy M",
     "category": "Rompi Sholat Rosal",
@@ -3312,7 +4230,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-60",
+    "id": "item-1dJUmz-63",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy L",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy L",
     "category": "Rompi Sholat Rosal",
@@ -3330,7 +4248,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-61",
+    "id": "item-1dJUmz-64",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy XL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy XL",
     "category": "Rompi Sholat Rosal",
@@ -3348,7 +4266,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-62",
+    "id": "item-1dJUmz-65",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy XXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy XXL",
     "category": "Rompi Sholat Rosal",
@@ -3366,7 +4284,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-63",
+    "id": "item-1dJUmz-66",
     "name": "Rosal Madani Hoodie Setengah Zipper Navy XXXL",
     "sku": "Rosal Madani Hoodie Setengah Zipper Navy XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3384,7 +4302,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-64",
+    "id": "item-1dJUmz-67",
     "name": "Rosal Madani Kerah Navy S",
     "sku": "Rosal Madani Kerah Navy S",
     "category": "Rompi Sholat Rosal",
@@ -3402,7 +4320,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-65",
+    "id": "item-1dJUmz-68",
     "name": "Rosal Madani Kerah Navy M",
     "sku": "Rosal Madani Kerah Navy M",
     "category": "Rompi Sholat Rosal",
@@ -3420,7 +4338,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-66",
+    "id": "item-1dJUmz-69",
     "name": "Rosal Madani Kerah Navy L",
     "sku": "Rosal Madani Kerah Navy L",
     "category": "Rompi Sholat Rosal",
@@ -3438,7 +4356,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-67",
+    "id": "item-1dJUmz-70",
     "name": "Rosal Madani Kerah Navy XL",
     "sku": "Rosal Madani Kerah Navy XL",
     "category": "Rompi Sholat Rosal",
@@ -3456,7 +4374,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-68",
+    "id": "item-1dJUmz-71",
     "name": "Rosal Madani Kerah Navy XXL",
     "sku": "Rosal Madani Kerah Navy XXL",
     "category": "Rompi Sholat Rosal",
@@ -3474,7 +4392,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-69",
+    "id": "item-1dJUmz-72",
     "name": "Rosal Madani Kerah Navy XXXL",
     "sku": "Rosal Madani Kerah Navy XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3492,7 +4410,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-70",
+    "id": "item-1dJUmz-73",
     "name": "Rosal Madani Kerah Abu S",
     "sku": "Rosal Madani Kerah Abu S",
     "category": "Rompi Sholat Rosal",
@@ -3510,7 +4428,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-71",
+    "id": "item-1dJUmz-74",
     "name": "Rosal Madani Kerah Abu M",
     "sku": "Rosal Madani Kerah Abu M",
     "category": "Rompi Sholat Rosal",
@@ -3528,7 +4446,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-72",
+    "id": "item-1dJUmz-75",
     "name": "Rosal Madani Kerah Abu L",
     "sku": "Rosal Madani Kerah Abu L",
     "category": "Rompi Sholat Rosal",
@@ -3546,7 +4464,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-73",
+    "id": "item-1dJUmz-76",
     "name": "Rosal Madani Kerah Abu XL",
     "sku": "Rosal Madani Kerah Abu XL",
     "category": "Rompi Sholat Rosal",
@@ -3564,7 +4482,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-74",
+    "id": "item-1dJUmz-77",
     "name": "Rosal Madani Kerah Abu XXL",
     "sku": "Rosal Madani Kerah Abu XXL",
     "category": "Rompi Sholat Rosal",
@@ -3582,7 +4500,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-75",
+    "id": "item-1dJUmz-78",
     "name": "Rosal Madani Kerah Abu XXXL",
     "sku": "Rosal Madani Kerah Abu XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3600,7 +4518,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-76",
+    "id": "item-1dJUmz-79",
     "name": "Rosal Madani Kerah Steel Blue S",
     "sku": "Rosal Madani Kerah Steel Blue S",
     "category": "Rompi Sholat Rosal",
@@ -3618,7 +4536,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-77",
+    "id": "item-1dJUmz-80",
     "name": "Rosal Madani Kerah Steel Blue M",
     "sku": "Rosal Madani Kerah Steel Blue M",
     "category": "Rompi Sholat Rosal",
@@ -3636,7 +4554,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-78",
+    "id": "item-1dJUmz-81",
     "name": "Rosal Madani Kerah Steel Blue L",
     "sku": "Rosal Madani Kerah Steel Blue L",
     "category": "Rompi Sholat Rosal",
@@ -3654,7 +4572,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-79",
+    "id": "item-1dJUmz-82",
     "name": "Rosal Madani Kerah Steel Blue XL",
     "sku": "Rosal Madani Kerah Steel Blue XL",
     "category": "Rompi Sholat Rosal",
@@ -3672,7 +4590,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-80",
+    "id": "item-1dJUmz-83",
     "name": "Rosal Madani Kerah Steel Blue XXL",
     "sku": "Rosal Madani Kerah Steel Blue XXL",
     "category": "Rompi Sholat Rosal",
@@ -3690,7 +4608,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-81",
+    "id": "item-1dJUmz-84",
     "name": "Rosal Madani Kerah Steel Blue XXXL",
     "sku": "Rosal Madani Kerah Steel Blue XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3708,7 +4626,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-82",
+    "id": "item-1dJUmz-85",
     "name": "Rosal Madani Kerah Hitam S",
     "sku": "Rosal Madani Kerah Hitam S",
     "category": "Rompi Sholat Rosal",
@@ -3726,7 +4644,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-83",
+    "id": "item-1dJUmz-86",
     "name": "Rosal Madani Kerah Hitam M",
     "sku": "Rosal Madani Kerah Hitam M",
     "category": "Rompi Sholat Rosal",
@@ -3744,7 +4662,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-84",
+    "id": "item-1dJUmz-87",
     "name": "Rosal Madani Kerah Hitam L",
     "sku": "Rosal Madani Kerah Hitam L",
     "category": "Rompi Sholat Rosal",
@@ -3762,7 +4680,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-85",
+    "id": "item-1dJUmz-88",
     "name": "Rosal Madani Kerah Hitam XL",
     "sku": "Rosal Madani Kerah Hitam XL",
     "category": "Rompi Sholat Rosal",
@@ -3780,7 +4698,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-86",
+    "id": "item-1dJUmz-89",
     "name": "Rosal Madani Kerah Hitam XXL",
     "sku": "Rosal Madani Kerah Hitam XXL",
     "category": "Rompi Sholat Rosal",
@@ -3798,7 +4716,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-87",
+    "id": "item-1dJUmz-90",
     "name": "Rosal Madani Kerah Hitam XXXL",
     "sku": "Rosal Madani Kerah Hitam XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3816,7 +4734,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-88",
+    "id": "item-1dJUmz-91",
     "name": "Rosal ISLAH-Black-S",
     "sku": "Rosal ISLAH-Black-S",
     "category": "Rompi Sholat Rosal",
@@ -3834,7 +4752,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-89",
+    "id": "item-1dJUmz-92",
     "name": "Rosal ISLAH-Black-M",
     "sku": "Rosal ISLAH-Black-M",
     "category": "Rompi Sholat Rosal",
@@ -3852,7 +4770,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-90",
+    "id": "item-1dJUmz-93",
     "name": "Rosal ISLAH-Black-L",
     "sku": "Rosal ISLAH-Black-L",
     "category": "Rompi Sholat Rosal",
@@ -3870,7 +4788,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-91",
+    "id": "item-1dJUmz-94",
     "name": "Rosal ISLAH-Black-XL",
     "sku": "Rosal ISLAH-Black-XL",
     "category": "Rompi Sholat Rosal",
@@ -3888,7 +4806,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-92",
+    "id": "item-1dJUmz-95",
     "name": "Rosal ISLAH-Black-XXL",
     "sku": "Rosal ISLAH-Black-XXL",
     "category": "Rompi Sholat Rosal",
@@ -3906,7 +4824,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-93",
+    "id": "item-1dJUmz-96",
     "name": "Rosal ISLAH-Black-XXXL",
     "sku": "Rosal ISLAH-Black-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -3924,7 +4842,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-94",
+    "id": "item-1dJUmz-97",
     "name": "Rosal ISLAH-Cream-S",
     "sku": "Rosal ISLAH-Cream-S",
     "category": "Rompi Sholat Rosal",
@@ -3942,7 +4860,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-95",
+    "id": "item-1dJUmz-98",
     "name": "Rosal ISLAH-Cream-M",
     "sku": "Rosal ISLAH-Cream-M",
     "category": "Rompi Sholat Rosal",
@@ -3960,7 +4878,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-96",
+    "id": "item-1dJUmz-99",
     "name": "Rosal ISLAH-Cream-L",
     "sku": "Rosal ISLAH-Cream-L",
     "category": "Rompi Sholat Rosal",
@@ -3978,7 +4896,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-97",
+    "id": "item-1dJUmz-100",
     "name": "Rosal ISLAH-Cream-XL",
     "sku": "Rosal ISLAH-Cream-XL",
     "category": "Rompi Sholat Rosal",
@@ -3996,7 +4914,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-98",
+    "id": "item-1dJUmz-101",
     "name": "Rosal ISLAH-Cream-XXL",
     "sku": "Rosal ISLAH-Cream-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4014,7 +4932,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-99",
+    "id": "item-1dJUmz-102",
     "name": "Rosal ISLAH-Cream-XXXL",
     "sku": "Rosal ISLAH-Cream-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4032,7 +4950,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-100",
+    "id": "item-1dJUmz-103",
     "name": "Rosal ISLAH-Kubus-S",
     "sku": "Rosal ISLAH-Kubus-S",
     "category": "Rompi Sholat Rosal",
@@ -4050,7 +4968,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-101",
+    "id": "item-1dJUmz-104",
     "name": "Rosal ISLAH-Kubus-M",
     "sku": "Rosal ISLAH-Kubus-M",
     "category": "Rompi Sholat Rosal",
@@ -4068,7 +4986,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-102",
+    "id": "item-1dJUmz-105",
     "name": "Rosal ISLAH-Kubus-L",
     "sku": "Rosal ISLAH-Kubus-L",
     "category": "Rompi Sholat Rosal",
@@ -4086,7 +5004,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-103",
+    "id": "item-1dJUmz-106",
     "name": "Rosal ISLAH-Kubus-XL",
     "sku": "Rosal ISLAH-Kubus-XL",
     "category": "Rompi Sholat Rosal",
@@ -4104,7 +5022,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-104",
+    "id": "item-1dJUmz-107",
     "name": "Rosal ISLAH-Kubus-XXL",
     "sku": "Rosal ISLAH-Kubus-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4122,7 +5040,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-105",
+    "id": "item-1dJUmz-108",
     "name": "Rosal ISLAH-Kubus-XXXL",
     "sku": "Rosal ISLAH-Kubus-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4140,7 +5058,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-106",
+    "id": "item-1dJUmz-109",
     "name": "Rosal ISLAH-Army-S",
     "sku": "Rosal ISLAH-Army-S",
     "category": "Rompi Sholat Rosal",
@@ -4158,7 +5076,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-107",
+    "id": "item-1dJUmz-110",
     "name": "Rosal ISLAH-Army-M",
     "sku": "Rosal ISLAH-Army-M",
     "category": "Rompi Sholat Rosal",
@@ -4176,7 +5094,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-108",
+    "id": "item-1dJUmz-111",
     "name": "Rosal ISLAH-Army-L",
     "sku": "Rosal ISLAH-Army-L",
     "category": "Rompi Sholat Rosal",
@@ -4194,7 +5112,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-109",
+    "id": "item-1dJUmz-112",
     "name": "Rosal ISLAH-Army-XL",
     "sku": "Rosal ISLAH-Army-XL",
     "category": "Rompi Sholat Rosal",
@@ -4212,7 +5130,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-110",
+    "id": "item-1dJUmz-113",
     "name": "Rosal ISLAH-Army-XXL",
     "sku": "Rosal ISLAH-Army-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4230,7 +5148,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-111",
+    "id": "item-1dJUmz-114",
     "name": "Rosal ISLAH-Army-XXXL",
     "sku": "Rosal ISLAH-Army-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4248,7 +5166,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-112",
+    "id": "item-1dJUmz-115",
     "name": "Rosal ISLAH-Navy-S",
     "sku": "Rosal ISLAH-Navy-S",
     "category": "Rompi Sholat Rosal",
@@ -4266,7 +5184,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-113",
+    "id": "item-1dJUmz-116",
     "name": "Rosal ISLAH-Navy-M",
     "sku": "Rosal ISLAH-Navy-M",
     "category": "Rompi Sholat Rosal",
@@ -4284,7 +5202,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-114",
+    "id": "item-1dJUmz-117",
     "name": "Rosal ISLAH-Navy-L",
     "sku": "Rosal ISLAH-Navy-L",
     "category": "Rompi Sholat Rosal",
@@ -4302,7 +5220,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-115",
+    "id": "item-1dJUmz-118",
     "name": "Rosal ISLAH-Navy-XL",
     "sku": "Rosal ISLAH-Navy-XL",
     "category": "Rompi Sholat Rosal",
@@ -4320,7 +5238,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-116",
+    "id": "item-1dJUmz-119",
     "name": "Rosal ISLAH-Navy-XXL",
     "sku": "Rosal ISLAH-Navy-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4338,7 +5256,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-117",
+    "id": "item-1dJUmz-120",
     "name": "Rosal ISLAH-Navy-XXXL",
     "sku": "Rosal ISLAH-Navy-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4356,7 +5274,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-118",
+    "id": "item-1dJUmz-121",
     "name": "Rosal ISLAH-Dark Choco-S",
     "sku": "Rosal ISLAH-Dark Choco-S",
     "category": "Rompi Sholat Rosal",
@@ -4374,7 +5292,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-119",
+    "id": "item-1dJUmz-122",
     "name": "Rosal ISLAH-Dark Choco-M",
     "sku": "Rosal ISLAH-Dark Choco-M",
     "category": "Rompi Sholat Rosal",
@@ -4392,7 +5310,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-120",
+    "id": "item-1dJUmz-123",
     "name": "Rosal ISLAH-Dark Choco-L",
     "sku": "Rosal ISLAH-Dark Choco-L",
     "category": "Rompi Sholat Rosal",
@@ -4410,7 +5328,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-121",
+    "id": "item-1dJUmz-124",
     "name": "Rosal ISLAH-Dark Choco-XL",
     "sku": "Rosal ISLAH-Dark Choco-XL",
     "category": "Rompi Sholat Rosal",
@@ -4428,7 +5346,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-122",
+    "id": "item-1dJUmz-125",
     "name": "Rosal ISLAH-Dark Choco-XXL",
     "sku": "Rosal ISLAH-Dark Choco-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4446,7 +5364,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-123",
+    "id": "item-1dJUmz-126",
     "name": "Rosal ISLAH-Dark Choco-XXXL",
     "sku": "Rosal ISLAH-Dark Choco-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4464,7 +5382,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-124",
+    "id": "item-1dJUmz-127",
     "name": "Rosal ISLAH-Dark Brown-S",
     "sku": "Rosal ISLAH-Dark Brown-S",
     "category": "Rompi Sholat Rosal",
@@ -4482,7 +5400,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-125",
+    "id": "item-1dJUmz-128",
     "name": "Rosal ISLAH-Dark Brown-M",
     "sku": "Rosal ISLAH-Dark Brown-M",
     "category": "Rompi Sholat Rosal",
@@ -4500,7 +5418,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-126",
+    "id": "item-1dJUmz-129",
     "name": "Rosal ISLAH-Dark Brown-L",
     "sku": "Rosal ISLAH-Dark Brown-L",
     "category": "Rompi Sholat Rosal",
@@ -4518,7 +5436,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-127",
+    "id": "item-1dJUmz-130",
     "name": "Rosal ISLAH-Dark Brown-XL",
     "sku": "Rosal ISLAH-Dark Brown-XL",
     "category": "Rompi Sholat Rosal",
@@ -4536,7 +5454,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-128",
+    "id": "item-1dJUmz-131",
     "name": "Rosal ISLAH-Dark Brown-XXL",
     "sku": "Rosal ISLAH-Dark Brown-XXL",
     "category": "Rompi Sholat Rosal",
@@ -4554,7 +5472,7 @@
     "activeMonth": "Katalog Barang Hijab November 2026"
   },
   {
-    "id": "item-1dJUmz-129",
+    "id": "item-1dJUmz-132",
     "name": "Rosal ISLAH-Dark Brown-XXXL",
     "sku": "Rosal ISLAH-Dark Brown-XXXL",
     "category": "Rompi Sholat Rosal",
@@ -4570,5 +5488,149 @@
     "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
     "sourceSheetName": "Ranura Hijab & Rosal",
     "activeMonth": "Katalog Barang Hijab November 2026"
+  },
+  {
+    "id": "item-1dJUmz-133",
+    "name": "Rosal ISLAH-Kubus-M Custom",
+    "sku": "Rosal ISLAH-Kubus-M Custom",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 100000,
+    "sellPrice": 185000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab September 2026"
+  },
+  {
+    "id": "item-1dJUmz-134",
+    "name": "Rosal ISLAH-Kubus-XL Custom",
+    "sku": "Rosal ISLAH-Kubus-XL Custom",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 1,
+    "stockOut": 1,
+    "buyPrice": 110000,
+    "sellPrice": 195000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab September 2026"
+  },
+  {
+    "id": "item-1dJUmz-135",
+    "name": "Rosal ISLAH-Sax Blue-S",
+    "sku": "Rosal ISLAH-Sax Blue-S",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 100000,
+    "sellPrice": 185000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
+  },
+  {
+    "id": "item-1dJUmz-136",
+    "name": "Rosal ISLAH-Sax Blue-M",
+    "sku": "Rosal ISLAH-Sax Blue-M",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 100000,
+    "sellPrice": 185000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
+  },
+  {
+    "id": "item-1dJUmz-137",
+    "name": "Rosal ISLAH-Sax Blue-L",
+    "sku": "Rosal ISLAH-Sax Blue-L",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 100000,
+    "sellPrice": 185000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
+  },
+  {
+    "id": "item-1dJUmz-138",
+    "name": "Rosal ISLAH-Sax Blue-XL",
+    "sku": "Rosal ISLAH-Sax Blue-XL",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 195000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
+  },
+  {
+    "id": "item-1dJUmz-139",
+    "name": "Rosal ISLAH-Sax Blue-XXL",
+    "sku": "Rosal ISLAH-Sax Blue-XXL",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 110000,
+    "sellPrice": 205000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
+  },
+  {
+    "id": "item-1dJUmz-140",
+    "name": "Rosal ISLAH-Sax Blue-XXXL",
+    "sku": "Rosal ISLAH-Sax Blue-XXXL",
+    "category": "Rompi Sholat Rosal",
+    "stock": 0,
+    "reserved": 0,
+    "initialStock": 0,
+    "stockIn": 0,
+    "stockOut": 0,
+    "buyPrice": 135000,
+    "sellPrice": 215000,
+    "status": "critical",
+    "unit": "pcs",
+    "sourceSheetId": "1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM",
+    "sourceSheetName": "Ranura Hijab & Rosal",
+    "activeMonth": "Katalog Barang Hijab Mei 2026"
   }
 ]

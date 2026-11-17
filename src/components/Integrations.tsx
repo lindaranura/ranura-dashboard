@@ -28,7 +28,11 @@ import {
   Plus,
   Trash2,
   Loader2,
-  Database
+  Database,
+  BookOpen,
+  Copy,
+  ShieldCheck,
+  X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { IntegrationConfig, SyncLog, ProductionItem, Order } from '../types';
@@ -159,6 +163,10 @@ export default function Integrations({
     setIsBigsellerConnected(true);
     onAddLog('system', 'success', `API BigSeller terhubung untuk ${bigsellerEmail}`);
   };
+
+  // API Guide Modal State
+  const [showApiGuideModal, setShowApiGuideModal] = useState(false);
+  const [guideActiveTab, setGuideActiveTab] = useState<'shopee' | 'tiktok' | 'bigseller'>('shopee');
 
 
   const [newSheetTitle, setNewSheetTitle] = useState('');
@@ -860,12 +868,21 @@ export default function Integrations({
   return (
     <div id="integrations-viewport" className="p-8 space-y-8 overflow-y-auto h-full flex-1 bg-[#f8fafc] text-slate-800">
       {/* Header section */}
-      <div id="integrations-header" className="border-b border-slate-200 pb-6">
-        <span className="text-blue-600 font-mono text-xs font-semibold tracking-widest uppercase">Konfigurasi Jembatan API</span>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 mt-1">Integrasi Saluran Penjualan</h1>
-        <p className="text-slate-500 text-sm mt-1">
-          Hubungkan e-commerce Shopee & TikTok menggunakan kredensial toko Anda, serta konfigurasikan bot Telegram menggunakan Token Bot unik.
-        </p>
+      <div id="integrations-header" className="border-b border-slate-200 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span className="text-blue-600 font-mono text-xs font-semibold tracking-widest uppercase">Konfigurasi Jembatan API</span>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 mt-1">Integrasi Saluran Penjualan</h1>
+          <p className="text-slate-500 text-sm mt-1">
+            Hubungkan e-commerce Shopee & TikTok menggunakan kredensial toko Anda, serta konfigurasikan bot Telegram menggunakan Token Bot unik.
+          </p>
+        </div>
+        <button
+          onClick={() => setShowApiGuideModal(true)}
+          className="self-start md:self-auto flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition-all active:scale-95 text-xs"
+        >
+          <BookOpen className="w-4 h-4" />
+          Panduan Dapatkan API Shopee & TikTok
+        </button>
       </div>
 
       {/* Main integration status banner */}
@@ -1639,6 +1656,306 @@ export default function Integrations({
           ))}
         </div>
       </div>
+
+      {/* MODAL PANDUAN RESMI INTEGRASI API SHOPEE & TIKTOK SELLER */}
+      <AnimatePresence>
+        {showApiGuideModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0, scale: 0.95 }} 
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh] border border-slate-200"
+            >
+              {/* Modal Header */}
+              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-indigo-600 text-white rounded-xl shadow-md">
+                    <BookOpen className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-800">Panduan Mendapatkan API Shopee & TikTok Seller</h2>
+                    <p className="text-xs text-slate-500 mt-0.5">Langkah resmi untuk memperoleh kredensial API Developer & menghubungkannya ke dasbor</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowApiGuideModal(false)} 
+                  className="text-slate-400 hover:text-slate-600 p-1.5 bg-white rounded-full border border-slate-200 shadow-sm transition-all"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              {/* Tab Selector */}
+              <div className="flex border-b border-slate-200 px-6 pt-3 bg-white gap-2">
+                <button
+                  onClick={() => setGuideActiveTab('shopee')}
+                  className={`pb-3 px-4 text-xs font-bold transition-all border-b-2 flex items-center gap-2 ${
+                    guideActiveTab === 'shopee'
+                      ? 'border-orange-500 text-orange-600'
+                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                  Shopee Open Platform
+                </button>
+                <button
+                  onClick={() => setGuideActiveTab('tiktok')}
+                  className={`pb-3 px-4 text-xs font-bold transition-all border-b-2 flex items-center gap-2 ${
+                    guideActiveTab === 'tiktok'
+                      ? 'border-fuchsia-600 text-fuchsia-600'
+                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-600"></span>
+                  TikTok Shop Partner
+                </button>
+                <button
+                  onClick={() => setGuideActiveTab('bigseller')}
+                  className={`pb-3 px-4 text-xs font-bold transition-all border-b-2 flex items-center gap-2 ${
+                    guideActiveTab === 'bigseller'
+                      ? 'border-emerald-600 text-emerald-600'
+                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                  Jalur Cepat (BigSeller)
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6 overflow-y-auto space-y-6 text-xs text-slate-700 max-h-[65vh] leading-relaxed">
+                
+                {/* SHOPEE GUIDE */}
+                {guideActiveTab === 'shopee' && (
+                  <div className="space-y-5">
+                    <div className="p-4 bg-orange-50 border border-orange-200 rounded-xl flex items-start gap-3">
+                      <div className="p-2 bg-orange-500 text-white rounded-lg font-bold shrink-0 text-sm">SPX</div>
+                      <div>
+                        <h4 className="font-bold text-orange-900 text-sm">Shopee Open Platform (Developer In-House)</h4>
+                        <p className="text-orange-800 mt-1">
+                          Shopee menyediakan API resmi untuk membaca pesanan (Orders), cetak resi (AirwayBill), dan sinkronisasi stok otomatis langsung dari toko Shopee Anda.
+                        </p>
+                        <a 
+                          href="https://open.shopee.com/" 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          className="inline-flex items-center gap-1 text-orange-600 font-bold mt-2 hover:underline"
+                        >
+                          Buka Portal Shopee Open Platform <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">1</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Daftar Akun Pengembang Shopee</p>
+                          <p className="text-slate-600 mt-0.5">Kunjungi <code className="bg-slate-100 px-1 py-0.5 rounded text-orange-600 font-mono">https://open.shopee.com</code> lalu klik <b>Sign In / Register</b> menggunakan email resmi bisnis Anda.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">2</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Pilih Tipe Developer: In-House Developer</p>
+                          <p className="text-slate-600 mt-0.5">Pilih jenis <b>In-House Developer</b> (bukan Third-Party/ISV). Tipe ini khusus bagi pemilik toko yang ingin menghubungkan aplikasi/dasbor internal ke tokonya sendiri tanpa perlu sertifikasi rumit pihak ketiga.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">3</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Lengkapi Dokumen Verifikasi Merchant</p>
+                          <p className="text-slate-600 mt-0.5">Unggah identitas KTP/NPWP pemilik atau dokumen usaha. Tim Shopee biasanya menyetujui akun developer dalam 1 - 3 hari kerja.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">4</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Buat Aplikasi Baru (Create App) & Salin Partner ID</p>
+                          <p className="text-slate-600 mt-0.5">Masuk ke <b>Console &gt; App Management &gt; Create App</b>. Beri nama aplikasi (contoh: <code>Ranura Ops Dashboard</code>) dan pilih kategori <b>ERP / Order &amp; Logistics</b>. Di menu <b>App Details</b>, Anda akan mendapatkan:</p>
+                          <ul className="list-disc list-inside ml-2 mt-1 space-y-1 font-mono text-slate-800">
+                            <li><b>Partner ID</b> (contoh: <span className="text-orange-600">2008492</span>)</li>
+                            <li><b>Partner Key</b> (string rahasia 64 karakter)</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">5</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Otorisasi Toko (Shop Authorization) & Access Token</p>
+                          <p className="text-slate-600 mt-0.5">Di tab <b>App Authorization</b>, klik <b>Authorize Shop</b>. Login dengan akun toko Shopee Ranura yang ingin dihubungkan, lalu klik <b>Confirm Authorization</b>. Sistem akan menghasilkan <b>Shop ID</b> dan <b>Access Token</b>.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center shrink-0">6</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Masukkan Kredensial ke Formulir Dasbor</p>
+                          <p className="text-slate-600 mt-0.5">Tutup panduan ini, lalu klik tombol <b>"+ Tambah Akun Toko Shopee"</b> di kartu Shopee dasbor. Masukkan nama toko dan kredensial. Pesanan akan otomatis tersinkron!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* TIKTOK GUIDE */}
+                {guideActiveTab === 'tiktok' && (
+                  <div className="space-y-5">
+                    <div className="p-4 bg-fuchsia-50 border border-fuchsia-200 rounded-xl flex items-start gap-3">
+                      <div className="p-2 bg-fuchsia-600 text-white rounded-lg font-bold shrink-0 text-sm">TT</div>
+                      <div>
+                        <h4 className="font-bold text-fuchsia-900 text-sm">TikTok Shop Partner Center (Open API)</h4>
+                        <p className="text-fuchsia-800 mt-1">
+                          TikTok Shop menyediakan REST API v2 resmi untuk menarik pesanan real-time, generate resi pengiriman kurir TikTok, dan update status stok.
+                        </p>
+                        <a 
+                          href="https://partner.tiktokshop.com/" 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          className="inline-flex items-center gap-1 text-fuchsia-600 font-bold mt-2 hover:underline"
+                        >
+                          Buka Portal TikTok Shop Partner Center <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">1</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Registrasi Akun TikTok Partner Center</p>
+                          <p className="text-slate-600 mt-0.5">Buka <code className="bg-slate-100 px-1 py-0.5 rounded text-fuchsia-600 font-mono">https://partner.tiktokshop.com/</code> lalu klik <b>Sign Up</b>. Gunakan nomor telepon/email yang sama dengan pengelola toko.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">2</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Pilih Tipe Aplikasi: Custom App (In-House)</p>
+                          <p className="text-slate-600 mt-0.5">Di dalam Partner Console, pilih opsi <b>Custom App Developer (In-House)</b> untuk integrasi langsung ke toko milik sendiri tanpa harus mendaftar sebagai penyedia software publik.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">3</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Buat Aplikasi &amp; Tentukan Izin (Permissions)</p>
+                          <p className="text-slate-600 mt-0.5">Buka <b>App Management &gt; Create App</b>. Pada bagian <b>Permissions</b>, centang izin berikut:</p>
+                          <div className="mt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-mono text-[11px]">
+                            <span className="text-slate-700">✓ <b>Order Management:</b> orders.read, orders.write</span>
+                            <span className="text-slate-700">✓ <b>Fulfillment:</b> package.ship, shipping.read</span>
+                            <span className="text-slate-700">✓ <b>Products:</b> products.read, products.write</span>
+                            <span className="text-slate-700">✓ <b>Webhooks:</b> order_status_change</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">4</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Salin App Key &amp; App Secret</p>
+                          <p className="text-slate-600 mt-0.5">Setelah aplikasi dibuat, buka tab <b>App Details</b> untuk menyalin:</p>
+                          <ul className="list-disc list-inside ml-2 mt-1 space-y-1 font-mono text-slate-800">
+                            <li><b>App Key</b> (string unik aplikasi)</li>
+                            <li><b>App Secret</b> (kunci otentikasi)</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">5</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Otorisasi Toko TikTok Seller &amp; Generate Token</p>
+                          <p className="text-slate-600 mt-0.5">Di tab <b>Authorizations</b>, klik <b>Add Shop</b> atau generate link otorisasi. Login dengan akun TikTok Seller Center toko Ranura, pilih masa berlaku otorisasi 1 tahun, dan setujui izin. Anda akan memperoleh <b>Authorized Shop ID</b> dan <b>Access Token</b>.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-fuchsia-100 text-fuchsia-700 font-bold flex items-center justify-center shrink-0">6</div>
+                        <div>
+                          <p className="font-bold text-slate-900">Simpan ke Dasbor Ranura</p>
+                          <p className="text-slate-600 mt-0.5">Tutup panduan ini, klik <b>"+ Tambah Akun Toko TikTok"</b>, lalu masukkan Nama Toko dan Token yang didapatkan. Dasbor siap menarik pesanan otomatis!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* BIGSELLER ALTERNATIVE */}
+                {guideActiveTab === 'bigseller' && (
+                  <div className="space-y-5">
+                    <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start gap-3">
+                      <div className="p-2 bg-emerald-600 text-white rounded-lg font-bold shrink-0 text-sm">⚡</div>
+                      <div>
+                        <h4 className="font-bold text-emerald-900 text-sm">Jalur Cepat: Integrator Agregator (BigSeller / Ginee)</h4>
+                        <p className="text-emerald-800 mt-1">
+                          Jika proses pendaftaran Developer di Shopee / TikTok terasa rumit atau membutuhkan dokumen PT/CV, Anda dapat menggunakan <b>BigSeller</b> (Mitra Resmi Bersertifikat Shopee &amp; TikTok).
+                        </p>
+                        <a 
+                          href="https://www.bigseller.com/" 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          className="inline-flex items-center gap-1 text-emerald-700 font-bold mt-2 hover:underline"
+                        >
+                          Buka Website BigSeller Indonesia <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <p className="font-bold text-slate-800">Keuntungan Menggunakan BigSeller:</p>
+                        <ul className="list-disc list-inside space-y-1 text-slate-600">
+                          <li><b>100% Gratis &amp; Resmi:</b> BigSeller adalah Certified Official Partner Shopee dan TikTok Shop.</li>
+                          <li><b>Koneksi 1 Menit:</b> Cukup login akun seller center Shopee &amp; TikTok, tidak perlu verifikasi developer berminggu-minggu.</li>
+                          <li><b>Mendukung Multi-Toko:</b> Dapat menghubungkan 5-10 toko Shopee &amp; TikTok sekaligus dalam satu API Token.</li>
+                        </ul>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex gap-3">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">1</div>
+                          <p className="text-slate-600">Daftar akun gratis di <code className="bg-slate-100 px-1 py-0.5 rounded text-emerald-700 font-mono">https://www.bigseller.com</code>.</p>
+                        </div>
+                        <div className="flex gap-3">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">2</div>
+                          <p className="text-slate-600">Di menu <b>Integrasi &gt; Hubungkan Toko</b>, pilih Shopee dan TikTok, lalu login akun seller Anda.</p>
+                        </div>
+                        <div className="flex gap-3">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">3</div>
+                          <p className="text-slate-600">Buka menu <b>Pengaturan &gt; Integrasi API / Developer Token</b> di BigSeller, lalu salin API Token Anda.</p>
+                        </div>
+                        <div className="flex gap-3">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">4</div>
+                          <p className="text-slate-600">Di dasbor ini, gulir ke kartu <b>Integrasi BigSeller Multi-Channel</b>, masukkan Email dan Token, lalu klik <b>Hubungkan API BigSeller</b>.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Modal Footer */}
+              <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+                <span className="text-[11px] text-slate-500 font-medium">Dokumentasi resmi ini disinkronkan dengan API Shopee v2 &amp; TikTok Open API 2026.</span>
+                <button
+                  onClick={() => setShowApiGuideModal(false)}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-xl text-xs shadow transition-all active:scale-95"
+                >
+                  Tutup Panduan
+                </button>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

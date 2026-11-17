@@ -109,7 +109,7 @@ export default function OrderMaster({
   
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingOrder, setEditingOrder] = useState<any>(null);
-  const [printOrder, setPrintOrder] = useState<any>(null);
+  const [printOrders, setPrintOrders] = useState<any[] | null>(null);
 
   const [isManualInputOpen, setIsManualInputOpen] = useState(false);
   const [manualText, setManualText] = useState('');
@@ -230,6 +230,45 @@ export default function OrderMaster({
     if (window.confirm(`⚠️ PERINGATAN!\nYakin menghapus permanen ${selectedIds.length} pesanan?`)) { selectedIds.forEach(id => onDeleteOrder(id)); setSelectedIds([]); }
   };
 
+  // SISTEM CETAK MASSAL LABEL PENGIRIMAN (100x150mm)
+  const handleStartPrint = (ordersToPrint: any[], autoMovePickup: boolean = false) => {
+    if (!ordersToPrint || ordersToPrint.length === 0) {
+      alert('Tidak ada pesanan yang dipilih untuk dicetak.');
+      return;
+    }
+
+    const invalidTelegram = ordersToPrint.filter(o => {
+      const p = (o.platform || '').toLowerCase();
+      const hasResi = o.trackingNumber && o.trackingNumber !== '-' && o.trackingNumber !== 'undefined';
+      return p === 'telegram' && !hasResi;
+    });
+
+    let validOrders = [...ordersToPrint];
+    if (invalidTelegram.length > 0) {
+      if (ordersToPrint.length === 1) {
+        alert('⚠️ GAGAL MENCETAK: Pesanan Telegram harus diinput Nomor Resi pengiriman terlebih dahulu sebelum dapat dicetak!');
+        return;
+      } else {
+        const proceed = window.confirm(
+          `⚠️ PERINGATAN RESI:\nTerdapat ${invalidTelegram.length} pesanan Telegram yang belum memiliki Nomor Resi.\n\nApakah Anda ingin tetap mencetak ${ordersToPrint.length - invalidTelegram.length} pesanan lainnya yang sudah lengkap?`
+        );
+        if (!proceed) return;
+        validOrders = ordersToPrint.filter(o => !invalidTelegram.includes(o));
+        if (validOrders.length === 0) return;
+      }
+    }
+
+    const newPrinted = [...new Set([...printedIds, ...validOrders.map(o => String(o.id))])];
+    setPrintedIds(newPrinted);
+    localStorage.setItem('apex_printed_ids', JSON.stringify(newPrinted));
+
+    if (autoMovePickup) {
+      validOrders.forEach(o => onUpdateOrderStatus(o.id, 'Menunggu Pickup'));
+    }
+
+    setPrintOrders(validOrders);
+  };
+
   const openEditModal = (order: any) => { setEditingOrder({ ...order, status: normalizeStatus(order.status) }); setIsEditModalOpen(true); };
   const saveEdit = () => { onUpdateOrderStatus(editingOrder.id, editingOrder.status, editingOrder.trackingNumber, editingOrder.shippingAddress, editingOrder.shippingDate, editingOrder.customerPhone); setIsEditModalOpen(false); };
 
@@ -307,19 +346,9 @@ export default function OrderMaster({
     if (pForm === 'shopee') printerClass = "p-1.5 border rounded shadow-sm transition-all text-orange-500 border-orange-200 hover:bg-orange-50";
     else if (pForm === 'tiktok') printerClass = "p-1.5 border rounded shadow-sm transition-all text-fuchsia-600 border-fuchsia-200 hover:bg-fuchsia-50";
     
-    // SISTEM PROTEKSI SAAT TOMBOL CETAK DITEKAN
+    // SISTEM CETAK SATUAN
     const handlePrintMarketplace = () => { 
-       const hasResi = order.trackingNumber && order.trackingNumber !== '-' && order.trackingNumber !== 'undefined';
-       if (pForm === 'telegram' && !hasResi) {
-           alert('⚠️ GAGAL MENCETAK: Pesanan Telegram harus diinput Nomor Resi pengiriman terlebih dahulu sebelum dapat dicetak!');
-           return;
-       }
-       if (!printedIds.includes(order.id)) {
-           const newPrinted = [...printedIds, order.id];
-           setPrintedIds(newPrinted);
-           localStorage.setItem('apex_printed_ids', JSON.stringify(newPrinted));
-       }
-       setPrintOrder(order); 
+       handleStartPrint([order]);
     };
 
     // SISTEM PROTEKSI SAAT PINDAH KE PICKUP
@@ -534,13 +563,23 @@ export default function OrderMaster({
 
           <AnimatePresence>
             {selectedIds.length > 0 && (
-              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="bg-white border-2 border-indigo-500 rounded-xl shadow-lg p-4 mb-6 flex items-center justify-between sticky top-4 z-20">
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="bg-white border-2 border-indigo-500 rounded-xl shadow-lg p-4 mb-6 flex items-center justify-between sticky top-4 z-20 flex-wrap gap-3">
                 <div className="flex items-center gap-3">
                   <div className="bg-indigo-100 text-indigo-700 p-2 rounded-lg"><CheckCircle className="h-5 w-5" /></div>
                   <span className="font-bold text-slate-800">{selectedIds.length} Pesanan Terpilih</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <select value={bulkStatus} onChange={e => setBulkStatus(e.target.value)} className="border-slate-300 rounded-lg text-sm font-medium focus:ring-indigo-500 py-2 px-4 bg-slate-50 text-slate-700">
+                <div className="flex items-center gap-2.5 flex-wrap">
+                  <button 
+                    onClick={() => {
+                      const selectedOrders = safeOrders.filter(o => selectedIds.includes(String(o.id)));
+                      handleStartPrint(selectedOrders);
+                    }}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 shadow-md transition-all active:scale-95"
+                    title="Cetak label pesanan yang dipilih"
+                  >
+                    <Printer className="h-4 w-4" /> Cetak Label ({selectedIds.length})
+                  </button>
+                  <select value={bulkStatus} onChange={e => setBulkStatus(e.target.value)} className="border-slate-300 rounded-lg text-xs font-medium focus:ring-indigo-500 py-2 px-3 bg-slate-50 text-slate-700">
                     <option value="">-- Ubah Status Massal --</option>
                     <option value="Pesanan Belum Dibayar">Pesanan Belum Dibayar</option>
                     <option value="Menunggu Diproses">Menunggu Diproses</option>
@@ -552,13 +591,60 @@ export default function OrderMaster({
                     <option value="Pesanan Dibatalkan">Pesanan Dibatalkan</option>
                     <option value="Pesanan Retur">Pesanan Retur</option>
                   </select>
-                  <button onClick={handleBulkUpdate} className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md transition-colors">Terapkan</button>
-                  <div className="w-px h-8 bg-slate-200 mx-2"></div>
-                  <button onClick={handleBulkDelete} className="bg-rose-100 hover:bg-rose-200 text-rose-700 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-colors"><Trash2 className="h-4 w-4" /> Hapus</button>
+                  <button onClick={handleBulkUpdate} className="bg-slate-700 hover:bg-slate-800 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow transition-colors">Terapkan</button>
+                  <div className="w-px h-6 bg-slate-200 mx-1"></div>
+                  <button onClick={handleBulkDelete} className="bg-rose-100 hover:bg-rose-200 text-rose-700 px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"><Trash2 className="h-3.5 w-3.5" /> Hapus</button>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* BANNER ANTREAN CETAK LABEL KHUSUS MENU "MENUNGGU DICETAK" */}
+          {activeFilter === 'Menunggu Dicetak' && (
+            <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-blue-600 text-white rounded-xl shadow-md">
+                  <Printer className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800 text-base flex items-center gap-2">
+                    Antrean Cetak Label Pengiriman
+                    <span className="text-xs bg-blue-600 text-white font-bold px-2.5 py-0.5 rounded-full">
+                      {filteredOrders.length} Pesanan Menunggu
+                    </span>
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-0.5">
+                    Cetak beberapa pesanan (centang kotak) atau cetak seluruh antrean sekaligus untuk printer thermal 100x150mm (A6).
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap w-full md:w-auto">
+                {selectedIds.length > 0 && (
+                  <button
+                    onClick={() => {
+                      const selectedOrders = filteredOrders.filter(o => selectedIds.includes(String(o.id)));
+                      handleStartPrint(selectedOrders);
+                    }}
+                    className="flex-1 md:flex-initial flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-md transition-all active:scale-95"
+                  >
+                    <Printer className="w-4 h-4" /> Cetak Terpilih ({selectedIds.length})
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    if (filteredOrders.length === 0) {
+                      alert('Tidak ada pesanan di antrean Menunggu Dicetak.');
+                      return;
+                    }
+                    handleStartPrint(filteredOrders);
+                  }}
+                  className="flex-1 md:flex-initial flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-md transition-all active:scale-95"
+                >
+                  <Printer className="w-4 h-4" /> Cetak Semua ({filteredOrders.length} Pesanan)
+                </button>
+              </div>
+            </div>
+          )}
 
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
@@ -693,126 +779,163 @@ export default function OrderMaster({
       </div>
 
       <AnimatePresence>
-        {printOrder && (
+        {printOrders && printOrders.length > 0 && (
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-slate-100 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[95vh] border border-slate-300">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-slate-100 rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[95vh] border border-slate-300">
               
               <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-white no-print">
-                <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2"><Printer className="h-5 w-5 text-indigo-600" /> Pratinjau Label {printOrder.platform.toUpperCase()}</h2>
-                <button onClick={() => setPrintOrder(null)} className="text-slate-400 hover:text-rose-600 p-1 bg-slate-50 rounded-full border border-slate-200 shadow-sm"><X className="h-4 w-4" /></button>
+                <div>
+                  <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <Printer className="h-5 w-5 text-indigo-600" />
+                    Cetak Label Pengiriman ({printOrders.length} Pesanan)
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Format thermal A6 (100x150mm). Siap cetak ke printer thermal (Direct Thermal / Bluetooth / USB).
+                  </p>
+                </div>
+                <button onClick={() => setPrintOrders(null)} className="text-slate-400 hover:text-rose-600 p-1.5 bg-slate-50 rounded-full border border-slate-200 shadow-sm"><X className="h-4 w-4" /></button>
               </div>
 
-              <div className="p-8 overflow-y-auto flex justify-center items-start bg-slate-200">
-                <div id="printable-area" className="bg-white shadow-xl flex-shrink-0 text-black p-0 m-0" style={{ width: '100mm', minHeight: '150mm', fontFamily: 'Arial, sans-serif' }}>
-                  
-                  {printOrder.platform.toLowerCase() === 'shopee' && (
-                    <div className="border-[3px] border-black text-xs leading-snug w-full h-full p-2 relative">
-                      <div className="flex border-b-[3px] border-black pb-2 items-center justify-between">
-                        <div className="font-black text-xl tracking-tighter">Shopee</div>
-                        <div className="font-black text-2xl">ECO</div>
-                        <div className="font-black text-xl tracking-tighter italic text-red-600">SPX</div>
-                      </div>
-                      <div className="flex border-b-[3px] border-black">
-                        <div className="w-1/3 border-r-[3px] border-black p-2 flex items-center justify-center font-black text-3xl">BW-13</div>
-                        <div className="w-2/3 p-2 flex flex-col items-center">
-                          <div className="border border-black px-2 py-0.5 font-bold mb-1">SJB-A-16</div>
-                          <DummyBarcode />
-                          <div className="text-[10px] font-bold mt-1 border border-black px-2">Resi: {printOrder.trackingNumber || 'SPXID063104105798'}</div>
+              <div className="p-6 overflow-y-auto flex flex-col items-center gap-8 bg-slate-200 max-h-[70vh]">
+                <div id="printable-area" className="flex flex-col items-center gap-8 w-full">
+                  {printOrders.map((pOrder, pIdx) => {
+                    const isShopee = (pOrder.platform || '').toLowerCase() === 'shopee';
+                    const expireDateObj = getExpireDate(pOrder);
+                    const safeExpire = isNaN(expireDateObj.getTime()) ? '-' : expireDateObj.toLocaleDateString('id-ID');
+                    
+                    return (
+                      <div key={pOrder.id || pIdx} className="w-full flex flex-col items-center">
+                        <div className="text-[11px] font-bold text-slate-600 bg-white/80 px-3 py-1 rounded-full mb-2 no-print border border-slate-300">
+                          Label {pIdx + 1} dari {printOrders.length} — No. {pOrder.orderNumber || '-'} ({pOrder.customerName || 'Anonim'})
                         </div>
-                      </div>
-                      <div className="flex border-b-[3px] border-black p-1 relative overflow-hidden">
-                        <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none font-black text-[6rem]">COD</div>
-                        <div className="w-1/2 pr-1 border-r border-black relative z-10">
-                          <p className="font-bold">Penerima: {printOrder.customerName}</p>
-                          <p className="text-[10px] mt-1">{printOrder.shippingAddress}</p>
-                        </div>
-                        <div className="w-1/2 pl-1 relative z-10">
-                          <p className="font-bold">Pengirim: {printOrder.shopName || 'Ranura Official'}</p>
-                          <p className="text-[10px] mt-1 font-bold">{printOrder.customerPhone || '628111376700'}</p>
-                          <p className="text-[10px]">KOTA DEPOK</p>
-                        </div>
-                      </div>
-                      <div className="flex border-b-[3px] border-black text-[10px] font-bold text-center">
-                        <div className="w-1/3 border-r border-black p-1">KAB. SUKABUMI</div>
-                        <div className="w-1/3 border-r border-black p-1">SUKARAJA</div>
-                        <div className="w-1/3 p-1">Langensari</div>
-                      </div>
-                      <div className="flex border-b-[3px] border-black p-1">
-                        <div className="w-2/3">
-                          <p><b>Berat:</b> 1000 gr</p>
-                          <p><b>Batas Kirim:</b> {isNaN(getExpireDate(printOrder).getTime()) ? '-' : getExpireDate(printOrder).toLocaleDateString('id-ID')}</p>
-                          <p><b>No.Pesanan:</b> {printOrder.orderNumber}</p>
-                        </div>
-                        <div className="w-1/3 flex flex-col items-end">
-                          <p className="font-bold text-right mb-1">COD Cek Dulu: Tidak</p>
-                          <DummyQRCode />
-                        </div>
-                      </div>
-                      <div className="p-1">
-                        <table className="w-full text-[9px] text-left border-collapse">
-                          <thead><tr className="border-b border-black"><th className="pb-1">#</th><th>Nama Produk</th><th>SKU</th><th>Variasi</th><th>Qty</th></tr></thead>
-                          <tbody><tr><td className="pt-1 align-top">1</td><td className="pt-1 pr-1 align-top">{printOrder.productName}</td><td className="pt-1 pr-1 align-top break-all">{printOrder.sku}</td><td className="pt-1 pr-1 align-top">-</td><td className="pt-1 align-top font-bold">{printOrder.qty}</td></tr></tbody>
-                        </table>
-                        <p className="mt-4 font-bold text-[10px]">Pesan: ({printOrder.orderNumber}) ({printOrder.trackingNumber || 'SPXID063104105798'})</p>
-                      </div>
-                    </div>
-                  )}
 
-                  {printOrder.platform.toLowerCase() !== 'shopee' && (
-                    <div className="border-[2px] border-black text-[11px] leading-tight w-full h-full">
-                      <div className="flex justify-between items-center p-2 border-b border-black">
-                        <div className="font-black text-2xl tracking-tighter italic text-red-600">JNE<span className="text-blue-800 text-xs ml-1 block not-italic">EXPRESS</span></div>
-                        <div className="font-serif text-3xl font-bold">REG</div>
-                        <DummyQRCode />
-                      </div>
-                      <div className="p-2 border-b border-black">
-                        <div className="flex justify-between font-semibold"><p>Pengirim: {printOrder.shopName || 'Ranura Official'}</p><p>(+62)81528247440</p></div>
-                        <p className="mb-2">Jawa Barat, Depok</p>
-                        <div className="flex justify-between font-semibold"><p>Penerima: {printOrder.customerName}</p><p>{printOrder.customerPhone || '(+62)81****78'}</p></div>
-                        <p className="text-[10px]">{printOrder.shippingAddress}</p>
-                      </div>
-                      <div className="flex border-b border-black text-center font-bold">
-                        <div className="w-2/3 border-r border-black p-1">NON COD</div>
-                        <div className="w-1/3 p-1 text-[10px] flex items-center justify-center">Ship: {isNaN(getExpireDate(printOrder).getTime()) ? '-' : getExpireDate(printOrder).toLocaleDateString('id-ID')}</div>
-                      </div>
-                      <div className="flex border-b border-black">
-                        <div className="w-2/3 border-r border-black p-2">
-                          <p>Jumlah: {printOrder.qty} pcs,</p>
-                          <p className="mt-1">Barang: {printOrder.productName}</p>
-                          <p className="mt-1">Note: -</p>
+                        <div className="printable-label bg-white shadow-xl flex-shrink-0 text-black p-0 m-0" style={{ width: '100mm', minHeight: '148mm', fontFamily: 'Arial, sans-serif' }}>
+                          {isShopee ? (
+                            <div className="border-[3px] border-black text-xs leading-snug w-full h-full p-2 relative bg-white">
+                              <div className="flex border-b-[3px] border-black pb-2 items-center justify-between">
+                                <div className="font-black text-xl tracking-tighter">Shopee</div>
+                                <div className="font-black text-2xl">ECO</div>
+                                <div className="font-black text-xl tracking-tighter italic text-red-600">SPX</div>
+                              </div>
+                              <div className="flex border-b-[3px] border-black">
+                                <div className="w-1/3 border-r-[3px] border-black p-2 flex items-center justify-center font-black text-3xl">BW-13</div>
+                                <div className="w-2/3 p-2 flex flex-col items-center">
+                                  <div className="border border-black px-2 py-0.5 font-bold mb-1">SJB-A-16</div>
+                                  <DummyBarcode />
+                                  <div className="text-[10px] font-bold mt-1 border border-black px-2">Resi: {pOrder.trackingNumber || 'SPXID063104105798'}</div>
+                                </div>
+                              </div>
+                              <div className="flex border-b-[3px] border-black p-1 relative overflow-hidden">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none font-black text-[6rem]">COD</div>
+                                <div className="w-1/2 pr-1 border-r border-black relative z-10">
+                                  <p className="font-bold">Penerima: {pOrder.customerName}</p>
+                                  <p className="text-[10px] mt-1">{pOrder.shippingAddress}</p>
+                                </div>
+                                <div className="w-1/2 pl-1 relative z-10">
+                                  <p className="font-bold">Pengirim: {pOrder.shopName || 'Ranura Official'}</p>
+                                  <p className="text-[10px] mt-1 font-bold">{pOrder.customerPhone || '628111376700'}</p>
+                                  <p className="text-[10px]">KOTA DEPOK</p>
+                                </div>
+                              </div>
+                              <div className="flex border-b-[3px] border-black text-[10px] font-bold text-center">
+                                <div className="w-1/3 border-r border-black p-1">KAB. SUKABUMI</div>
+                                <div className="w-1/3 border-r border-black p-1">SUKARAJA</div>
+                                <div className="w-1/3 p-1">Langensari</div>
+                              </div>
+                              <div className="flex border-b-[3px] border-black p-1">
+                                <div className="w-2/3">
+                                  <p><b>Berat:</b> 1000 gr</p>
+                                  <p><b>Batas Kirim:</b> {safeExpire}</p>
+                                  <p><b>No.Pesanan:</b> {pOrder.orderNumber}</p>
+                                </div>
+                                <div className="w-1/3 flex flex-col items-end">
+                                  <p className="font-bold text-right mb-1">COD Cek Dulu: Tidak</p>
+                                  <DummyQRCode />
+                                </div>
+                              </div>
+                              <div className="p-1">
+                                <table className="w-full text-[9px] text-left border-collapse">
+                                  <thead><tr className="border-b border-black"><th className="pb-1">#</th><th>Nama Produk</th><th>SKU</th><th>Variasi</th><th>Qty</th></tr></thead>
+                                  <tbody><tr><td className="pt-1 align-top">1</td><td className="pt-1 pr-1 align-top">{pOrder.productName}</td><td className="pt-1 pr-1 align-top break-all">{pOrder.sku}</td><td className="pt-1 pr-1 align-top">-</td><td className="pt-1 align-top font-bold">{pOrder.qty}</td></tr></tbody>
+                                </table>
+                                <p className="mt-4 font-bold text-[10px]">Pesan: ({pOrder.orderNumber}) ({pOrder.trackingNumber || 'SPXID063104105798'})</p>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="border-[2px] border-black text-[11px] leading-tight w-full h-full bg-white">
+                              <div className="flex justify-between items-center p-2 border-b border-black">
+                                <div className="font-black text-2xl tracking-tighter italic text-red-600">JNE<span className="text-blue-800 text-xs ml-1 block not-italic">EXPRESS</span></div>
+                                <div className="font-serif text-3xl font-bold">REG</div>
+                                <DummyQRCode />
+                              </div>
+                              <div className="p-2 border-b border-black">
+                                <div className="flex justify-between font-semibold"><p>Pengirim: {pOrder.shopName || 'Ranura Official'}</p><p>(+62)81528247440</p></div>
+                                <p className="mb-2">Jawa Barat, Depok</p>
+                                <div className="flex justify-between font-semibold"><p>Penerima: {pOrder.customerName}</p><p>{pOrder.customerPhone || '(+62)81****78'}</p></div>
+                                <p className="text-[10px]">{pOrder.shippingAddress}</p>
+                              </div>
+                              <div className="flex border-b border-black text-center font-bold">
+                                <div className="w-2/3 border-r border-black p-1">NON COD</div>
+                                <div className="w-1/3 p-1 text-[10px] flex items-center justify-center">Ship: {safeExpire}</div>
+                              </div>
+                              <div className="flex border-b border-black">
+                                <div className="w-2/3 border-r border-black p-2">
+                                  <p>Jumlah: {pOrder.qty} pcs,</p>
+                                  <p className="mt-1">Barang: {pOrder.productName}</p>
+                                  <p className="mt-1">Note: -</p>
+                                </div>
+                                <div className="w-1/3 p-2 flex items-center justify-center font-serif text-4xl font-black">CGK</div>
+                              </div>
+                              <div className="p-2 border-b border-black text-center flex flex-col items-center">
+                                <p className="font-bold text-[10px] mb-1">AWB Number</p>
+                                <DummyBarcode />
+                                <p className="font-bold text-lg mt-1 tracking-widest">{pOrder.trackingNumber || 'TG3577683268'}</p>
+                              </div>
+                              <div className="p-1 px-2 border-b border-black font-semibold text-[10px]">Order Id: {pOrder.orderNumber}</div>
+                              <div className="p-2">
+                                <p className="text-[9px] mb-1">In transit by: {safeExpire}</p>
+                                <table className="w-full text-[9px] text-left border-collapse border-b border-black mb-1">
+                                  <thead><tr className="border-b border-black"><th className="pb-1">Product Name</th><th>SKU</th><th>Seller SKU</th><th>Qty</th></tr></thead>
+                                  <tbody><tr><td className="py-1 pr-1">{pOrder.productName}</td><td className="py-1 pr-1">{pOrder.sku}</td><td className="py-1 pr-1">{pOrder.sku}</td><td className="py-1 font-bold text-center">{pOrder.qty}</td></tr></tbody>
+                                </table>
+                                <p className="text-right font-bold text-[10px]">Qty Total: {pOrder.qty}</p>
+                              </div>
+                              <div className="flex justify-between items-center p-2 border-t border-black bg-slate-50 mt-2">
+                                <div className="font-bold text-lg tracking-tighter">tokopedia</div>
+                                <div className="font-bold text-lg flex items-center gap-1"><Package className="w-4 h-4"/> Shop</div>
+                                <div className="text-[7px] text-right"><p>Order ID: {pOrder.orderNumber}</p><p>Package ID: 1208508357115</p></div>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                        <div className="w-1/3 p-2 flex items-center justify-center font-serif text-4xl font-black">CGK</div>
                       </div>
-                      <div className="p-2 border-b border-black text-center flex flex-col items-center">
-                        <p className="font-bold text-[10px] mb-1">AWB Number</p>
-                        <DummyBarcode />
-                        <p className="font-bold text-lg mt-1 tracking-widest">{printOrder.trackingNumber || 'TG3577683268'}</p>
-                      </div>
-                      <div className="p-1 px-2 border-b border-black font-semibold text-[10px]">Order Id: {printOrder.orderNumber}</div>
-                      <div className="p-2">
-                        <p className="text-[9px] mb-1">In transit by: {isNaN(getExpireDate(printOrder).getTime()) ? '-' : getExpireDate(printOrder).toLocaleDateString('id-ID')}</p>
-                        <table className="w-full text-[9px] text-left border-collapse border-b border-black mb-1">
-                          <thead><tr className="border-b border-black"><th className="pb-1">Product Name</th><th>SKU</th><th>Seller SKU</th><th>Qty</th></tr></thead>
-                          <tbody><tr><td className="py-1 pr-1">{printOrder.productName}</td><td className="py-1 pr-1">{printOrder.sku}</td><td className="py-1 pr-1">{printOrder.sku}</td><td className="py-1 font-bold text-center">{printOrder.qty}</td></tr></tbody>
-                        </table>
-                        <p className="text-right font-bold text-[10px]">Qty Total: {printOrder.qty}</p>
-                      </div>
-                      <div className="flex justify-between items-center p-2 border-t border-black bg-slate-50 mt-2">
-                        <div className="font-bold text-lg tracking-tighter">tokopedia</div>
-                        <div className="font-bold text-lg flex items-center gap-1"><Package className="w-4 h-4"/> Shop</div>
-                        <div className="text-[7px] text-right"><p>Order ID: {printOrder.orderNumber}</p><p>Package ID: 1208508357115</p></div>
-                      </div>
-                    </div>
-                  )}
-
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="p-4 border-t border-slate-200 bg-white flex justify-between items-center no-print">
-                <p className="text-xs text-slate-500 font-medium">Siapkan kertas thermal berukuran 100x150mm (A6).</p>
-                <button onClick={() => window.print()} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md flex items-center gap-2 transition-all active:scale-95">
-                  <Printer className="w-4 h-4" /> Cetak Sekarang
-                </button>
+              <div className="p-4 border-t border-slate-200 bg-white flex flex-col sm:flex-row justify-between items-center gap-3 no-print">
+                <div className="text-xs text-slate-500 font-medium">
+                  Total <span className="font-bold text-slate-800">{printOrders.length} label</span> thermal (100x150mm / A6).
+                </div>
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <button 
+                    onClick={() => {
+                      printOrders.forEach(o => onUpdateOrderStatus(o.id, 'Menunggu Pickup'));
+                      window.print();
+                    }} 
+                    className="flex-1 sm:flex-initial bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-lg shadow flex items-center justify-center gap-2 text-xs transition-all active:scale-95"
+                    title="Cetak dan otomatis pindahkan status pesanan ini ke antrean Menunggu Pickup"
+                  >
+                    <Truck className="w-4 h-4" /> Cetak & Pindah ke Pickup
+                  </button>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="flex-1 sm:flex-initial bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-md flex items-center justify-center gap-2 text-xs transition-all active:scale-95"
+                  >
+                    <Printer className="w-4 h-4" /> Cetak Sekarang
+                  </button>
+                </div>
               </div>
 
             </motion.div>

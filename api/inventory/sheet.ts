@@ -1,3 +1,5 @@
+import REAL_PRODUCTION_DATA from '../../src/data/realProductionItems.json';
+
 const SWIMWEAR_ID = '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA';
 const HIJAB_ID = '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM';
 
@@ -21,19 +23,20 @@ async function fetchFromGViz(sheetId: string, monthParam: string = 'default') {
   const data = JSON.parse(jsonStr);
   const rows = data.table?.rows || [];
 
-  const items: any[] = [];
-  let counter = 1;
+  // Base map from all 313 products filtered by sheet
+  const baseItems: any[] = JSON.parse(JSON.stringify(REAL_PRODUCTION_DATA));
+  const sheetItems = baseItems.filter(i => i.sourceSheetId === sheetId);
+  const itemsMap = new Map<string, any>();
+  sheetItems.forEach(it => {
+    itemsMap.set(it.name.trim().toUpperCase(), it);
+  });
 
-  for (let i = 4; i < rows.length; i++) {
-    const c = rows[i].c || [];
+  for (let i = 0; i < rows.length; i++) {
+    const c = rows[i]?.c || [];
     const name = c[1]?.v ? String(c[1].v).trim() : '';
     if (!name || name.toLowerCase().includes('kosongkan') || name.toLowerCase().includes('nama barang')) continue;
 
-    let sku = c[0]?.v ? String(c[0].v).trim() : name;
-    if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
-      sku = name;
-    }
-
+    const key = name.toUpperCase();
     const initialStock = Number(c[2]?.v) || 0;
     const stockIn = Number(c[3]?.v) || 0;
     const stockOut = Number(c[4]?.v) || 0;
@@ -41,40 +44,57 @@ async function fetchFromGViz(sheetId: string, monthParam: string = 'default') {
     const buyPrice = Math.round(Number(c[6]?.v) || 0);
     const sellPrice = Math.round(Number(c[8]?.v) || 0);
 
-    let category = "Pakaian Apung";
-    if (isHijab) {
-      if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
-      else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
-      else category = "Ranura Hijab";
+    if (itemsMap.has(key)) {
+      const existing = itemsMap.get(key);
+      existing.stock = stock;
+      existing.initialStock = initialStock;
+      existing.stockIn = stockIn;
+      existing.stockOut = stockOut;
+      if (buyPrice > 0) existing.buyPrice = buyPrice;
+      if (sellPrice > 0) existing.sellPrice = sellPrice;
+      existing.status = stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical';
+      existing.activeMonth = tabName;
     } else {
-      if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
-      else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
-      else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
-      else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
-      else category = "Baju Renang Ranura";
-    }
+      let sku = c[0]?.v ? String(c[0].v).trim() : name;
+      if (!sku || ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember','bulan'].includes(sku.toLowerCase())) {
+        sku = name;
+      }
 
-    items.push({
-      id: `item-${sheetId.substring(0, 6)}-${counter++}`,
-      name,
-      sku,
-      category,
-      stock,
-      reserved: 0,
-      initialStock,
-      stockIn,
-      stockOut,
-      buyPrice,
-      sellPrice,
-      status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
-      unit: 'pcs',
-      sourceSheetId: sheetId,
-      sourceSheetName: isHijab ? 'Ranura Hijab & Rosal' : 'Ranura Swimwear',
-      activeMonth: `${month} 2026`
-    });
+      let category = "Pakaian Apung";
+      if (isHijab) {
+        if (name.toLowerCase().includes('rosal')) category = "Rompi Sholat Rosal";
+        else if (name.toLowerCase().includes('outer') || name.toLowerCase().includes('murih')) category = "Ranura Outer & Hijab";
+        else category = "Ranura Hijab";
+      } else {
+        if (name.toLowerCase().includes('kids')) category = "Baju Renang Anak";
+        else if (name.toLowerCase().includes('female')) category = "Baju Renang Muslimah";
+        else if (name.toLowerCase().includes('male')) category = "Baju Renang Pria";
+        else if (name.toLowerCase().includes('proswim')) category = "Ranura Proswim";
+        else category = "Baju Renang Ranura";
+      }
+
+      itemsMap.set(key, {
+        id: `item-${sheetId.substring(0, 6)}-${itemsMap.size + 1}`,
+        name,
+        sku,
+        category,
+        stock,
+        reserved: 0,
+        initialStock,
+        stockIn,
+        stockOut,
+        buyPrice,
+        sellPrice,
+        status: stock > 15 ? 'optimal' : stock > 5 ? 'warning' : 'critical',
+        unit: 'pcs',
+        sourceSheetId: sheetId,
+        sourceSheetName: isHijab ? 'Ranura Hijab & Rosal' : 'Ranura Swimwear',
+        activeMonth: tabName
+      });
+    }
   }
 
-  return items;
+  return Array.from(itemsMap.values());
 }
 
 export default async function handler(req: any, res: any) {
