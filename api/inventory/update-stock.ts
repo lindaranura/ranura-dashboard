@@ -2,8 +2,8 @@ import { google } from 'googleapis';
 import fs from 'fs';
 import path from 'path';
 
-const SWIMWEAR_ID = '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
-const HIJAB_ID = '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
+const SWIMWEAR_ID = '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA';
+const HIJAB_ID = '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM';
 
 export default async function handler(req: any, res: any) {
   res.setHeader('Access-Control-Allow-Origin', '*');

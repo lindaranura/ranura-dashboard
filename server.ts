@@ -64,8 +64,8 @@ async function startServer() {
   // ==========================================
   // API: Update Inventory Google Sheet directly
   // ==========================================
-  const DEFAULT_SWIMWEAR_SHEET_ID = '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
-  const DEFAULT_HIJAB_SHEET_ID = '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
+  const DEFAULT_SWIMWEAR_SHEET_ID = '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA';
+  const DEFAULT_HIJAB_SHEET_ID = '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM';
 
   function parseNumber(val: any): number {
     if (!val) return 0;
@@ -236,7 +236,7 @@ async function startServer() {
     let isHijab = sheetId === DEFAULT_HIJAB_SHEET_ID;
     const targetMonth = monthParam && monthParam !== 'default' && monthParam !== 'all' 
       ? monthParam.toLowerCase() 
-      : (isHijab ? 'september' : 'agustus');
+      : 'november';
 
     let matchedTab: string | undefined = availableTabs.find(t => {
       const lower = t.toLowerCase();

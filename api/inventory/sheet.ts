@@ -1,12 +1,12 @@
-const SWIMWEAR_ID = '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8';
-const HIJAB_ID = '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8';
+const SWIMWEAR_ID = '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA';
+const HIJAB_ID = '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM';
 
 async function fetchFromGViz(sheetId: string, monthParam: string = 'default') {
   const isHijab = sheetId === HIJAB_ID;
   
   let month = monthParam;
   if (!month || month === 'default' || month === 'all') {
-    month = isHijab ? 'September' : 'Agustus';
+    month = 'November';
   }
 
   const tabName = isHijab 

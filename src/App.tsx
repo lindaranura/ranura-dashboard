@@ -73,7 +73,32 @@ export default function App() {
 
   const [shopeeAccounts, setShopeeAccounts] = useState<any[]>(() => { const saved = localStorage.getItem('apex_shopee_accounts'); return saved ? JSON.parse(saved) : [{ id: 'shp-1', shopName: 'Ranura Official Depok', email: 'finance.ranura@shopee-seller.co.id', connected: true, autoSync: true, lastSynced: '2026-06-29T21:05:00-07:00' }]; });
   const [tiktokAccounts, setTiktokAccounts] = useState<any[]>(() => { const saved = localStorage.getItem('apex_tiktok_accounts'); return saved ? JSON.parse(saved) : [{ id: 'tts-1', shopName: 'Mayudee Hijab Premium', email: 'ops.ranura@ranura-berkah.id', connected: true, autoSync: true, lastSynced: '2026-06-29T21:10:00-07:00' }]; });
-  const [googleSheets, setGoogleSheets] = useState<any[]>(() => { const saved = localStorage.getItem('apex_google_sheets'); return saved ? JSON.parse(saved) : [{ id: 'sheet-ranura-2026', title: 'Ranura Berkah Abadi - DATA ORDER', spreadsheetId: '1XQDhyy80k6ruXTkMfgGMDfNg2K8TJ8s2jjSRIYn86sk', spreadsheetUrl: '#', tabs: ['DATA ORDER 2026'], active: true, connectedAt: '2026-07-21T23:00:00-07:00' }]; });
+  const [googleSheets, setGoogleSheets] = useState<any[]>(() => { 
+    const newOrderSheet = { 
+      id: 'sheet-ranura-order-2026', 
+      title: 'Salinan dari (NEW ) PENGIRIMAN HARIAN & PENDING', 
+      spreadsheetId: '1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc', 
+      spreadsheetUrl: 'https://docs.google.com/spreadsheets/d/1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc/edit?usp=sharing', 
+      tabs: ['DATA ORDER 2026', 'Ranura Swimwear September 2026', 'Ranura Swimwear November 2026'], 
+      active: true, 
+      connectedAt: '2026-11-17T00:00:00+07:00' 
+    };
+    const saved = localStorage.getItem('apex_google_sheets'); 
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map(s => {
+            if (s.spreadsheetId === '1XQDhyy80k6ruXTkMfgGMDfNg2K8TJ8s2jjSRIYn86sk' || s.spreadsheetId === '1XD0iua8lyFvE0PQ-3Qk-_Cu8JqayffDy_ObCqqqC8V0') {
+              return newOrderSheet;
+            }
+            return s;
+          });
+        }
+      } catch (e) {}
+    }
+    return [newOrderSheet]; 
+  });
   const [configs, setConfigs] = useState<IntegrationConfig[]>(() => { const saved = localStorage.getItem('apex_configs'); return saved ? JSON.parse(saved) : INITIAL_INTEGRATIONS; });
   const [orders, setOrders] = useState<Order[]>(() => { const saved = localStorage.getItem('apex_orders'); return saved ? JSON.parse(saved) : INITIAL_ORDERS; });
   const [logs, setLogs] = useState<SyncLog[]>(() => { const saved = localStorage.getItem('apex_logs'); return saved ? JSON.parse(saved) : INITIAL_LOGS; });
@@ -82,8 +107,9 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        const isOldSheets = parsed.some((i: any) => i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' || i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8');
         const hasMovements = Array.isArray(parsed) && parsed.some((i: any) => (i.stockIn || 0) > 0 || (i.stockOut || 0) > 0);
-        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1') && hasMovements) {
+        if (Array.isArray(parsed) && parsed.length > 20 && !parsed.some((i: any) => i.id === 'prod-1') && hasMovements && !isOldSheets) {
           return parsed;
         }
       } catch (e) {}
@@ -100,6 +126,12 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('apex_calendarPosts', JSON.stringify(calendarPosts));
   }, [calendarPosts]);
+
+  useEffect(() => {
+    localStorage.setItem('apex_sheets_spreadsheet_id', '1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc');
+    localStorage.setItem('apex_sheets_spreadsheet_url', 'https://docs.google.com/spreadsheets/d/1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc/edit?usp=sharing');
+    localStorage.setItem('apex_sheets_spreadsheet_title', 'Salinan dari (NEW ) PENGIRIMAN HARIAN & PENDING');
+  }, []);
 
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
   const [globalToast, setGlobalToast] = useState<string | null>(null);

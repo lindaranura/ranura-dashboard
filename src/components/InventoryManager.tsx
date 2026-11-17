@@ -74,20 +74,19 @@ export default function InventoryManager({
 
   const fetchPublicSheets = async (month: string = 'default') => {
     const isDefault = month === 'default' || !month;
-    const swimMonth = isDefault ? 'Agustus' : month;
-    const hijabMonth = isDefault ? 'September' : month;
+    const activeMonth = isDefault ? 'November' : month;
 
     const sheetConfigs = [
       { 
-        id: '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8', 
+        id: '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA', 
         name: 'Ranura Swimwear',
-        tabName: `Katalog Barang ${swimMonth} 2026`,
+        tabName: `Katalog Barang ${activeMonth} 2026`,
         isHijab: false
       },
       { 
-        id: '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8', 
+        id: '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM', 
         name: 'Ranura Hijab & Rosal',
-        tabName: `Katalog Barang Hijab ${hijabMonth} 2026`,
+        tabName: `Katalog Barang Hijab ${activeMonth} 2026`,
         isHijab: true
       }
     ];
@@ -412,7 +411,7 @@ export default function InventoryManager({
 
   const swimwearCount = useMemo(() => {
     return inventory.filter(i => 
-      i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' ||
+      i.sourceSheetId === '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA' ||
       i.category?.toLowerCase().includes('renang') ||
       i.category?.toLowerCase().includes('apung') ||
       i.category?.toLowerCase().includes('proswim')
@@ -421,7 +420,7 @@ export default function InventoryManager({
 
   const hijabCount = useMemo(() => {
     return inventory.filter(i => 
-      i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+      i.sourceSheetId === '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' ||
       i.category?.toLowerCase().includes('rosal') ||
       i.category?.toLowerCase().includes('hijab') ||
       i.category?.toLowerCase().includes('outer')
@@ -439,13 +438,13 @@ export default function InventoryManager({
       if (!matchesSearch) return false;
 
       if (categoryFilter === 'swimwear') {
-        return item.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' ||
+        return item.sourceSheetId === '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA' ||
                item.category?.toLowerCase().includes('renang') ||
                item.category?.toLowerCase().includes('apung') ||
                item.category?.toLowerCase().includes('proswim');
       }
       if (categoryFilter === 'hijab') {
-        return item.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+        return item.sourceSheetId === '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' ||
                item.category?.toLowerCase().includes('rosal') ||
                item.category?.toLowerCase().includes('hijab') ||
                item.category?.toLowerCase().includes('outer');
@@ -498,7 +497,7 @@ export default function InventoryManager({
         const isRosalOrHijab = item.category?.toLowerCase().includes('rosal') || 
                                item.category?.toLowerCase().includes('hijab') || 
                                item.category?.toLowerCase().includes('outer');
-        const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' : '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8');
+        const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' : '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA');
         if (finalSheetId) {
           fetch('/api/inventory/update-stock', {
             method: 'POST',
@@ -616,7 +615,7 @@ export default function InventoryManager({
       const isRosalOrHijab = item.category?.toLowerCase().includes('rosal') || 
                              item.category?.toLowerCase().includes('hijab') || 
                              item.category?.toLowerCase().includes('outer');
-      const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' : '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8');
+      const finalSheetId = item.sourceSheetId || (isRosalOrHijab ? '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' : '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA');
       
       if (finalSheetId) {
         fetch('/api/inventory/update-stock', {
@@ -742,28 +741,31 @@ export default function InventoryManager({
             Tarik Data (Google Sheet)
           </button>
 
-          {spreadsheetId && (
-            <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-2xl p-3.5 shadow-sm">
-              <div className="p-2 bg-emerald-600 text-white rounded-lg shrink-0">
-                <FileSpreadsheet className="h-4 w-4" />
-              </div>
-              <div className="text-left">
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] font-bold text-emerald-800 font-mono uppercase tracking-wider">Sheets Sync Aktif</span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                </div>
-                <a 
-                  href={spreadsheetUrl || `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 hover:underline"
-                >
-                  Buka Master File
-                  <ArrowUpRight className="h-3 w-3" />
-                </a>
-              </div>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <a 
+              href="https://docs.google.com/spreadsheets/d/19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA/edit?usp=sharing"
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 bg-blue-50 border border-blue-200 text-blue-700 hover:bg-blue-100 rounded-xl text-xs font-semibold shadow-xs transition-all"
+              title="Buka Google Sheet Stok Ranura Swimwear"
+            >
+              <FileSpreadsheet className="h-3.5 w-3.5 text-blue-600" />
+              <span>Sheet Swimwear</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+
+            <a 
+              href="https://docs.google.com/spreadsheets/d/1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM/edit?usp=sharing"
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 bg-purple-50 border border-purple-200 text-purple-700 hover:bg-purple-100 rounded-xl text-xs font-semibold shadow-xs transition-all"
+              title="Buka Google Sheet Stok Ranura Hijab & Rosal"
+            >
+              <FileSpreadsheet className="h-3.5 w-3.5 text-purple-600" />
+              <span>Sheet Hijab & Rosal</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -983,9 +985,11 @@ export default function InventoryManager({
                   }}
                   className="bg-transparent font-bold text-slate-800 outline-none cursor-pointer pr-1 text-xs"
                 >
-                  <option value="default">Terkini (Ags Swimwear + Sept Hijab)</option>
-                  <option value="Agustus">Agustus 2026</option>
+                  <option value="default">Terkini (November 2026)</option>
+                  <option value="November">November 2026</option>
+                  <option value="Oktober">Oktober 2026</option>
                   <option value="September">September 2026</option>
+                  <option value="Agustus">Agustus 2026</option>
                   <option value="Juli">Juli 2026</option>
                   <option value="Juni">Juni 2026</option>
                   <option value="Mei">Mei 2026</option>
@@ -1105,7 +1109,7 @@ export default function InventoryManager({
                     statusBadge = 'bg-rose-50 text-rose-600 border border-rose-100';
                   }
 
-                  const isHijabOrRosal = item.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' ||
+                  const isHijabOrRosal = item.sourceSheetId === '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' ||
                                          item.category?.toLowerCase().includes('rosal') ||
                                          item.category?.toLowerCase().includes('hijab') ||
                                          item.category?.toLowerCase().includes('outer');
@@ -1267,14 +1271,14 @@ export default function InventoryManager({
                   {inventory.length > 0 ? (
                     <>
                       <optgroup label={`🏊 Ranura Swimwear (${swimwearCount} Produk)`}>
-                        {inventory.filter(i => i.sourceSheetId === '1u8oVPIyH7oh4rEpkXQGAHmOOQka01vWILVM8eOSAtD8' || (!i.category?.toLowerCase().includes('rosal') && !i.category?.toLowerCase().includes('hijab') && !i.category?.toLowerCase().includes('outer'))).map((item) => (
+                        {inventory.filter(i => i.sourceSheetId === '19oOIWUVLd8UiVkG8BgOI2YG1cbCsQ_Wx_EWJ3Ujo2pA' || (!i.category?.toLowerCase().includes('rosal') && !i.category?.toLowerCase().includes('hijab') && !i.category?.toLowerCase().includes('outer'))).map((item) => (
                           <option key={item.id} value={item.id}>
                             {item.name} (Stok: {item.stock} pcs)
                           </option>
                         ))}
                       </optgroup>
                       <optgroup label={`🧕 Ranura Hijab & Rosal Madani (${hijabCount} Produk)`}>
-                        {inventory.filter(i => i.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' || i.category?.toLowerCase().includes('rosal') || i.category?.toLowerCase().includes('hijab') || i.category?.toLowerCase().includes('outer')).map((item) => (
+                        {inventory.filter(i => i.sourceSheetId === '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' || i.category?.toLowerCase().includes('rosal') || i.category?.toLowerCase().includes('hijab') || i.category?.toLowerCase().includes('outer')).map((item) => (
                           <option key={item.id} value={item.id}>
                             {item.name} (Stok: {item.stock} pcs)
                           </option>
@@ -1295,7 +1299,7 @@ export default function InventoryManager({
                         <span className="font-mono text-slate-600">{selectedProductItem.sku}</span>
                         <span>•</span>
                         <span className={`font-semibold ${
-                          selectedProductItem.sourceSheetId === '1YAkmsRxamdK5XiK-IpvpS-p9jym3vn3z-M5gLkqrYC8' || selectedProductItem.category?.toLowerCase().includes('rosal') || selectedProductItem.category?.toLowerCase().includes('hijab')
+                          selectedProductItem.sourceSheetId === '1dJUmz5-vh8DhSV60PVMV3bjix-TmyEtJZSQzSPv3zLM' || selectedProductItem.category?.toLowerCase().includes('rosal') || selectedProductItem.category?.toLowerCase().includes('hijab')
                             ? 'text-purple-600'
                             : 'text-blue-600'
                         }`}>

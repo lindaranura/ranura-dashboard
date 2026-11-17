@@ -460,7 +460,7 @@ try {
 // =================================================================
 // 2. KREDENSIAL & KONFIGURASI
 // =================================================================
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID || "1XD0iua8lyFvE0PQ-3Qk-_Cu8JqayffDy_ObCqqqC8V0";
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID || "1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc";
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 

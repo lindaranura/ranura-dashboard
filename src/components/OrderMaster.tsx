@@ -436,6 +436,17 @@ export default function OrderMaster({
               <span>Upload Excel</span>
             </button>
 
+            <a 
+              href="https://docs.google.com/spreadsheets/d/1DD1TwoYweUqThHCMjJFkkYTff6XWjMtn_vsXYh__Azc/edit?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 px-3.5 py-2.5 bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 rounded-lg transition-colors font-medium text-sm shadow-sm"
+              title="Buka Google Sheets Master Order (Pengiriman Harian & Pending)"
+            >
+              <FileSpreadsheet className="h-4 w-4 text-emerald-600" />
+              <span>Google Sheet Order</span>
+            </a>
+
             <button onClick={onTriggerSync} disabled={isSyncing} className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-white font-semibold shadow-lg transition-all ${isSyncing ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 active:scale-95'}`}>
             <RefreshCw className={`h-4 w-4 ${isSyncing ? 'animate-spin' : ''}`} />
             {isSyncing ? 'Menarik Data...' : 'Sinkronisasi Marketplace'}
